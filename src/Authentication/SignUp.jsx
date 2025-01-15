@@ -28,10 +28,22 @@ const SignUp = () => {
     .then(userCredential=>{
       setUser(userCredential.user)
       updateProfile(auth.currentUser,{ displayName:data.userName,photoURL: image})
-      .then(res=>{
-        reset()
-        alert('signUp successfully')
+      .then( async(res)=>{
+       
+       
         setUser({...userCredential.user, displayName:data.userName,photoURL: image})
+        const userInfo = {
+          email:data.email,
+          name:data.userName,
+          role:data.role
+        }
+
+        const userData = await axiosPublic.post('/users',userInfo)
+        if(userData.data){
+          reset()
+          alert('signUp successfully')
+
+        }
        
         
       })
