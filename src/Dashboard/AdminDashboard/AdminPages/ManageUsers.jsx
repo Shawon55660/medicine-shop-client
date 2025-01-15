@@ -43,7 +43,7 @@ const ManageUsers = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {userData.map(users => <tr key={user._id}>
+                        {userData.map(users => <tr key={users._id}>
 
 
                             <td>

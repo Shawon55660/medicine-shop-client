@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
 import { useForm } from "react-hook-form";
 import useAxiosPrivate from "../../../CustomHook/useAxiosPrivate";
+import { useQuery } from "@tanstack/react-query";
+import Loading from "../../../CommonComponent/Loading";
+import { FaDeleteLeft } from "react-icons/fa6";
+import { GrDocumentUpdate } from "react-icons/gr";
 
 const ManageCategory = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,18 +16,38 @@ const ManageCategory = () => {
   const openModal = () => setIsOpen(true);
   const closeModal = () => setIsOpen(false);
 
-  // Input handle korar function
+  const {data:categoryData=[],refetch,isLoading} = useQuery({
+    queryKey:['categoryData','category'],
+    queryFn: async()=>{
+        const categoryInfo = await axiosPrivate.get('/category')
+      if (categoryInfo.data){
+        return categoryInfo.data
+      }
+    }
+
+})
+
  
 
   // Submit handle korar function
   const onSubmit = async(data) => {
  
-    const res  = await axiosPrivate.post('/add-category',data)
  
-  closeModal()
-  reset()
-  };
+   
+    const res  = await axiosPrivate.post('/add-category',data)
+    if(res.data.acknowledged){
+       
+        closeModal()
+        alert('category added successfully')
+        refetch()
+     
+        reset()
+    }
+ 
 
+  };
+// console.log(categoryData)
+if(isLoading) return <Loading></Loading>
   return (
     <div className="min-h-screen  bg-gray-100">
       {/* Add Category Button */}
@@ -33,6 +57,38 @@ const ManageCategory = () => {
       >
         Add Category Name
       </button>
+      <div>
+      <div className="overflow-x-auto">
+                <table className="table">
+                    {/* head */}
+                    <thead>
+                        <tr>
+
+                            <th>Category Name</th>
+                            <th>Category Photo</th>
+                            <th>Category Update</th>
+                            <th>Category Delete</th>
+
+                           
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                  {categoryData.map(category=> <tr key={category._id}>
+                    <td>{category.MedicineCategory}</td>
+                    <td>
+                        <img className="w-10 object-cover" src={category.categoryPhoto} alt="" />
+                    </td>
+                    <td><FaDeleteLeft></FaDeleteLeft></td>
+                    <td><GrDocumentUpdate /></td>
+                 
+                  </tr> )}
+
+                    </tbody>
+
+                </table>
+            </div>
+      </div>
 
       {/* Modal Component */}
       <Dialog open={isOpen} onClose={closeModal} className="relative z-50">
