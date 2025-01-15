@@ -4,6 +4,8 @@ import MainLayout from '../LayOut/MainLayout';
 import SignUp from '../Authentication/SignUp';
 import Login from '../Authentication/Login';
 import DashboardLayout from '../Dashboard/DashboardLayout';
+import ManageUsers from '../Dashboard/AdminDashboard/AdminPages/ManageUsers';
+import ManageCategory from '../Dashboard/AdminDashboard/AdminPages/ManageCategory';
 
 const router  = createBrowserRouter([
     //normal router
@@ -41,14 +43,20 @@ const router  = createBrowserRouter([
         children:[
             //admin router
             {  
-            //    index:true,
+          
+                index:true,
+                   
+                    element:  <h1>i am from admin home</h1>
+                },
+            {  
+          
             path:'users',
                
-                element:  <h1>i am from /dashboard/manageUsers</h1>
+                element:  <ManageUsers></ManageUsers>
             },
             {
                 path:'manageCategory',
-                element:  <h1>i am from manageCategory</h1>
+                element: <ManageCategory></ManageCategory>
             },
             {
                 path:'paymentManagement',
@@ -64,6 +72,10 @@ const router  = createBrowserRouter([
             },
             //seller router
             {
+               index:true,
+                element: <h1>home</h1>
+            },
+            {
                 path:'manageMedicines',
                 element: <h1>manageMedicines</h1>
             },
@@ -77,7 +89,7 @@ const router  = createBrowserRouter([
             },
             //user router
             {
-                path:'UserPaymentHistory',
+                path:'/dashboard/UserPaymentHistory',
                 element: <h1>UserPaymentHistory</h1>
             },
 

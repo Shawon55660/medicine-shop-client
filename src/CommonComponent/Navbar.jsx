@@ -83,7 +83,7 @@ const Navbar = () => {
         </li>
        
         <li><NavLink className='mx-1 font-semibold p-2 uppercase'> Update Profile</NavLink></li>
-      <li>  <NavLink className='mx-1 font-semibold p-2 uppercase' to='/dashboard'> Dashboard</NavLink></li>
+      <li>  <NavLink className='mx-1 font-semibold p-2 uppercase' to='dashboard'> Dashboard</NavLink></li>
      <li onClick={handleLogOut}>   <NavLink className='mx-1 font-semibold p-2 uppercase'> Logout</NavLink></li>
        
       </ul>
