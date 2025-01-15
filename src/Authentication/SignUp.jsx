@@ -4,12 +4,13 @@ import useAxiosPublic from '../CustomHook/useAxiosPublic';
 import useAuth from '../CustomHook/useAuth';
 import { auth } from '../firebase/init';
 import { updateProfile } from 'firebase/auth';
+import SoicalLogin from './SoicalLogin';
 
 const SignUp = () => {
   const {register,handleSubmit,reset} = useForm()
   const axiosPublic = useAxiosPublic()
-  const {createUserSignUp,setUser, user,loginWithGoogle} = useAuth()
-  console.log(user)
+  const {createUserSignUp,setUser, user} = useAuth()
+
 
   const img_key = import.meta.env.VITE_IMG_API_KEY;
   const img_hosting_api =`https://api.imgbb.com/1/upload?key=${img_key}`
@@ -62,16 +63,7 @@ const SignUp = () => {
     
 
   }
-  const handleGoogle=()=>{
-    loginWithGoogle()
-    .then(res=>{
-        setUser(res.user)
-        alert('login with google successfully')
-    })
-    .catch(error=>{
-        alert('login faild')
-    })
-  }
+ 
     return (
         <div className="max-w-md mx-auto mt-10 bg-white p-6 rounded shadow">
       <h2 className="text-2xl font-bold mb-4 text-center">Registration Form</h2>
@@ -151,15 +143,8 @@ const SignUp = () => {
           Sign Up
         </button>
       </form>
-      <div>
-      <button
-      onClick={handleGoogle}
-          type="submit"
-          className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition duration-200"
-        >
-         Google
-        </button>
-      </div>
+      <SoicalLogin></SoicalLogin>
+     
     </div>
     );
 };

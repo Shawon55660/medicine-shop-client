@@ -1,10 +1,11 @@
 import React from 'react';
 import useAuth from '../CustomHook/useAuth';
 import { useForm } from 'react-hook-form';
+import SoicalLogin from './SoicalLogin';
 
 const Login = () => {
 
-    const {loginWithEmail,setUser,loginWithGoogle} = useAuth()
+    const {loginWithEmail,setUser} = useAuth()
       const {register,handleSubmit,reset} = useForm()
       const onSubmit = (data) =>{
         loginWithEmail(data.email,data.password)
@@ -17,16 +18,7 @@ const Login = () => {
             alert('faild to login')
         })
       }
-      const handleGoogle=()=>{
-        loginWithGoogle()
-        .then(res=>{
-            setUser(res.user)
-            alert('login with google successfully')
-        })
-        .catch(error=>{
-            alert('login faild')
-        })
-      }
+    
     return (
         <div>
          <div className="flex flex-col justify-center items-center h-screen bg-gray-100">
@@ -72,14 +64,7 @@ const Login = () => {
           </button>
         </div>
       </form>
-     <div>
-     <button
-            onClick={handleGoogle}
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-          >
-            google
-          </button>
-     </div>
+    <SoicalLogin></SoicalLogin>
     </div>
             
         </div>
