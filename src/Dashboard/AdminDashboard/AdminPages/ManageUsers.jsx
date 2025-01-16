@@ -8,7 +8,7 @@ const ManageUsers = () => {
     const axiosPrivate = useAxiosPrivate()
     const { user } = useAuth()
 
-    const { data: userData, refetch, isLoading } = useQuery({
+    const { data: userData =[], refetch, isLoading } = useQuery({
         queryKey: ['userData', 'users'],
         queryFn: async () => {
             const res = await axiosPrivate.get('/users')

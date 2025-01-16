@@ -6,6 +6,8 @@ import Login from '../Authentication/Login';
 import DashboardLayout from '../Dashboard/DashboardLayout';
 import ManageUsers from '../Dashboard/AdminDashboard/AdminPages/ManageUsers';
 import ManageCategory from '../Dashboard/AdminDashboard/AdminPages/ManageCategory';
+import ManageMedicines from '../Dashboard/SellerDashboard/sellerPages/ManageMedicines';
+import AskAdvertisement from '../Dashboard/SellerDashboard/sellerPages/AskAdvertisement';
 
 const router  = createBrowserRouter([
     //normal router
@@ -77,7 +79,7 @@ const router  = createBrowserRouter([
             },
             {
                 path:'manageMedicines',
-                element: <h1>manageMedicines</h1>
+                element: <ManageMedicines></ManageMedicines>
             },
             {
                 path:'paymentHistory',
@@ -85,7 +87,7 @@ const router  = createBrowserRouter([
             },
             {
                 path:'askForAdvertise',
-                element: <h1>askForAdvertise</h1>
+                element: <AskAdvertisement></AskAdvertisement>
             },
             //user router
             {
