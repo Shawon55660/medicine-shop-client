@@ -8,6 +8,10 @@ import ManageUsers from '../Dashboard/AdminDashboard/AdminPages/ManageUsers';
 import ManageCategory from '../Dashboard/AdminDashboard/AdminPages/ManageCategory';
 import ManageMedicines from '../Dashboard/SellerDashboard/sellerPages/ManageMedicines';
 import AskAdvertisement from '../Dashboard/SellerDashboard/sellerPages/AskAdvertisement';
+import BannarAdvertise from '../Dashboard/AdminDashboard/AdminPages/BannarAdvertise';
+import Home from '../Home/Home';
+import PrivateRouter from './PrivateRouter';
+import CategoryPage from '../Home/Category/CategoryPage';
 
 const router  = createBrowserRouter([
     //normal router
@@ -17,7 +21,7 @@ const router  = createBrowserRouter([
         children:[
             {
                 path:'/',
-                element: <h2>home</h2>
+                element:<Home></Home>
             },
             {
                 path:'/shop',
@@ -34,6 +38,10 @@ const router  = createBrowserRouter([
             {
                 path:'/login',
                 element:<Login></Login>
+            },
+            {
+                path:'/category/:category',
+                element:<CategoryPage></CategoryPage>
             }
 
         ]
@@ -41,7 +49,7 @@ const router  = createBrowserRouter([
     //dashboard router
     {
         path:'dashboard',
-        element: <DashboardLayout></DashboardLayout>,
+        element: <PrivateRouter><DashboardLayout></DashboardLayout></PrivateRouter>,
         children:[
             //admin router
             {  
@@ -70,7 +78,7 @@ const router  = createBrowserRouter([
             },
             {
                 path:'bannarAdvertise',
-                element:  <h1>i am from bannarAdvertise</h1>
+                element:  <BannarAdvertise></BannarAdvertise>
             },
             //seller router
             {
@@ -87,7 +95,7 @@ const router  = createBrowserRouter([
             },
             {
                 path:'askForAdvertise',
-                element: <AskAdvertisement></AskAdvertisement>
+                element: <PrivateRouter> <AskAdvertisement></AskAdvertisement></PrivateRouter>
             },
             //user router
             {

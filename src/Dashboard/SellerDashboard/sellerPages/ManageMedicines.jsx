@@ -8,11 +8,13 @@ import { FaDeleteLeft } from "react-icons/fa6";
 import { GrDocumentUpdate } from "react-icons/gr";
 import Swal from "sweetalert2";
 import useAxiosPublic from "../../../CustomHook/useAxiosPublic";
+import useAuth from "../../../CustomHook/useAuth";
 
 const ManageMedicines = () => {
     const [isOpen, setIsOpen] = useState(false);
     const { register, handleSubmit, reset } = useForm()
     const axiosPrivate = useAxiosPrivate()
+    const {user} = useAuth()
 
     // Modal open/close korar function
     const openModal = () => setIsOpen(true);
@@ -37,7 +39,7 @@ const ManageMedicines = () => {
     const { data: medicinesData = [], refetch:medicinesFetch, isLoading:medicinesLoading } = useQuery({
         queryKey: ['medicinesData', 'medicines'],
         queryFn: async () => {
-            const catInfo = await axiosPrivate.get('/medicines')
+            const catInfo = await axiosPrivate.get(`/medicines?sellerEmail=${user?.email}`)
             if (catInfo.data) {
                 return catInfo.data
             }
@@ -87,6 +89,7 @@ const ManageMedicines = () => {
 console.log(result)
    
     data.photo = result.data.data.display_url
+    data.sellerEmail = user?.email
        if(result.data.success){
 
         const res = await axiosPrivate.post('/add-medicines', data)

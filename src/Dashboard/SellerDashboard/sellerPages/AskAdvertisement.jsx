@@ -30,7 +30,7 @@ const AskAdvertisement = () => {
     const { data: advertisementsData = [], refetch:advertisementsFetch, isLoading:advertisementsLoading ,isPending} = useQuery({
         queryKey: ['advertisementsData', 'advertisements'],
         queryFn: async () => {
-            const catInfo = await axiosPrivate.get('/advertisements')
+            const catInfo = await axiosPrivate.get(`/advertisements?sellerEmail=${user.email}`)
             if (catInfo.data) {
                 return catInfo.data
             }
@@ -38,35 +38,7 @@ const AskAdvertisement = () => {
 
     })
 
-    const handleDelete = async (id) => {
-
-        Swal.fire({
-            title: "Are you sure?",
-            text: "You won't be able to revert this!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!"
-        }).then(async (result) => {
-            if (result.isConfirmed) {
-                const res = await axiosPrivate.delete(`/category-delete/${id}`)
-
-                if (res.data) {
-                    await Swal.fire({
-                        title: "Deleted!",
-                        text: "Your file has been deleted.",
-                        icon: "success"
-                    });
-
-
-                }
-
-            }
-            await refetch()
-        });
-
-    }
+  
 
 
     const onSubmit = async (data) => {
