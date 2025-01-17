@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import useAxiosPublic from '../../CustomHook/useAxiosPublic';
+
 import { useQuery } from '@tanstack/react-query';
 import { FaEye } from 'react-icons/fa6';
 import { CgAddR } from 'react-icons/cg';
 import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
-import useAuth from '../../CustomHook/useAuth';
+import useAuth from '../CustomHook/useAuth';
+import useAxiosPublic from '../CustomHook/useAxiosPublic';
+import Loading from '../CommonComponent/Loading';
 
 
-const CategoryPage = () => {
+const Shop = () => {
     const [isOpen, setIsOpen] = useState(false);
     const openModal = () => setIsOpen(true);
     const closeModal = () => setIsOpen(false);
@@ -20,9 +22,9 @@ const CategoryPage = () => {
     const { category } = useParams()
     const axiosPublic = useAxiosPublic()
     const { data: medicinesData = [], refetch: medicinesFetch, isLoading: medicinesLoading } = useQuery({
-        queryKey: ['medicinesData', 'medicines'],
+        queryKey: ['medicinesData', 'medicinesAll'],
         queryFn: async () => {
-            const catInfo = await axiosPublic.get(`/category-medicines?category=${category}`)
+            const catInfo = await axiosPublic.get(`/medicinesAll`)
             if (catInfo.data) {
                 return catInfo.data
             }
@@ -52,12 +54,12 @@ const CategoryPage = () => {
     GenericName:userInfo.GenericName,
     photo:userInfo.photo,
     Price:userInfo.Price,
-  
+   
     ItemName:userInfo.ItemName
     }
-    console.log(medicineInfo)
+    
         const res = await axiosPublic.post(`/cart`,medicineInfo)
-       console.log(res)
+       
         if(res.data.insertedId){
             alert('cart added successfully')
         }
@@ -65,6 +67,7 @@ const CategoryPage = () => {
             alert(res.data.error)
         }
     }
+    if(medicinesLoading) return <Loading></Loading>
 
     return (
         <div className=''>
@@ -136,8 +139,9 @@ const CategoryPage = () => {
                             <td>{category.Price}</td>
                             <td>{category.discountPercentage}%</td>
                             <td className='gap-4 flex items-center h-auto text-xl'>
+                        
                                 <button onClick={()=>handleDetails(category._id) }><FaEye></FaEye></button>
-                            <td>{category.Price}</td>
+                           
                                 <button onClick={()=>handleCart(category)}><CgAddR></CgAddR></button>
                                 
                                 </td>
@@ -153,4 +157,4 @@ const CategoryPage = () => {
     );
 };
 
-export default CategoryPage;
+export default Shop;

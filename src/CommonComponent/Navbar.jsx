@@ -23,7 +23,7 @@ const Navbar = () => {
           alert('logOut failed')
         })
        }
-    console.log(user)
+  
     return (
         <div className='relative'>
             <div className="navbar fixed z-50 top-0 left-0 right-0 bg-base-100">

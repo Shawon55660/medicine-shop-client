@@ -12,6 +12,8 @@ import BannarAdvertise from '../Dashboard/AdminDashboard/AdminPages/BannarAdvert
 import Home from '../Home/Home';
 import PrivateRouter from './PrivateRouter';
 import CategoryPage from '../Home/Category/CategoryPage';
+import Shop from '../Shop/Shop';
+import CartPage from '../Cart/CartPage';
 
 const router  = createBrowserRouter([
     //normal router
@@ -25,11 +27,11 @@ const router  = createBrowserRouter([
             },
             {
                 path:'/shop',
-                element: <h2>shop</h2>
+                element: <Shop></Shop>
             },
             {
                 path:'/cart',
-                element: <h2>cart</h2>
+                element: <CartPage></CartPage>
             },
             {
                 path:'/signUp',

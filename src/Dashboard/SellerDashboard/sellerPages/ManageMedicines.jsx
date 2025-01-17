@@ -90,6 +90,9 @@ console.log(result)
    
     data.photo = result.data.data.display_url
     data.sellerEmail = user?.email
+    data.Massunit =parseInt(data.Massunit)
+    data.discountPercentage =parseInt(data.discountPercentage)
+    data.Price =parseInt(data.Price)
        if(result.data.success){
 
         const res = await axiosPrivate.post('/add-medicines', data)
