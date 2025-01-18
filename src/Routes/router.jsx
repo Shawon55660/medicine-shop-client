@@ -19,6 +19,7 @@ import InvoicePage from '../Invoice/InvoicePage';
 import PaymentManagement from '../Dashboard/AdminDashboard/AdminPages/PaymentManagement';
 import PaymentHistory from '../Dashboard/UserDashboard/UserPages/PaymentHistory';
 import SellerPayment from '../Dashboard/SellerDashboard/sellerPages/SellerPayment';
+import SalesReport from '../Dashboard/AdminDashboard/AdminPages/SalesReport';
 
 const router  = createBrowserRouter([
     //normal router
@@ -89,7 +90,7 @@ const router  = createBrowserRouter([
             },
             {
                 path:'salesReport',
-                element:  <h1>i am from salesReport</h1>
+                element:  <SalesReport></SalesReport>
             },
             {
                 path:'bannarAdvertise',
