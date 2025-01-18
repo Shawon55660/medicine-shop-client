@@ -14,6 +14,8 @@ import PrivateRouter from './PrivateRouter';
 import CategoryPage from '../Home/Category/CategoryPage';
 import Shop from '../Shop/Shop';
 import CartPage from '../Cart/CartPage';
+import CheckOut from '../Payment/CheckOut';
+import InvoicePage from '../Invoice/InvoicePage';
 
 const router  = createBrowserRouter([
     //normal router
@@ -44,6 +46,14 @@ const router  = createBrowserRouter([
             {
                 path:'/category/:category',
                 element:<CategoryPage></CategoryPage>
+            },
+            {
+                path:'/checkOut',
+                element:<CheckOut></CheckOut>
+            },
+            {
+                path:'/invoice',
+                element:<InvoicePage></InvoicePage>
             }
 
         ]

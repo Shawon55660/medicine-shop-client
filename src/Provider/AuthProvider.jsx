@@ -7,6 +7,7 @@ export const authContext = createContext()
 const AuthProvider = ({children}) => {
     const axiosPublic = useAxiosPublic()
     const [user,setUser] = useState([])
+    const [paymentInfo,setPaymentInfo] = useState({})
     const [loading,setLoading] = useState(true)
     const provider = new GoogleAuthProvider()
 
@@ -57,7 +58,8 @@ const AuthProvider = ({children}) => {
         logOut,
         loading,
         setUser,
-        user
+        user,paymentInfo,
+        setPaymentInfo
 
     }
 

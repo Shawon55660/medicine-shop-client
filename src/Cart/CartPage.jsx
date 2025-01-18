@@ -7,6 +7,7 @@ import { FaEye } from 'react-icons/fa6';
 import { FaTrashAlt } from 'react-icons/fa';
 import Loading from '../CommonComponent/Loading';
 import Swal from 'sweetalert2';
+import { Link } from 'react-router-dom';
 
 const CartPage = () => {
     const { user } = useAuth()
@@ -159,6 +160,7 @@ const CartPage = () => {
 
                 </table>
                 {cartData.length > 0 ? <div className='text-right'>  <button onClick={deleteCart} className='btn btn-warning'>Delete All</button></div> : ''}
+                <button className='btn text-center btn-success'><Link to='/checkOut'>CheckOut</Link></button>
             </div>
 
         </div>
