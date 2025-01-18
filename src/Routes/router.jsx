@@ -16,6 +16,8 @@ import Shop from '../Shop/Shop';
 import CartPage from '../Cart/CartPage';
 import CheckOut from '../Payment/CheckOut';
 import InvoicePage from '../Invoice/InvoicePage';
+import PaymentManagement from '../Dashboard/AdminDashboard/AdminPages/PaymentManagement';
+import PaymentHistory from '../Dashboard/UserDashboard/UserPages/PaymentHistory';
 
 const router  = createBrowserRouter([
     //normal router
@@ -64,12 +66,12 @@ const router  = createBrowserRouter([
         element: <PrivateRouter><DashboardLayout></DashboardLayout></PrivateRouter>,
         children:[
             //admin router
-            {  
+            // {  
           
-                index:true,
+            //     index:true,
                    
-                    element:  <h1>i am from admin home</h1>
-                },
+            //         element:  <h1>i am from admin home</h1>
+            //     },
             {  
           
             path:'users',
@@ -82,7 +84,7 @@ const router  = createBrowserRouter([
             },
             {
                 path:'paymentManagement',
-                element:  <h1>i am from paymentManagement</h1>
+                element: <PaymentManagement></PaymentManagement>
             },
             {
                 path:'salesReport',
@@ -93,10 +95,10 @@ const router  = createBrowserRouter([
                 element:  <BannarAdvertise></BannarAdvertise>
             },
             //seller router
-            {
-               index:true,
-                element: <h1>home</h1>
-            },
+            // {
+            //    index:true,
+            //     element: <h1>home</h1>
+            // },
             {
                 path:'manageMedicines',
                 element: <ManageMedicines></ManageMedicines>
@@ -111,8 +113,8 @@ const router  = createBrowserRouter([
             },
             //user router
             {
-                path:'/dashboard/UserPaymentHistory',
-                element: <h1>UserPaymentHistory</h1>
+                index:true,
+                element:<PaymentHistory></PaymentHistory>
             },
 
         ]
