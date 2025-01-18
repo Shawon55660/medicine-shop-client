@@ -18,6 +18,7 @@ import CheckOut from '../Payment/CheckOut';
 import InvoicePage from '../Invoice/InvoicePage';
 import PaymentManagement from '../Dashboard/AdminDashboard/AdminPages/PaymentManagement';
 import PaymentHistory from '../Dashboard/UserDashboard/UserPages/PaymentHistory';
+import SellerPayment from '../Dashboard/SellerDashboard/sellerPages/SellerPayment';
 
 const router  = createBrowserRouter([
     //normal router
@@ -105,7 +106,7 @@ const router  = createBrowserRouter([
             },
             {
                 path:'paymentHistory',
-                element: <h1>paymentHistory</h1>
+                element: <SellerPayment></SellerPayment>
             },
             {
                 path:'askForAdvertise',

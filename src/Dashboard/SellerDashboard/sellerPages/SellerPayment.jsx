@@ -5,27 +5,18 @@ import useAuth from '../../../CustomHook/useAuth';
 import { useQuery } from '@tanstack/react-query';
 import Swal from 'sweetalert2';
 
-const PaymentManagement = () => {
+const SellerPayment = () => {
     const axiosPrivate = useAxiosPrivate()
     const { user } = useAuth()
 
     const { data: paymentInfo =[], refetch, isLoading } = useQuery({
         queryKey: ['paymentInfo', 'users'],
         queryFn: async () => {
-            const res = await axiosPrivate.get('/payments')
+            const res = await axiosPrivate.get(`/sellerSelling?sellerEmail=${user.email}`)
             return res.data
         }
     })
-    const handlePayment = async(id)=>{
-        const res = await axiosPrivate.patch(`/paymentUpdate/${id}`)
-        console.log(id)
-        if(res.data.modifiedCount){
-           
-           await Swal.fire('payment Confrim')
-           await refetch()
-        }
-    }
-    console.log(paymentInfo)
+
     if (isLoading) return <Loading></Loading>
     return (
         <div>
@@ -35,7 +26,7 @@ const PaymentManagement = () => {
                     <thead>
                         <tr>
 
-                            <th>Buyer Email</th>
+                            <th>Transaction Id</th>
                             <th>totalPrice</th>
                             <th>data</th>
                             <th>Status</th>
@@ -48,13 +39,13 @@ const PaymentManagement = () => {
 
 
                             <td>
-                                {pay.BuyerEmail}
+                                {pay.transactionId}
 
                             </td>
-                            <td>{pay.Price}</td>
-                            <td>{pay.GenericName}</td>
+                            <td>{pay.totalPrice}</td>
+                            <td>{pay.date}</td>
                             <td>{pay.status}</td>
-                            <td><button disabled={pay.status=='paid'} onClick={()=>handlePayment(pay._id)} className='btn btn-success'>accept payment</button></td>
+                         
 
                          
                         </tr>)}
@@ -70,4 +61,6 @@ const PaymentManagement = () => {
     );
 };
 
-export default PaymentManagement;
+export default SellerPayment;
+
+

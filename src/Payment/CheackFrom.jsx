@@ -30,7 +30,7 @@ const CheackFrom = () => {
        
         axiosPrivate.post('/create-payment-intent',{price:totalPrice,cartData})
         .then(res=>{
-          console.log(res.data)
+          
           setClientSecret(res.data.clientSecret)
           setPaymentInfo(res.data)
         })
@@ -68,27 +68,27 @@ const CheackFrom = () => {
           
          
           // console.log(paymentIntent)
-        //  const paymentCart= cartData.map(item=>({
-        //     ...item,
-        //     date: new Date(),
-        //     BuyerEmail:user?.email,
-        //     transactionId:paymentIntent.id,
-        //     status: 'pending',
-        //   }))
-        //   console.log(paymentCart)
-          const payment = {
-            
-            buyerEmail: user.email,
-            sellerEmail:cartData.map(item=> item.sellerEmail),
-            totalPrice:totalPrice,
+         const paymentCart= cartData.map(item=>({
+            ...item,
+            date: new Date(),
+            BuyerEmail:user?.email,
             transactionId:paymentIntent.id,
-            medicineId:cartData.map(item=>item.medicineId),
-            cartId:cartData.map(item=> item._id),
-            Price:cartData.map(item=> item.Price),
             status: 'pending',
-            data:new Date()
-        }
-        const res =await axiosPrivate.post('/payment',payment)
+          }))
+        //   console.log(paymentCart)
+        //   const payment = {
+            
+        //     buyerEmail: user.email,
+        //     sellerEmail:cartData.map(item=> item.sellerEmail),
+        //     totalPrice:totalPrice,
+        //     transactionId:paymentIntent.id,
+        //     medicineId:cartData.map(item=>item.medicineId),
+        //     cartId:cartData.map(item=> item._id),
+        //     Price:cartData.map(item=> item.Price),
+        //     status: 'pending',
+        //     data:new Date()
+        // }
+        const res =await axiosPrivate.post('/payment',paymentCart)
         if(res){
             refetch()
             console.log(res)
