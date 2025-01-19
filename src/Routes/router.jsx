@@ -23,6 +23,7 @@ import SalesReport from '../Dashboard/AdminDashboard/AdminPages/SalesReport';
 import AdminRouter from './AdminRouter';
 import SellerRouter from './SellerRouter';
 import DashboardCommon from '../Dashboard/CommonComponent/DashboardCommon';
+import UpdateProfile from '../Authentication/UpdateProfile';
 
 
 
@@ -53,6 +54,10 @@ const  router  = createBrowserRouter([
             {
                 path:'/login',
                 element:<Login></Login>
+            },
+            {
+                path:'/updateProfile',
+                element:<UpdateProfile></UpdateProfile>
             },
             {
                 path:'/category/:category',
@@ -133,7 +138,7 @@ const  router  = createBrowserRouter([
             // user router
             {
                 path:'payment',
-                element: <PrivateRouter><PaymentHistory></PaymentHistory></PrivateRouter>
+                element: <PaymentHistory></PaymentHistory>
             }
           
            

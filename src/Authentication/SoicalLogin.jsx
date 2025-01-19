@@ -34,9 +34,9 @@ const SoicalLogin = () => {
         <button
         onClick={handleGoogle}
             type="submit"
-            className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition duration-200"
+            className="w-full font-semibold justify-center bg-gray-100 text-first gap-3 py-2 px-4 flex items-center rounded-sm hover:bg-first hover:text-white transition duration-200"
           >
-           Google
+          <img src="https://img.icons8.com/?size=30&id=17949&format=png&color=000000" alt="" /><span>continue with google</span>
           </button>
         </div>
     );
