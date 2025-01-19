@@ -20,13 +20,20 @@ import PaymentManagement from '../Dashboard/AdminDashboard/AdminPages/PaymentMan
 import PaymentHistory from '../Dashboard/UserDashboard/UserPages/PaymentHistory';
 import SellerPayment from '../Dashboard/SellerDashboard/sellerPages/SellerPayment';
 import SalesReport from '../Dashboard/AdminDashboard/AdminPages/SalesReport';
+import AdminRouter from './AdminRouter';
+import SellerRouter from './SellerRouter';
+import DashboardCommon from '../Dashboard/CommonComponent/DashboardCommon';
 
-const router  = createBrowserRouter([
+
+
+
+const  router  = createBrowserRouter([
     //normal router
     {
         path:'/',
         element: <MainLayout></MainLayout>,
         children:[
+         
             {
                 path:'/',
                 element:<Home></Home>
@@ -63,62 +70,73 @@ const router  = createBrowserRouter([
         ]
     },
     //dashboard router
+    
     {
         path:'dashboard',
         element: <PrivateRouter><DashboardLayout></DashboardLayout></PrivateRouter>,
         children:[
-            //admin router
-            // {  
-          
-            //     index:true,
+
+            {
+                index: true,
+                element:<DashboardCommon></DashboardCommon> 
                    
-            //         element:  <h1>i am from admin home</h1>
-            //     },
+            },
+            // admin router
+            {
+                path:'AdminHome',
+                element:<AdminRouter> <h2>admin</h2></AdminRouter>
+            }
+            ,
+         
+           
             {  
           
             path:'users',
                
-                element:  <ManageUsers></ManageUsers>
+                element: <AdminRouter><ManageUsers></ManageUsers></AdminRouter>
             },
             {
                 path:'manageCategory',
-                element: <ManageCategory></ManageCategory>
+                element: <AdminRouter><ManageCategory></ManageCategory></AdminRouter>
             },
             {
                 path:'paymentManagement',
-                element: <PaymentManagement></PaymentManagement>
+                element: <AdminRouter><PaymentManagement></PaymentManagement></AdminRouter>
             },
             {
                 path:'salesReport',
-                element:  <SalesReport></SalesReport>
+                element:  <AdminRouter><SalesReport></SalesReport></AdminRouter>
             },
             {
                 path:'bannarAdvertise',
-                element:  <BannarAdvertise></BannarAdvertise>
+                element: <AdminRouter> <BannarAdvertise></BannarAdvertise></AdminRouter>
             },
-            //seller router
-            // {
-            //    index:true,
-            //     element: <h1>home</h1>
-            // },
+            // seller router
+         
+           
             {
                 path:'manageMedicines',
-                element: <ManageMedicines></ManageMedicines>
+                element: <SellerRouter><ManageMedicines></ManageMedicines></SellerRouter>
             },
             {
                 path:'paymentHistory',
-                element: <SellerPayment></SellerPayment>
+                element: <SellerRouter><SellerPayment></SellerPayment></SellerRouter>
+            },
+            {
+                path:'sellerHome',
+                element: <SellerRouter><h2>sller</h2></SellerRouter>
             },
             {
                 path:'askForAdvertise',
                 element: <PrivateRouter> <AskAdvertisement></AskAdvertisement></PrivateRouter>
             },
-            //user router
+            // user router
             {
-                index:true,
-                element:<PaymentHistory></PaymentHistory>
-            },
-
+                path:'payment',
+                element: <PrivateRouter><PaymentHistory></PaymentHistory></PrivateRouter>
+            }
+          
+           
         ]
     }
 

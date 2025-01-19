@@ -6,7 +6,7 @@ const UserNav = () => {
         <div>
             <ul>
             
-                <li><NavLink  to='/dashboard' end>Payment History</NavLink></li>
+                <li><NavLink  to='/dashboard/payment' end>Payment History</NavLink></li>
                 
                
             </ul>

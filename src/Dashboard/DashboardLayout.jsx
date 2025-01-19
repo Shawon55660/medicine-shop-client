@@ -5,6 +5,8 @@ import SellerNav from './SellerDashboard/SellerNavbar/SellerNav';
 import UserNav from './UserDashboard/UserNavber/UserNav';
 import useRole from '../CustomHook/useRole';
 import Loading from '../CommonComponent/Loading'
+import AdminRouter from '../Routes/AdminRouter';
+import SellerRouter from '../Routes/SellerRouter';
 
 
 const DashboardLayout = () => {
@@ -17,8 +19,8 @@ const DashboardLayout = () => {
             <div className='col-span-2 bg-red-400'>
             
             
-                {role === 'admin' && <AdminNav></AdminNav>}
-                {role === 'seller' && <SellerNav></SellerNav>}
+                {role === 'admin' && <AdminRouter><AdminNav></AdminNav></AdminRouter>}
+                {role === 'seller' && <SellerRouter><SellerNav></SellerNav></SellerRouter>}
                 {role === 'user' && <UserNav></UserNav>}
                 
           

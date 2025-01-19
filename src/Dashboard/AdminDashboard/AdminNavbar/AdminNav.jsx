@@ -5,7 +5,7 @@ const AdminNav = () => {
     return (
         <div>
             <ul>
-            <li><NavLink to='/dashboard' end>Admin Home</NavLink></li>
+            <li><NavLink to='/dashboard/AdminHome' end>Admin Home</NavLink></li>
             <li><NavLink to='/dashboard/users'>Manage Users</NavLink></li>
                 <li><NavLink to='/dashboard/manageCategory'>Manage Category</NavLink></li>
                 <li><NavLink to='/dashboard/paymentManagement'>Payment Management</NavLink></li>

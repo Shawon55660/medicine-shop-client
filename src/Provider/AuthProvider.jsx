@@ -2,6 +2,7 @@ import React, { createContext, useEffect, useState } from 'react';
 import { auth } from '../firebase/init';
 import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from 'firebase/auth';
 import useAxiosPublic from '../CustomHook/useAxiosPublic';
+import useRole from '../CustomHook/useRole';
 export const authContext = createContext()
 
 const AuthProvider = ({children}) => {
@@ -9,6 +10,7 @@ const AuthProvider = ({children}) => {
     const [user,setUser] = useState([])
     const [paymentInfo,setPaymentInfo] = useState({})
     const [loading,setLoading] = useState(true)
+   
     const provider = new GoogleAuthProvider()
 
     const createUserSignUp = (email,password)=>{
@@ -59,7 +61,8 @@ const AuthProvider = ({children}) => {
         loading,
         setUser,
         user,paymentInfo,
-        setPaymentInfo
+        setPaymentInfo,
+       
 
     }
 
