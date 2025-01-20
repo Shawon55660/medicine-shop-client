@@ -26,7 +26,7 @@ const Bannar = () => {
     })
     console.log(advertisementsData)
     return (
-        <div className='  mx-auto'>
+        <div className='  max-w-[1348px] mx-auto'>
         <Swiper
           spaceBetween={30}
           centeredSlides={true}
@@ -45,28 +45,11 @@ const Bannar = () => {
          {
             advertisementsData.filter(add=> add.status == 'aceecpt' )
             .map(add=>   <SwiperSlide key={add._id}>
-                <div className=" relative">
-              {/* Banner Section with Background Image */}
-              <div className="relative w-full h-[600px] flex  justify-center items-center transition-all duration-1000 ease-in-out transform hover:scale-110"
-                 style={{ backgroundImage: `url(${add.photo})`,backgroundSize: "cover",backgroundPosition: "center", }}   >
-                     
-                {/* Dark Overlay for better text visibility */}
-                {/* <div className="absolute inset-0 bg-black opacity-20"></div> */}
+                <div className=" w-full rounded-2xl min-h-[400px]  mt-4   relative">
+             <img className='w-full object-cover bg-cover rounded-2xl' src={add.photo} alt="" />
                 
-                {/* Content Section */}
-                <div className="relative z-10  text-center text-white py-32 px-6">
-                  {/* Heading with bold text and cool effects */}
-                  <h1 className="text-5xl font-bold mb-6 tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-[#EF4444] to-[#ee3c3c] animate__animated animate__fadeIn animate__delay-1s">
-                   {add.medicineName}
-                  </h1>
-                  {/* Paragraph with a slight animation */}
-                  <p className="text-xl sm:text-xl md:text-xl mb-8 max-w-3xl mx-auto text-gray-900 opacity-85 animate__animated animate__fadeIn animate__delay-2s">
-                  {add.Description}
-                  </p>
-                
-                  
-                </div>
-              </div>
+               
+            
             </div>
                 </SwiperSlide>)
          

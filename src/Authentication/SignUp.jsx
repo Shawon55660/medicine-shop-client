@@ -7,6 +7,8 @@ import { updateProfile } from "firebase/auth";
 import SoicalLogin from "./SoicalLogin";
 import signUp from '../../src/assets/Mobile login-amico.png'
 import { Link } from "react-router-dom";
+import HelmetSet from "../CommonComponent/HelmetSet";
+
 
 const SignUp = () => {
   const { register, handleSubmit, reset } = useForm();
@@ -62,16 +64,20 @@ const SignUp = () => {
 
   return (
     <div className="grid min-h-screen mx-auto gap-8 md:grid-cols-2 items-center bg-gray-100">
+       <HelmetSet sub1='MediStore' sub2='SignUp'></HelmetSet>
       {/* Left Section */}
-      <div className="hidden md:block">
+     
+
+<div className="hidden md:block">
         <img
           className="w-10/12 mx-auto"
           src={signUp}
           alt="Sign Up"
         />
       </div>
+
       {/* Right Section */}
-      <div className="w-10/12 md:w-12/12 lg:w-9/12 mx-auto bg-white shadow-md rounded-lg p-8">
+  <div className="w-10/12 md:w-12/12 lg:w-9/12 mx-auto bg-white shadow-md rounded-lg p-8">
         <h2 className="text-3xl font-bold text-center text-[#85A844] mb-6">
           Create an Account
         </h2>
@@ -79,18 +85,18 @@ const SignUp = () => {
          <div className="grid grid-cols-2 gap-2">
            {/* Username */}
            <div>
-            <label className="block text-sm font-semibold mb-1">Username</label>
+            <label className="block text-sm font-semibold mb-1">User Name</label>
             <input
               type="text"
               {...register("userName", { required: true })}
               className="w-full px-4 py-2 border rounded-sm focus:outline-none focus:ring-2 focus:ring-[#85A844]"
-              placeholder="Enter your username"
+              placeholder="Enter your name"
               required
             />
           </div>
           {/* Email */}
           <div>
-            <label className="block text-sm font-semibold mb-1">Email</label>
+            <label className="block text-sm font-semibold mb-1">Email Address</label>
             <input
               type="email"
               {...register("email", { required: true })}

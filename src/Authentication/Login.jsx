@@ -4,6 +4,8 @@ import { useForm } from "react-hook-form";
 import SoicalLogin from "./SoicalLogin";
 import loginimg from '../../src/assets/Sign in-bro.png'
 import { Link } from "react-router-dom";
+import HelmetSet from "../CommonComponent/HelmetSet";
+
 
 const Login = () => {
   const { loginWithEmail, setUser } = useAuth();
@@ -23,10 +25,11 @@ const Login = () => {
 
   return (
     <div className="grid  mx-auto gap-4 md:grid-cols-2 justify-center items-center min-h-screen bg-gray-100">
-       <div>
+       <HelmetSet sub1='MediStore' sub2='Login'></HelmetSet>
+     <div>
         <img className="w-6/12 md:w-9/12 mx-auto" src={loginimg} alt="" />
       </div>
-      <div className=" w-8/12 md:w-10/12 lg:w-7/12 mx-auto  bg-white shadow-md rounded-lg p-6">
+ <div className=" w-8/12 md:w-10/12 lg:w-7/12 mx-auto  bg-white shadow-md rounded-lg p-6">
         <h2 className="text-3xl font-bold text-center mb-6 text-[#85A844]">
           Login
         </h2>

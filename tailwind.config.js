@@ -9,7 +9,18 @@ export default {
       colors: {
         first: {
           DEFAULT: '#85A844',
+          
         },
+        second: {
+          DEFAULT: '#3D474D',
+          
+        },
+        thrid: {
+          DEFAULT: '#868AA7',
+          
+        },
+        
+        
       },
     },
   },

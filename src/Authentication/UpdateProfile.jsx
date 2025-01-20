@@ -1,5 +1,5 @@
 import React from "react";
-import { useForm } from "react-hook-form";
+
 import useAuth from "../CustomHook/useAuth";
 import updateImg from '../../src/assets/Portfolio Update-bro.png'
 import { updateProfile } from "firebase/auth";
@@ -7,6 +7,8 @@ import { auth } from "../firebase/init";
 import useAxiosPublic from "../CustomHook/useAxiosPublic";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import HelmetSet from "../CommonComponent/HelmetSet";
+
 
 const UpdateProfile = () => {
  
@@ -60,10 +62,11 @@ const UpdateProfile = () => {
 console.log(user)
   return (
     <div className="container mx-auto ">
+       <HelmetSet sub1='MediStore' sub2='UpdateProfile'></HelmetSet>
 
       
       <div className="grid lg:grid-cols-2 gap-2  items-center">
-      <div className="w-9/12 mx-auto p-4 bg-white shadow-md rounded-lg">
+    <div className="w-9/12 mx-auto p-4 bg-white shadow-md rounded-lg"> 
         <div className="mx-auto flex flex-col gap-2 justify-center items-center"><img className=" border-4 w-40 object-cover h-40 rounded-full border-first " src={user?.photoURL} alt="" /><p className="font-semibold text-first">{user?.displayName}</p> <h2 className="text-first  uppercase  text-2xl font-semibold">Update Profile</h2></div>
       <form onSubmit={onSubmit} className="space-y-4">
         {/* User Name */}
@@ -103,7 +106,7 @@ console.log(user)
 
       </div>
       </form>
-      </div>
+       </div>
         <div>
             <img className="w-10/12 mx-auto" src={updateImg} alt="" />
 
