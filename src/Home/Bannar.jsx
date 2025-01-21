@@ -45,8 +45,8 @@ const Bannar = () => {
          {
             advertisementsData.filter(add=> add.status == 'aceecpt' )
             .map(add=>   <SwiperSlide key={add._id}>
-                <div className=" w-full rounded-2xl min-h-[400px]  mt-4   relative">
-             <img className='w-full object-cover bg-cover rounded-2xl' src={add.photo} alt="" />
+                <div className=" w-full rounded-2xl h-[300px]  mt-4   relative">
+             <img className='w-full object-cover h-full bg-cover rounded-2xl' src={add.photo} alt="" />
                 
                
             

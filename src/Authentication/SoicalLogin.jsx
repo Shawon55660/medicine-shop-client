@@ -1,6 +1,7 @@
 import React from 'react';
 import useAuth from '../CustomHook/useAuth';
 import useAxiosPublic from '../CustomHook/useAxiosPublic';
+import { toast } from 'react-toastify';
 
 const SoicalLogin = () => {
     const {loginWithGoogle,setUser} = useAuth()
@@ -10,7 +11,16 @@ const SoicalLogin = () => {
         .then( async res=>{
             setUser(res.user)
            if(res.user){
-            alert('signUp successfully')
+             toast.success("Profile Update Successfully", {
+                            position: "top-center",
+                            autoClose: 2000,
+                            hideProgressBar: true, 
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            icon: <span style={{ color: "#85A844" }}> <img src="https://img.icons8.com/?size=100&id=59850&format=png&color=85A844" alt="" srcset="" /></span>,
+                            style: { backgroundColor: "#FFFFF", color: "#85A844", fontWeight: "bold" }, 
+                          });
             const userInfo = {
               email:res.user.email,
               name:res.user.displayName,

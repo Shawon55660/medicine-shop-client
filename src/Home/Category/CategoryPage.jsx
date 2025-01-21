@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import useAxiosPublic from '../../CustomHook/useAxiosPublic';
 import { useQuery } from '@tanstack/react-query';
 import { FaEye } from 'react-icons/fa6';
@@ -7,6 +7,8 @@ import { CgAddR } from 'react-icons/cg';
 import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
 import useAuth from '../../CustomHook/useAuth';
 import Loading from '../../CommonComponent/Loading';
+import { toast } from 'react-toastify';
+import HelmetSet from '../../CommonComponent/HelmetSet';
 
 
 const CategoryPage = () => {
@@ -15,7 +17,7 @@ const CategoryPage = () => {
     const closeModal = () => setIsOpen(false);
     const [details,setDetails] = useState([])
     const {user} = useAuth()
-
+   const navigate = useNavigate()
 
 
     const { category } = useParams()
@@ -43,7 +45,33 @@ const CategoryPage = () => {
         
     }
     const handleCart = async(userInfo)=>{
-        if(!user.email)return alert('login first')
+         if (!user?.email){
+                             toast.warning("add to cart login first", {
+                                            position: "top-center",
+                                            autoClose: 2000,
+                                            hideProgressBar: false, 
+                                            closeOnClick: true,
+                                            pauseOnHover: true,
+                                            draggable: true,
+                                           
+                                          
+                                          });
+                             navigate('/login')            
+                        }
+                        if(user?.email === userInfo?.sellerEmail){
+                                  return  toast.warning("Seller can't buy his own products", {
+                                        position: "top-center",
+                                        autoClose: 2000,
+                                        hideProgressBar: false, 
+                                        closeOnClick: true,
+                                        pauseOnHover: true,
+                                        draggable: true,
+                                       
+                                      
+                                      });
+                                    
+                        
+                                }
        const medicineInfo ={
     medicineId:userInfo._id,
     sellerEmail:userInfo.sellerEmail,
@@ -53,22 +81,43 @@ const CategoryPage = () => {
     GenericName:userInfo.GenericName,
     photo:userInfo.photo,
     Price:userInfo.Price,
+    DisPrice: userInfo.discountPercentage,
   
     ItemName:userInfo.ItemName
     }
-    console.log(medicineInfo)
+   
         const res = await axiosPublic.post(`/cart`,medicineInfo)
-       console.log(res)
+       
         if(res.data.insertedId){
-            alert('cart added successfully')
+          return  toast.success("Profile Update Successfully", {
+                                       position: "top-center",
+                                       autoClose: 2000,
+                                       hideProgressBar: true, 
+                                       closeOnClick: true,
+                                       pauseOnHover: true,
+                                       draggable: true,
+                                       icon: <span style={{ color: "#85A844" }}> <img src="https://img.icons8.com/?size=100&id=59850&format=png&color=85A844" alt="" srcset="" /></span>,
+                                       style: { backgroundColor: "#FFFFF", color: "#85A844", fontWeight: "bold" }, 
+                                     });
         }
         else{
-            alert(res.data.error)
+            return  toast.warning(`${res.data.error} this product`, {
+                position: "top-center",
+                autoClose: 2000,
+                hideProgressBar: false, 
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+               
+              
+              });
+           
         }
     }
 if(medicinesLoading) return <Loading></Loading>
     return (
         <div className=''>
+            <HelmetSet sub1='Category' sub2={category}></HelmetSet>
          <Dialog open={isOpen} onClose={closeModal} className="relative z-50">
                          {/* Modal Overlay */}
                          <div

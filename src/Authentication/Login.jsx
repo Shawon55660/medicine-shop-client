@@ -29,7 +29,7 @@ const Login = () => {
      <div>
         <img className="w-6/12 md:w-9/12 mx-auto" src={loginimg} alt="" />
       </div>
- <div className=" w-8/12 md:w-10/12 lg:w-7/12 mx-auto  bg-white shadow-md rounded-lg p-6">
+ <div className=" w-8/12 md:w-10/12 lg:w-11/12 mx-auto  bg-white shadow-md rounded-lg p-6">
         <h2 className="text-3xl font-bold text-center mb-6 text-[#85A844]">
           Login
         </h2>

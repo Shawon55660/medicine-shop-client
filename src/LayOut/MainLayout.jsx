@@ -17,7 +17,7 @@ const MainLayout = () => {
             <Navbar></Navbar>
 
 
-            <div className='lg:grid lg:grid-cols-12 gap-2  min-h-screen mt-16'>
+            <div className='lg:grid lg:grid-cols-12 gap-2   min-h-screen mt-16'>
                 <button
                     className=" text-2xl text-white  p-2 m-3 fixed left-0 top-0 z-50 rounded-lg lg:hidden"
                     onClick={toggleSidebar}
@@ -27,9 +27,9 @@ const MainLayout = () => {
 
 
 
-              <div className='col-span-3 relative z-40  w-72 '>
+              <div className='col-span-3 relative z-40 bg-white  w-72 '>
               <div className={` shadow-xl rounded-sm text-black  h-screen    p-2 fixed top-18 lg:top-16 left-0 transform ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"
-                    } lg:translate-x-0 lg:fixed overflow-y-auto    z-40   transition-transform duration-300  `}>
+                    } lg:translate-x-0 lg:fixed overflow-y-auto bg-white   z-40   transition-transform duration-300  `}>
                         <Category></Category>
                        
 

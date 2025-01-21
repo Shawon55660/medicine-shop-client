@@ -2,12 +2,15 @@ import React from 'react';
 import useAxiosPrivate from '../CustomHook/useAxiosPrivate';
 import useAuth from '../CustomHook/useAuth';
 import { useQuery } from '@tanstack/react-query';
-import { FaEye } from 'react-icons/fa6';
+import { MdDeleteOutline } from "react-icons/md";
+import { LuDelete } from "react-icons/lu";
 
 import { FaTrashAlt } from 'react-icons/fa';
 import Loading from '../CommonComponent/Loading';
 import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom';
+import { FaArrowRight, FaCartPlus } from 'react-icons/fa6';
+import HelmetSet from '../CommonComponent/HelmetSet';
 
 const CartPage = () => {
     const { user } = useAuth()
@@ -107,63 +110,76 @@ const CartPage = () => {
 
     }
 
-
+    const totalPrice = cartData.reduce((total, item) => total +  (Math.floor(item.Price - ((item.Price * item.DisPrice) / 100))), 0);
 
     if (medicinesLoading) return <Loading></Loading>
     return (
         <div>
-            <div className="overflow-x-auto">
-                <table className="table">
-                    {/* head */}
-                    <thead>
-                        <tr>
+            <HelmetSet sub1='MediStore' sub2='Cart'></HelmetSet>
+            {cartData.length == 0 &&  <div className='uppercase flex flex-col justify-center items-center min-h-screen'>
+                <p className='font-bold text-xl text-first'>No Item In Cart </p>
+                <Link className='bg-first font-semibold py-2 px-4 text-white rounded-sm my-2' to='/shop'>add now</Link>
+                 </div> }
+           {cartData.length > 0 &&   <div className='border-b mt-8 mb-4 flex justify-between pb-2 items-center'>
+                <p className='text-lg font-semibold text-second uppercase'>Delete All Item</p>
+               <div className='text-right text-thrid'>  <button onClick={deleteCart} className=' flex items-center  gap-2'><MdDeleteOutline size={20} ></MdDeleteOutline > <span>Delete All</span></button></div> 
+            </div>}
 
-                            <th>GenericName </th>
-                            <th>category</th>
+            {
+                cartData.map(cart=> <div key={cart._id} className='flex mb-4 justify-between items-center '>
+                   <div className='flex  gap-4'>
+                   <div className='max-w-[70px] max-h-[70px] md:max-w-[100px] md:max-h-[100px]'><img className='w-full border-2 border-first rounded-3xl h-full object-cover' src={cart.photo} alt="" /></div>
+                    <div>
+                        <h2 className='text-sm md:text-xl font-semibold'>{cart.ItemName}</h2>
+                        <p className='text-xs md:text-[17px] md:py-1 font-semibold text-first'>{cart.category}</p>
+                        <p className='text-second text-xs  py-1 md:text-[16px]'>{cart.GenericName}</p>
+                        <p className='text-first  text-xs font-bold  py-1 md:text-[16px]'>{cart.DisPrice} % OFF</p>
+                    </div>
+                   </div>
+                    <div className='flex items-center gap-6'>
+                    <div className='leading-10'>
+                    <h3 className='font-bold text-sm md:text-md italic   text-first'>MRP. {Math.floor(cart.Price - ((cart.Price * cart.DisPrice) / 100))} tk</h3>
+                    <h3 className='text-thrid line-through text-xs md:text-sm font-mono italic'>MRP.{cart.Price}tk</h3>
 
-                            <th>image</th>
-                            <th>Price</th>
-                            <th>quentity</th>
-
-                            <th>action</th>
-
-
-
-                        </tr>
-                    </thead>
-                    <tbody>
-
-                        {cartData.map(cart => <tr key={cart._id}>
-
-                            <td>{cart.GenericName}</td>
-                            <td>{cart.category}</td>
-
-                            <td><img className="w-10 h-10 object-cover" src={cart.photo} alt="" /></td>
-
-                            <td>{cart.Price}</td>
-                            <td className='text-xl flex gap-4 '>
-                                <button onClick={() => cartDecrease(cart._id)}>-</button>
-                                <button>{cart.quentity}</button>
-                                <button disabled={cart.quentity == cart.Massunit} onClick={() => cartIncrease(cart._id)}>+</button></td>
-
-                            <td className='text-xl'>
+                    </div>
+                    <div>
+                    <div className='text-xl flex gap-8 '>
+                               <div className='flex gap-3'>
+                               <button className='btn btn-xs md:btn-sm text-sm md:text-xl text-second' disabled={cart.quentity==1} onClick={() => cartDecrease(cart._id)}>-</button>
+                                <button className='text-sm md:text-xl text-second'>{cart.quentity}</button>
+                                <button className='btn  btn-xs md:btn-sm  text-sm md:text-xl text-second' disabled={cart.quentity == cart.Massunit} onClick={() => cartIncrease(cart._id)}>+</button>
+                               </div>
+                                <button className='text-first' onClick={() => handleDelete(cart._id)}><LuDelete /></button>
+                                
+                                </div>
+                                
+                    </div>
+                    </div>
+        
+                  </div>)
+            }
+          
+         
 
 
-
-                                <button onClick={() => handleDelete(cart._id)}><FaTrashAlt></FaTrashAlt></button>
-
-                            </td>
-
-                        </tr>)}
-
-                    </tbody>
-
-                </table>
-                {cartData.length > 0 ? <div className='text-right'>  <button onClick={deleteCart} className='btn btn-warning'>Delete All</button></div> : ''}
-                <button className='btn text-center btn-success'><Link to='/checkOut'>CheckOut</Link></button>
+                {/* 
+                 */}
+                   
+                 
+                {cartData.length > 0 &&  <div className='flex bg-first text-white my-2 rounded-sm p-1 justify-between '>
+                    <div className='flex items-center gap-2'><div className=' p-3 m-1 rounded-lg bg-[#66852c]'> <FaCartPlus size={20} ></FaCartPlus></div>
+                    <div className='font-semibold'><p>{cartData.length} items</p>
+                    
+                    <p> Total: {totalPrice} tk</p></div>
+                    
+                    </div>
+                    <button className=' '><Link className=' text-center font-semibold flex items-center gap-1 mx-2' to='/checkOut'> <span>Place Order</span><FaArrowRight ></FaArrowRight></Link></button>
+                    </div>}
+               
+                
             </div>
 
-        </div>
+       
     );
 };
 

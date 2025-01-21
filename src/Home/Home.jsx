@@ -5,10 +5,12 @@ import DiscoutProduct from './Discout/DiscoutProduct';
 import ReveiwsClient from './Reveiws/ReveiwsClient';
 import ClientReiws from './Reveiws/ClientReiws';
 import HomeCard from './HomeCard/HomeCard';
+import HelmetSet from '../CommonComponent/HelmetSet';
 
 const Home = () => {
     return (
         <div>
+            <HelmetSet sub1='MediStore' sub2='Home'></HelmetSet>
             <Bannar></Bannar>
             <HomeCard></HomeCard>
             <DiscoutProduct></DiscoutProduct>

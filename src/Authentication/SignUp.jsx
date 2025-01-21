@@ -77,7 +77,7 @@ const SignUp = () => {
       </div>
 
       {/* Right Section */}
-  <div className="w-10/12 md:w-12/12 lg:w-9/12 mx-auto bg-white shadow-md rounded-lg p-8">
+  <div className="w-10/12 md:w-12/12 lg:w-11/12 mx-auto bg-white shadow-md rounded-lg p-8">
         <h2 className="text-3xl font-bold text-center text-[#85A844] mb-6">
           Create an Account
         </h2>

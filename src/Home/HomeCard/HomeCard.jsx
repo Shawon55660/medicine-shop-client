@@ -1,46 +1,90 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
+
 import { FaArrowRight, FaEye } from 'react-icons/fa6';
 import { CgAddR } from 'react-icons/cg';
-import { Dialog, DialogPanel } from '@headlessui/react';
+import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
+
+
 
 import useAxiosPublic from '../../CustomHook/useAxiosPublic';
 import Header from '../../CommonComponent/Header';
 import useAuth from '../../CustomHook/useAuth';
+import { toast, ToastContainer } from 'react-toastify';
+
+
 
 const HomeCard = () => {
     const [isOpen, setIsOpen] = useState(false);
     const openModal = () => setIsOpen(true);
     const closeModal = () => setIsOpen(false);
-    const [details, setDetails] = useState([]);
+    const [details, setDetails] = useState([])
 
-    const { category } = useParams();
-    const axiosPublic = useAxiosPublic();
+
+
+
+    const { category } = useParams()
+    const axiosPublic = useAxiosPublic()
     const [data, setData] = useState([]);
-    const { user } = useAuth();
+    const { user } = useAuth()
+    const navigate = useNavigate()
+
+
+
 
     const fetchData = async () => {
-        const catInfo = await axiosPublic.get(`/medicinesAll`);
+        const catInfo = await axiosPublic.get(`/medicinesAll`)
         if (catInfo.data) {
-            setData(catInfo.data.perPageData);
-        }
-    };
+            setData(catInfo.data.perPageData)
 
+        }
+    }
     useEffect(() => {
-        fetchData();
-    }, []);
+        fetchData()
+    }, [])
 
     const handleDetails = async (id) => {
-        const res = await axiosPublic.get(`/medicines-details/${id}`);
-        if (res.data) {
-            setDetails(res.data);
-        }
-        openModal();
-    };
 
+
+        const res = await axiosPublic.get(`/medicines-details/${id}`)
+        if (res.data) {
+            setDetails(res.data)
+        }
+        console.log(res.data)
+        openModal()
+
+    }
     const handleCart = async (userInfo) => {
-        if (!user.email) return alert('login first');
+        if (!user?.email){
+                     toast.warning("add to cart login first", {
+                                    position: "top-center",
+                                    autoClose: 2000,
+                                    hideProgressBar: false, 
+                                    closeOnClick: true,
+                                    pauseOnHover: true,
+                                    draggable: true,
+                                   
+                                  
+                                  });
+                               
+                              
+                }
+                
+                if(user?.email === userInfo?.sellerEmail){
+                          return  toast.warning("Seller can't buy his own products", {
+                                position: "top-center",
+                                autoClose: 2000,
+                                hideProgressBar: false, 
+                                closeOnClick: true,
+                                pauseOnHover: true,
+                                draggable: true,
+                               
+                              
+                              });
+                            
+                
+                        }
         const medicineInfo = {
             medicineId: userInfo._id,
             sellerEmail: userInfo.sellerEmail,
@@ -50,38 +94,62 @@ const HomeCard = () => {
             GenericName: userInfo.GenericName,
             photo: userInfo.photo,
             Price: userInfo.Price,
-            ItemName: userInfo.ItemName,
-        };
+            DisPrice: userInfo.discountPercentage,
 
-        const res = await axiosPublic.post(`/cart`, medicineInfo);
+            ItemName: userInfo.ItemName
+        }
+
+        const res = await axiosPublic.post(`/cart`, medicineInfo)
 
         if (res.data.insertedId) {
-            alert('cart added successfully');
-        } else {
-            alert(res.data.error);
+            toast.success("Profile Update Successfully", {
+                           position: "top-center",
+                           autoClose: 2000,
+                           hideProgressBar: true, 
+                           closeOnClick: true,
+                           pauseOnHover: true,
+                           draggable: true,
+                           icon: <span style={{ color: "#85A844" }}> <img src="https://img.icons8.com/?size=100&id=59850&format=png&color=85A844" alt="" srcset="" /></span>,
+                           style: { backgroundColor: "#FFFFF", color: "#85A844", fontWeight: "bold" }, 
+                         });
         }
-    };
+        else {
+            toast.error(`${res.data.error}`, {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+               
+                });
+            
+        }
+    }
 
+    // if(!data.length) return <Loading></Loading>
     return (
-        <div className="h-full">
+        <div className='h-full'>
+            <ToastContainer></ToastContainer>
             <Dialog open={isOpen} onClose={closeModal} className="relative z-50">
+                {/* Modal Overlay */}
                 <div
                     className="fixed inset-0 bg-black bg-opacity-25"
                     aria-hidden="true"
                 />
-                <DialogPanel className="fixed inset-0 flex items-center justify-center overflow-y-auto p-4">
+                {/* Modal Content */}
+                <DialogPanel className="fixed inset-0 flex items-center overflow-y-auto justify-center p-4">
                     <div className="w-full max-w-xl rounded bg-white p-6 shadow-lg">
-                        <img
-                            className="w-[300px] h-[300px] object-cover"
-                            src={details.photo}
-                            alt=""
-                        />
+                        <img className='w-[300px] h-[300px]  object-cover' src={details.photo} alt="" />
                         <p className="mt-2 text-xl text-gray-600">
                             {details.GenericName}
                         </p>
                         <p className="mt-2 text-xl text-gray-600">
                             {details.ItemName}
                         </p>
+
 
                         <div className="mt-4 flex justify-end space-x-4">
                             <button
@@ -90,128 +158,68 @@ const HomeCard = () => {
                             >
                                 Cancel
                             </button>
-                            <button
-                                onClick={() => handleCart(details)}
+                            <button onClick={() => handleCart(details)}
+
                                 className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
                             >
                                 Add To Cart
                             </button>
                         </div>
+
                     </div>
                 </DialogPanel>
             </Dialog>
 
-            <Header
-                title="Products"
-                subTitle=" Our Latest Products"
-                details="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam maximus lobortis faucibus. Pellentesque vehicula lacinia arcu nec sodales."
-            ></Header>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
-                {data.map((item) => (
-                    <motion.div
-                        key={item._id}
-                        className="flex relative flex-col h-full rounded-sm border-[1px] p-4"
-                        whileHover={{ scale: 1.03 }}
-                        transition={{ duration: 0.3 }}
-                    >
-                        {item.discountPercentage > 0 && (
-                            <p className="w-8 text-sm font-semibold absolute top-1 right-1 h-8 flex items-center justify-center p-6 bg-first opacity-90 text-white rounded-full z-20">
-                                -{item.discountPercentage}%
-                            </p>
-                        )}
-                        <motion.div
-                            className="flex-grow"
-                            whileHover={{ scale: 1.1 }}
-                            transition={{ duration: 0.3 }}
-                        >
-                            <div className="md:h-[200px]">
-                                <img
-                                    className="h-full rounded-sm w-full object-cover"
-                                    src={item.photo}
-                                    alt=""
-                                />
-                            </div>
-                            <div className="text-center">
-                                <div className="rating pt-2 rating-sm">
-                                    <input
-                                        type="radio"
-                                        name="rating-4"
-                                        className="mask mask-star-2 bg-first"
-                                    />
-                                    <input
-                                        type="radio"
-                                        name="rating-4"
-                                        className="mask mask-star-2 bg-first"
-                                        defaultChecked
-                                    />
-                                    <input
-                                        type="radio"
-                                        name="rating-4"
-                                        className="mask mask-star-2 bg-first"
-                                    />
-                                    <input
-                                        type="radio"
-                                        name="rating-4"
-                                        className="mask mask-star-2 bg-first"
-                                    />
-                                    <input
-                                        type="radio"
-                                        name="rating-4"
-                                        className="mask mask-star-2 bg-first"
-                                    />
+            <Header title='Products' subTitle=' Our Lastest Prodcuts' details='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam maximus lobortis faucibus. Pellentesque vehicula lacinia arcu nec sodales.'></Header>
+
+            <div className='grid md:grid-cols-2 w-11/12 mx-auto md:w-full lg:grid-cols-3 gap-3'>
+
+                {/* card satart  */}
+                {
+                    data.map(item => <div className='flex relative  flex-col h-full rounded-sm border-[1px] p-4' key={item._id}>
+                         {item.discountPercentage > 0 && <p className='w-8 text-sm font-semibold absolute top-1 right-1 h-8 flex items-center justify-center p-6 bg-first opacity-90 text-white rounded-full z-20 '>-{item.discountPercentage}%</p>}
+
+
+                        <div className='flex-grow '>
+                            <motion.div
+                                whileHover={{ scale: 1.1 }}
+                                transition={{ duration: 0.3 }}
+                            className='md:h-[200px]'><img className='h-full rounded-sm w-full object-cover' src={item.photo} alt="" /></motion.div>
+                            <div className='text-center'>
+                                <div className="rating pt-2  rating-sm">
+                                    <input type="radio" name="rating-4" className="mask mask-star-2 bg-first" />
+                                    <input type="radio" name="rating-4" className="mask mask-star-2 bg-first" defaultChecked />
+                                    <input type="radio" name="rating-4" className="mask mask-star-2 bg-first" />
+                                    <input type="radio" name="rating-4" className="mask mask-star-2 bg-first" />
+                                    <input type="radio" name="rating-4" className="mask mask-star-2 bg-first" />
                                 </div>
-                                <h2 className="font-semibold text-second text-xl py-1">
-                                    {item.ItemName} {item.Massunit} mg
-                                </h2>
-                                <div className="flex gap-6 justify-center items-center py-1">
-                                    <h3 className="text-thrid line-through font-mono italic">
-                                        MRP.{item.Price}tk
-                                    </h3>
-                                    <h3 className="font-bold text-md italic text-first">
-                                        MRP.{' '}
-                                        {Math.floor(
-                                            item.Price -
-                                                (item.Price *
-                                                    item.discountPercentage) /
-                                                    100
-                                        )}{' '}
-                                        tk
-                                    </h3>
+                                <h2 className='font-semibold text-second text-xl py-1'>{item.ItemName} {item.Massunit} mg</h2>
+                                <div className='flex gap-6 justify-center text-center items-center py-1'>
+                                    <h3 className='text-thrid line-through font-mono italic'>MRP.{item.Price}tk</h3>
+                                    <h3 className='font-bold text-md italic  text-first'>MRP. {Math.floor(item.Price - ((item.Price * item.discountPercentage) / 100))} tk</h3>
+
                                 </div>
                             </div>
-                        </motion.div>
-                        <div className="flex flex-col justify-center gap-3 mt-1 items-center">
-                            <button
-                                onClick={() => handleCart(item)}
-                                className="uppercase flex items-center text-sm gap-2 font-semibold bg-first text-white px-4 py-[7px]"
-                            >
-                                <CgAddR size={18}></CgAddR>{' '}
-                                <span>add to cart</span>
-                            </button>
-
-                            <button
-                                className="flex font-semibold text-thrid items-center gap-2 uppercase text-xs"
-                                onClick={() => handleDetails(item._id)}
-                            >
-                                <FaEye size={14}></FaEye>
-                                <span>quick view</span>
-                            </button>
                         </div>
-                    </motion.div>
-                ))}
+                        <div className='flex flex-col justify-center gap-3 mt-1 items-center' >
+                            <button onClick={() => handleCart(item)} className='uppercase flex items-center text-sm gap-2 font-semibold bg-first text-white px-4 py-[7px]'> <CgAddR size={18}></CgAddR> <span>add to cart</span></button>
+
+                            <button className='flex font-semibold text-thrid items-center gap-2 uppercase  text-xs ' onClick={() => handleDetails(item._id)} > <FaEye size={14}></FaEye><span>quick veiw</span></button>
+                        </div>
+                    </div>)
+                }
+                
+
             </div>
-            <div className="my-12 flex justify-center">
-                <Link
-                    to="/shop"
-                    className="py-3 px-6 rounded-sm flex items-center w-40 font-semibold justify-center gap-4 bg-first text-white"
-                >
-                    <span>See More</span>
-                    <FaArrowRight></FaArrowRight>
-                </Link>
-            </div>
+           <div className='my-12 flex justify-center'> <Link to='/shop' className='py-3 px-6 rounded-sm  flex items-center w-40 font-semibold justify-center gap-4 bg-first text-white'>  <span>See More</span><FaArrowRight ></FaArrowRight></Link></div>
+
+
+
         </div>
     );
 };
 
 export default HomeCard;
+
+

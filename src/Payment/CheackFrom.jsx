@@ -5,6 +5,8 @@ import useAuth from '../CustomHook/useAuth';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Loading from '../CommonComponent/Loading';
 
 const CheackFrom = () => {
@@ -14,7 +16,7 @@ const CheackFrom = () => {
     const navigate = useNavigate();
     const elements = useElements();
     const [clientSecret, setClientSecret] = useState('');
-    const [isLoadingPayment, setIsLoadingPayment] = useState(false); // Add loading state for payment
+    const [isLoadingPayment, setIsLoadingPayment] = useState(false);
 
     const { data: cartData = [], isLoading: medicinesLoading, refetch } = useQuery({
         queryKey: ['cartData', user.email],
@@ -26,7 +28,7 @@ const CheackFrom = () => {
         }
     });
 
-    const totalPrice = cartData.reduce((total, item) => total + item.Price, 0);
+    const totalPrice = cartData.reduce((total, item) => total + (Math.floor(item.Price - ((item.Price * item.DisPrice) / 100))), 0);
 
     useEffect(() => {
         if (totalPrice > 0) {
@@ -41,32 +43,37 @@ const CheackFrom = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!stripe || !elements) return;
-        setIsLoadingPayment(true); 
+
+        setIsLoadingPayment(true);
         const cardElement = elements.getElement(CardElement);
-        const { error, paymentMethod } = await stripe.createPaymentMethod({
-            type: 'card',
-            card: cardElement
-        });
-        if (error) {
-            setIsLoadingPayment(false); 
-            return;
-        }
 
-        // Confirm payment
-        const { paymentIntent, error: confirmError } = await stripe.confirmCardPayment(clientSecret, {
-            payment_method: {
-                card: cardElement,
-                billing_details: {
-                    email: user?.email || 'anonymous',
-                    name: user?.displayName || 'anonymous'
-                }
+        // Toast.promise দিয়ে পেমেন্ট প্রসেস ম্যানেজ করা
+        const paymentPromise = new Promise(async (resolve, reject) => {
+            const { error, paymentMethod } = await stripe.createPaymentMethod({
+                type: 'card',
+                card: cardElement
+            });
+
+            if (error) {
+                reject(error.message);
+                return;
             }
-        });
 
-        if (confirmError) {
-            setIsLoadingPayment(false); 
-            alert('Payment error');
-        } else {
+            const { paymentIntent, error: confirmError } = await stripe.confirmCardPayment(clientSecret, {
+                payment_method: {
+                    card: cardElement,
+                    billing_details: {
+                        email: user?.email || 'anonymous',
+                        name: user?.displayName || 'anonymous'
+                    }
+                }
+            });
+
+            if (confirmError) {
+                reject(confirmError.message);
+                return;
+            }
+
             if (paymentIntent.status === 'succeeded') {
                 const paymentCart = cartData.map(item => ({
                     ...item,
@@ -77,61 +84,75 @@ const CheackFrom = () => {
                 }));
 
                 const res = await axiosPrivate.post('/payment', paymentCart);
+
                 if (res) {
                     refetch();
+                    resolve('Payment successful!');
                     Swal.fire({
-                        position: "top-end",
+                        position: "top-center",
                         icon: "success",
-                        title: "Thank you for the taka paisa",
+                        title: "Your Order has been confrim",
                         showConfirmButton: false,
-                        timer: 1500
+                        timer: 2000
                     });
                     navigate('/invoice');
                 }
             }
-        }
+        });
 
-        setIsLoadingPayment(false); 
+        toast.promise(paymentPromise, {
+            pending: 'Processing payment...',
+            success: 'Payment successful!',
+            error: 'Payment failed. Please try again.',
+        });
+
+        setIsLoadingPayment(false);
     };
 
     return (
-        <div className='max-w-md mx-auto flex my-12 justify-center bg-yellow-400 items-center min-h-[40vh]'>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Amount: {totalPrice}</label>
-                </div>
+        <div  className="flex justify-center items-center  bg-gray-100">
+            <div className="w-full max-w-lg mx-auto">
+            <ToastContainer />
+            <form 
+  onSubmit={handleSubmit} 
+  className="bg-white shadow-md rounded-lg p-8 space-y-4 w-full max-w-lg"
+>
+  <div>
+    <label className="block text-second text-xl font-bold mb-2">
+    Total  Amount: <span className="text-green-500 font-semibold">{totalPrice} tk</span>
+    </label>
+  </div>
 
-                {medicinesLoading ? (
-                    <Loading></Loading>
-                ) : (
-                    <div className="" style={{ width: '400px' }}> 
-                        <CardElement 
-                            options={{
-                                style: {
-                                    base: {
-                                        fontSize: '16px',
-                                        color: '#FFFFFF',
-                                        '::placeholder': {
-                                            color: '#FFFFFF',
-                                        },
-                                    },
-                                    invalid: {
-                                        color: '#9e2146',
-                                    },
-                                },
-                            }}
-                        />
-                    </div>
-                )}
+  <div className="border border-gray-300 rounded-md p-3 bg-gray-50">
+    <CardElement
+      options={{
+        style: {
+          base: {
+            fontSize: '16px',
+            color: '#333',
+            '::placeholder': {
+              color: '#888',
+            },
+          },
+          invalid: {
+            color: '#e63946',
+          },
+        },
+      }}
+    />
+  </div>
 
-                <button type="submit" className='btn' disabled={!stripe || isLoadingPayment}>
-                    {isLoadingPayment ? (
-                       <Loading></Loading>
-                    ) : (
-                        'Pay'
-                    )}
-                </button>
-            </form>
+  <button 
+    type="submit" 
+    className={`w-full bg-first text-white font-bold py-2 px-4 rounded-md hover:bg-[#637c34] transition-all ${
+      isLoadingPayment ? 'opacity-50 cursor-not-allowed' : ''
+    }`} 
+    disabled={!stripe || isLoadingPayment}
+  >
+    {isLoadingPayment ? <Loading /> : 'Pay Now'}
+  </button>
+</form></div>
+
         </div>
     );
 };
