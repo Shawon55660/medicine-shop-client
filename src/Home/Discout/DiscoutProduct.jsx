@@ -30,8 +30,8 @@ const DiscountProduct = () => {
           dynamicBullets: true,
         }}
         autoplay={{
-            delay: 1000, // Auto slide delay in milliseconds (3 seconds)
-            disableOnInteraction: false, // Keeps autoplay running even after user interacts
+            delay: 1000, 
+            disableOnInteraction: false, 
           }}
         modules={[Pagination,Autoplay]}
         className="mySwiper"
@@ -53,10 +53,10 @@ const DiscountProduct = () => {
         
               {/* Content */}
               <div className="relative text-white text-center p-6">
-                <h2 className="text-4xl font-bold mb-2">{discout.discountPercentage }% OFF</h2>
-                <p>{discout.GenericName}</p>
-                <p className="text-lg mb-4">Limited Time Offer</p>
-                <Link to='/shop' className="bg-first text-white font-bold py-2 my-2 px-4 rounded-lg transition duration-300">
+                <h2 className="text-4xl font-bold text-first mb-2">{discout.discountPercentage }% OFF</h2>
+                <p className='font-semibold'>{discout.GenericName}</p>
+                <p className="text-xl mt-2 mb-4">Limited Time Offer</p>
+                <Link to='/shop' className="bg-first text-white font-bold py-2 my-4 px-4 rounded-lg transition duration-300">
                   Shop Now
                 </Link>
               </div>

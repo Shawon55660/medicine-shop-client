@@ -30,12 +30,12 @@ const Shop = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [search,setSearch]= useState('')
     const navigate = useNavigate()
-    let limit = 3
+    let limit = 1
 
     const handleChange = (event, value) => {
         setCurrentPage(value);
     };
-console.log(search)
+
     const fetchData = async (page) => {
         const catInfo = await axiosPublic.get(`/medicinesAll?page=${page}&limit=${limit}&search=${search}`)
         if (catInfo.data) {

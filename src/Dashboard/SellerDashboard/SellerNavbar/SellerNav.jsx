@@ -7,10 +7,10 @@ const SellerNav = () => {
     return (
         <div>
              <ul>
-               <li><NavLink to='/dashboard/sellerHome'end >Seller Home</NavLink></li>
-               <li><NavLink to='/dashboard/manageMedicines'>Manage Medicines</NavLink></li>
-                <li><NavLink to='/dashboard/paymentHistory'>Payment History</NavLink></li>
-                <li><NavLink to='/dashboard/askForAdvertise'>Ask For Advertisment</NavLink></li>
+                <li className=' my-3'><NavLink className='px-1  py-1' to='/dashboard/sellerHome'end >Seller Home</NavLink></li>
+                <li className=' my-3'><NavLink className='px-1  py-1' to='/dashboard/manageMedicines'>Manage Medicines</NavLink></li>
+                 <li className=' my-3'><NavLink className='px-1  py-1' to='/dashboard/paymentHistory'>Payment History</NavLink></li>
+                 <li className=' my-3'><NavLink className='px-1  py-1' to='/dashboard/askForAdvertise'>Ask For Advertisment</NavLink></li>
                
             </ul>
             

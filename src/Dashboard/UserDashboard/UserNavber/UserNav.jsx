@@ -6,7 +6,7 @@ const UserNav = () => {
         <div>
             <ul>
             
-                <li><NavLink  to='/dashboard/payment' end>Payment History</NavLink></li>
+                 <li className=' my-3'><NavLink className='px-1  py-1'  to='/dashboard/payment' end>Payment History</NavLink></li>
                 
                
             </ul>
