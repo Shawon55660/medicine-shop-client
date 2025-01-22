@@ -21,7 +21,7 @@ const Category = () => {
      
     return (
         <div className='mb-16 text-second'>
-        <h2 className='text-xl gap-2 items-center font-semibold flex py-4 text-first'> <AiOutlineShop size={30} ></AiOutlineShop> <span>Medicines By Category </span></h2>
+        <h2 className='text-lg px-4 items-center font-semibold gap-2 flex py-4 text-first'> <AiOutlineShop size={26} ></AiOutlineShop> <span>Medicines By Category </span></h2>
 
         {categoryData.map(category=> <div className='p-2' key={category._id}>
            <NavLink to={`/category/${category.MedicineCategory}`}  >

@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Loading from '../CommonComponent/Loading';
+import HelmetSet from '../CommonComponent/HelmetSet';
 
 const CheackFrom = () => {
     const axiosPrivate = useAxiosPrivate();
@@ -47,7 +48,7 @@ const CheackFrom = () => {
         setIsLoadingPayment(true);
         const cardElement = elements.getElement(CardElement);
 
-        // Toast.promise দিয়ে পেমেন্ট প্রসেস ম্যানেজ করা
+      
         const paymentPromise = new Promise(async (resolve, reject) => {
             const { error, paymentMethod } = await stripe.createPaymentMethod({
                 type: 'card',
@@ -87,14 +88,14 @@ const CheackFrom = () => {
 
                 if (res) {
                     refetch();
-                    resolve('Payment successful!');
+                    resolve(
                     Swal.fire({
                         position: "top-center",
                         icon: "success",
                         title: "Your Order has been confrim",
                         showConfirmButton: false,
                         timer: 2000
-                    });
+                    }))
                     navigate('/invoice');
                 }
             }
@@ -102,7 +103,6 @@ const CheackFrom = () => {
 
         toast.promise(paymentPromise, {
             pending: 'Processing payment...',
-            success: 'Payment successful!',
             error: 'Payment failed. Please try again.',
         });
 
@@ -111,6 +111,8 @@ const CheackFrom = () => {
 
     return (
         <div  className="flex justify-center items-center  bg-gray-100">
+
+          <HelmetSet sub1='MediStore' sub2='Payment'></HelmetSet>
             <div className="w-full max-w-lg mx-auto">
             <ToastContainer />
             <form 
@@ -119,7 +121,7 @@ const CheackFrom = () => {
 >
   <div>
     <label className="block text-second text-xl font-bold mb-2">
-    Total  Amount: <span className="text-green-500 font-semibold">{totalPrice} tk</span>
+    Total  Amount: <span className="text-first font-semibold">{totalPrice} tk</span>
     </label>
   </div>
 

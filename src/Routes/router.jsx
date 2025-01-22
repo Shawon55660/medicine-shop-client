@@ -24,6 +24,7 @@ import AdminRouter from './AdminRouter';
 import SellerRouter from './SellerRouter';
 import DashboardCommon from '../Dashboard/CommonComponent/DashboardCommon';
 import UpdateProfile from '../Authentication/UpdateProfile';
+import Error from '../CommonComponent/Error';
 
 
 
@@ -72,7 +73,8 @@ const  router  = createBrowserRouter([
                 element:<InvoicePage></InvoicePage>
             }
 
-        ]
+        ],
+        errorElement:<Error></Error>
     },
     //dashboard router
     
@@ -142,8 +144,10 @@ const  router  = createBrowserRouter([
             }
           
            
-        ]
-    }
+        ],
+        errorElement:<Error></Error>
+    },
+    
 
 
 ])

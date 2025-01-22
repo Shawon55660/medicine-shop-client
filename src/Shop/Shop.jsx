@@ -158,43 +158,55 @@ const Shop = () => {
             <ToastContainer></ToastContainer>
             <HelmetSet sub1='MediStore' sub2='Shop'></HelmetSet>
           
-            <Dialog open={isOpen} onClose={closeModal} className="relative z-50">
-                {/* Modal Overlay */}
-                <div
-                    className="fixed inset-0 bg-black bg-opacity-25"
-                    aria-hidden="true"
-                />
-                {/* Modal Content */}
-                <DialogPanel className="fixed inset-0 flex items-center overflow-y-auto justify-center p-4">
-                    <div className="w-full max-w-xl rounded bg-white p-6 shadow-lg">
-                        <img className='w-[300px] h-[300px]  object-cover' src={details.photo} alt="" />
-                        <p className="mt-2 text-xl text-gray-600">
-                            {details.GenericName}
-                        </p>
-                        <p className="mt-2 text-xl text-gray-600">
-                            {details.ItemName}
-                        </p>
-
-
-                        <div className="mt-4 flex justify-end space-x-4">
-                            <button
-                                onClick={closeModal}
-                                className="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600"
-                            >
-                                Cancel
-                            </button>
-                            <button onClick={() => handleCart(details)}
-
-                                className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-                            >
-                                Add To Cart
-                            </button>
-                        </div>
-
-                    </div>
-                </DialogPanel>
-            </Dialog>
-
+           <Dialog open={isOpen} onClose={closeModal} className="relative z-50">
+               {/* Modal Overlay */}
+               <div className="fixed inset-0 bg-black bg-opacity-30" aria-hidden="true" />
+               
+               {/* Modal Content */}
+               <DialogPanel
+                   className={`fixed inset-0 flex items-center justify-center p-6 overflow-y-auto transition-all duration-500 
+                   ${isOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}
+               >
+                   <div className="w-full max-w-3xl bg-white p-6 shadow-lg rounded-xl flex flex-col max-h-[80vh]">
+                       
+                       {/* Product Image */}
+                       <div className="flex justify-center mb-4">
+                           <img className="w-[200px] h-[200px] object-cover rounded-lg shadow-lg" src={details.photo} alt={details.ItemName} />
+                       </div>
+           
+                       {/* Product Information */}
+                       <div className="flex flex-col space-y-3 text-gray-600 overflow-y-auto flex-1 max-h-[60vh]">
+                           <p className="text-2xl font-bold text-first text-center">{details.ItemName}</p>
+                           <p className="text-lg text-second text-center">{details.GenericName}</p>
+           
+                           {/* Additional Details */}
+                           <p><strong>Category:</strong> {details.category}</p>
+                           <p><strong>Company:</strong> {details.company}</p>
+                           <p><strong>Mass Unit:</strong> {details.Massunit}</p>
+                           <p><strong>Volume:</strong> {details.ml} ml</p>
+                           <p><strong>Price:</strong> ${details.Price}</p>
+                           <p><strong>Discount:</strong> {details.discountPercentage}%</p>
+                           <p className="mt-2"><strong>Description:</strong> {details.Description}</p>
+                       </div>
+           
+                       {/* Action Buttons */}
+                       <div className="mt-6 flex justify-end space-x-4">
+                           <button
+                               onClick={closeModal}
+                               className="px-6 py-3 bg-[#85A844] text-white rounded-lg hover:bg-opacity-90 transition duration-300"
+                           >
+                               Cancel
+                           </button>
+                           <button
+                               onClick={() => handleCart(details)}
+                               className="px-6 py-3 bg-[#85A844] text-white rounded-lg hover:bg-opacity-90 transition duration-300"
+                           >
+                               Add To Cart
+                           </button>
+                       </div>
+                   </div>
+               </DialogPanel>
+           </Dialog>
 
             <div className='relative'>
                 <div className='flex items-center justify-between'>

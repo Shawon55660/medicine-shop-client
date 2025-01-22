@@ -51,40 +51,40 @@ const HomeCard = () => {
         if (res.data) {
             setDetails(res.data)
         }
-        console.log(res.data)
+      
         openModal()
 
     }
     const handleCart = async (userInfo) => {
-        if (!user?.email){
-                     toast.warning("add to cart login first", {
-                                    position: "top-center",
-                                    autoClose: 2000,
-                                    hideProgressBar: false, 
-                                    closeOnClick: true,
-                                    pauseOnHover: true,
-                                    draggable: true,
-                                   
-                                  
-                                  });
-                               
-                              
-                }
-                
-                if(user?.email === userInfo?.sellerEmail){
-                          return  toast.warning("Seller can't buy his own products", {
-                                position: "top-center",
-                                autoClose: 2000,
-                                hideProgressBar: false, 
-                                closeOnClick: true,
-                                pauseOnHover: true,
-                                draggable: true,
-                               
-                              
-                              });
-                            
-                
-                        }
+        if (!user?.email) {
+            toast.warning("add to cart login first", {
+                position: "top-center",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+
+
+            });
+
+
+        }
+
+        if (user?.email === userInfo?.sellerEmail) {
+            return toast.warning("Seller can't buy his own products", {
+                position: "top-center",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+
+
+            });
+
+
+        }
         const medicineInfo = {
             medicineId: userInfo._id,
             sellerEmail: userInfo.sellerEmail,
@@ -103,15 +103,15 @@ const HomeCard = () => {
 
         if (res.data.insertedId) {
             toast.success("Profile Update Successfully", {
-                           position: "top-center",
-                           autoClose: 2000,
-                           hideProgressBar: true, 
-                           closeOnClick: true,
-                           pauseOnHover: true,
-                           draggable: true,
-                           icon: <span style={{ color: "#85A844" }}> <img src="https://img.icons8.com/?size=100&id=59850&format=png&color=85A844" alt="" srcset="" /></span>,
-                           style: { backgroundColor: "#FFFFF", color: "#85A844", fontWeight: "bold" }, 
-                         });
+                position: "top-center",
+                autoClose: 2000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                icon: <span style={{ color: "#85A844" }}> <img src="https://img.icons8.com/?size=100&id=59850&format=png&color=85A844" alt="" srcset="" /></span>,
+                style: { backgroundColor: "#FFFFF", color: "#85A844", fontWeight: "bold" },
+            });
         }
         else {
             toast.error(`${res.data.error}`, {
@@ -123,9 +123,9 @@ const HomeCard = () => {
                 draggable: true,
                 progress: undefined,
                 theme: "light",
-               
-                });
-            
+
+            });
+
         }
     }
 
@@ -133,42 +133,65 @@ const HomeCard = () => {
     return (
         <div className='h-full'>
             <ToastContainer></ToastContainer>
-            <Dialog open={isOpen} onClose={closeModal} className="relative z-50">
-                {/* Modal Overlay */}
-                <div
-                    className="fixed inset-0 bg-black bg-opacity-25"
-                    aria-hidden="true"
-                />
-                {/* Modal Content */}
-                <DialogPanel className="fixed inset-0 flex items-center overflow-y-auto justify-center p-4">
-                    <div className="w-full max-w-xl rounded bg-white p-6 shadow-lg">
-                        <img className='w-[300px] h-[300px]  object-cover' src={details.photo} alt="" />
-                        <p className="mt-2 text-xl text-gray-600">
-                            {details.GenericName}
-                        </p>
-                        <p className="mt-2 text-xl text-gray-600">
-                            {details.ItemName}
-                        </p>
+           
+
+<Dialog open={isOpen} onClose={closeModal} className="relative z-50">
+    {/* Modal Overlay */}
+    <div className="fixed inset-0 bg-black bg-opacity-30" aria-hidden="true" />
+    
+    {/* Modal Content */}
+    <DialogPanel
+        className={`fixed inset-0 flex items-center justify-center p-6 overflow-y-auto transition-all duration-500 
+        ${isOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}
+    >
+        <div className="w-full max-w-3xl bg-white p-6 shadow-lg rounded-xl flex flex-col max-h-[80vh]">
+            
+            {/* Product Image */}
+            <div className="flex justify-center mb-4">
+                <img className="w-[200px] h-[200px] object-cover rounded-lg shadow-lg" src={details.photo} alt={details.ItemName} />
+            </div>
+
+            {/* Product Information */}
+            <div className="flex flex-col space-y-3 text-gray-600 overflow-y-auto flex-1 max-h-[60vh]">
+                <p className="text-2xl font-bold text-first text-center">{details.ItemName}</p>
+                <p className="text-lg text-second text-center">{details.GenericName}</p>
+
+                {/* Additional Details */}
+                <p><strong>Category:</strong> {details.category}</p>
+                <p><strong>Company:</strong> {details.company}</p>
+                <p><strong>Mass Unit:</strong> {details.Massunit}</p>
+                <p><strong>Volume:</strong> {details.ml} ml</p>
+                <p><strong>Price:</strong> ${details.Price}</p>
+                <p><strong>Discount:</strong> {details.discountPercentage}%</p>
+                <p className="mt-2"><strong>Description:</strong> {details.Description}</p>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="mt-6 flex justify-end space-x-4">
+                <button
+                    onClick={closeModal}
+                    className="px-6 py-3 bg-[#85A844] text-white rounded-lg hover:bg-opacity-90 transition duration-300"
+                >
+                    Cancel
+                </button>
+                <button
+                    onClick={() => handleCart(details)}
+                    className="px-6 py-3 bg-[#85A844] text-white rounded-lg hover:bg-opacity-90 transition duration-300"
+                >
+                    Add To Cart
+                </button>
+            </div>
+        </div>
+    </DialogPanel>
+</Dialog>
 
 
-                        <div className="mt-4 flex justify-end space-x-4">
-                            <button
-                                onClick={closeModal}
-                                className="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600"
-                            >
-                                Cancel
-                            </button>
-                            <button onClick={() => handleCart(details)}
 
-                                className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-                            >
-                                Add To Cart
-                            </button>
-                        </div>
 
-                    </div>
-                </DialogPanel>
-            </Dialog>
+
+
+
+
 
 
             <Header title='Products' subTitle=' Our Lastest Prodcuts' details='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam maximus lobortis faucibus. Pellentesque vehicula lacinia arcu nec sodales.'></Header>
@@ -178,14 +201,14 @@ const HomeCard = () => {
                 {/* card satart  */}
                 {
                     data.map(item => <div className='flex relative  flex-col h-full rounded-sm border-[1px] p-4' key={item._id}>
-                         {item.discountPercentage > 0 && <p className='w-8 text-sm font-semibold absolute top-1 right-1 h-8 flex items-center justify-center p-6 bg-first opacity-90 text-white rounded-full z-20 '>-{item.discountPercentage}%</p>}
+                        {item.discountPercentage > 0 && <p className='w-8 text-sm font-semibold absolute top-1 right-1 h-8 flex items-center justify-center p-6 bg-first opacity-90 text-white rounded-full z-20 '>-{item.discountPercentage}%</p>}
 
 
                         <div className='flex-grow '>
                             <motion.div
                                 whileHover={{ scale: 1.1 }}
                                 transition={{ duration: 0.3 }}
-                            className='md:h-[200px]'><img className='h-full rounded-sm w-full object-cover' src={item.photo} alt="" /></motion.div>
+                                className='md:h-[200px]'><img className='h-full rounded-sm w-full object-cover' src={item.photo} alt="" /></motion.div>
                             <div className='text-center'>
                                 <div className="rating pt-2  rating-sm">
                                     <input type="radio" name="rating-4" className="mask mask-star-2 bg-first" />
@@ -209,10 +232,10 @@ const HomeCard = () => {
                         </div>
                     </div>)
                 }
-                
+
 
             </div>
-           <div className='my-12 flex justify-center'> <Link to='/shop' className='py-3 px-6 rounded-sm  flex items-center w-40 font-semibold justify-center gap-4 bg-first text-white'>  <span>See More</span><FaArrowRight ></FaArrowRight></Link></div>
+            <div className='my-12 flex justify-center'> <Link to='/shop' className='py-3 px-6 rounded-sm  flex items-center w-40 font-semibold justify-center gap-4 bg-first text-white'>  <span>See More</span><FaArrowRight ></FaArrowRight></Link></div>
 
 
 

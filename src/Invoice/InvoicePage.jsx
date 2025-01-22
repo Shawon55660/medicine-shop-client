@@ -1,9 +1,11 @@
 import React from 'react';
 import useAuth from '../CustomHook/useAuth';
 
-import pdfMake from 'pdfmake/build/pdfmake';
-import { useNavigate } from 'react-router-dom';
+import 'jspdf-autotable';
+import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { FaDownload, FaNotesMedical } from 'react-icons/fa';
+import jsPDF from 'jspdf';
 
 
 
@@ -14,71 +16,114 @@ const InvoicePage = () => {
   const nvaigate = useNavigate()
 
   const generatePDF = () => {
-  
-    const docDefinition = {
-      content: [
-        {
-          table: {
-            headerRows: 1,
-            widths: [50, '*', 'auto', 'auto', 'auto', 'auto'],
-            body: [
-           
-              ['Serial', 'Item Name', 'Quantity', 'Price', 'Buyer Email', 'Transaction ID'],
-           
-              ...Payment.map((item, index) => [
-                index + 1,
-                item.ItemName,
-                item.quentity,
-                item.Price,
-                item.userEmail,
-                paymentInfo?.clientSecret,
-              ]),
-            ],
-          },
-        },
-      ],
-    };
+   const doc =new jsPDF()
+   doc.text('Payment Receipt', 20, 15)
+   const tableColumn = ['Serial', 'Item Name', 'Quantity', 'Price', 'Transaction ID'];
+
+   const tableRows = Payment.map((item,index)=>[
+    index+1,
+    item.ItemName,
+    item.quentity,
+    item.Price,
+   
+    paymentInfo?.clientSecret
+
+   ])
+   doc.autoTable({
+    head: [tableColumn],
+    body: tableRows,
+    startY: 30,
+  });
+   doc.save('invoice.pdf');
+   Swal.fire({
+                           position: "top-center",
+                           icon: "success",
+                           title: "Payment Receipt Download Successfully",
+                           showConfirmButton: false,
+                           timer: 2000
+                       })
+   nvaigate('/shop')
 
   
-    pdfMake.createPdf(docDefinition).download('invoice.pdf');
-    Swal.fire('download successfully')
-    nvaigate('/')
 
   };
 
   return (
     <div>
-      <div className="overflow-x-auto">
-        <table className="table">
-          <thead>
-            <tr>
-              <th>Serial</th>
-              <th>Item Name</th>
-              <th>Quantity</th>
-              <th>Price</th>
-              <th>Buyer Email</th>
-              <th>Transaction ID</th>
-            </tr>
-          </thead>
-          <tbody>
-            {Payment.map((item, index) => (
-              <tr key={item._id || index}>
-                <th>{index + 1}</th>
-                <td>{item.ItemName}</td>
-                <td>{item.quentity}</td>
-                <td>{item.Price}</td>
-                <td>{item.userEmail}</td>
-                <td>{paymentInfo?.clientSecret}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+    <div className="bg-gray-100 p-6 rounded-md shadow-md">
+  <h2 className="text-xl font-semibold mb-4 text-center">Payment Receipt</h2>
+  {Payment.map((item, index) => (
+    <div key={item._id || index} className="mb-6">
+      <div className="grid grid-cols-2 gap-4">
+        <div>
+          <label className="block text-sm font-medium text-gray-700">Serial</label>
+          <input
+            type="text"
+            value={index + 1}
+            readOnly
+            className="mt-1 block w-full px-3 py-2 bg-gray-200 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-gray-500"
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-gray-700">Item Name</label>
+          <input
+            type="text"
+            value={item.ItemName}
+            readOnly
+            className="mt-1 block w-full px-3 py-2 bg-gray-200 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-gray-500"
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-gray-700">Quantity</label>
+          <input
+            type="text"
+            value={item.quentity}
+            readOnly
+            className="mt-1 block w-full px-3 py-2 bg-gray-200 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-gray-500"
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-gray-700">Price</label>
+          <input
+            type="text"
+            value={`$${item.Price}`}
+            readOnly
+            className="mt-1 block w-full px-3 py-2 bg-gray-200 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-gray-500"
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-gray-700">Buyer Email</label>
+          <input
+            type="text"
+            value={item.userEmail}
+            readOnly
+            className="mt-1 block w-full px-3 py-2 bg-gray-200 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-gray-500"
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-gray-700">Transaction ID</label>
+          <input
+            type="text"
+            value={paymentInfo?.clientSecret}
+            readOnly
+            className="mt-1 block w-full px-3 py-2 bg-gray-200 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-gray-500"
+          />
+        </div>
       </div>
+    </div>
+  ))}
+</div>
+
 
       {/* Download PDF Button */}
-      <button onClick={generatePDF} className="btn btn-primary mt-3">
-        Download as PDF
+    <div className='flex justify-center my-4 gap-3 text-white'>  
+      <button onClick={generatePDF}  className='px-4 flex items-center font-semibold gap-2 py-2 rounded-sm bg-first text-center'>
+      <FaDownload /><span> payment receipt</span>
       </button>
+      <Link to='/shop'><button  className='px-4 flex items-center font-semibold gap-2 py-2 rounded-sm bg-first text-center'>
+      <FaNotesMedical size={20}/> <span>shop continue</span>
+      </button></Link>
+      </div>
     </div>
   );
 };
