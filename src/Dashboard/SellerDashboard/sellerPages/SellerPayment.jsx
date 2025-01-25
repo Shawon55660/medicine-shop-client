@@ -3,6 +3,7 @@ import Loading from "../../../CommonComponent/Loading";
 import useAxiosPrivate from "../../../CustomHook/useAxiosPrivate";
 import useAuth from "../../../CustomHook/useAuth";
 import { useQuery } from "@tanstack/react-query";
+import HelmetSet from "../../../CommonComponent/HelmetSet";
 
 const SellerPayment = () => {
   const axiosPrivate = useAxiosPrivate();
@@ -20,6 +21,7 @@ const SellerPayment = () => {
 
   return (
     <div className="p-4 mx-5 my-2 min-h-screen bg-gray-50">
+      <HelmetSet sub1='Dashboard' sub2='Payment  History'></HelmetSet>
       {/* Header Section */}
       <div className="mb-3">
         <h1 className="text-2xl font-bold text-second">Payment Information</h1>

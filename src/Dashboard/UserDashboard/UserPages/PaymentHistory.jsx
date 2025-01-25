@@ -25,20 +25,20 @@ const PaymentHistory = () => {
                 <table className="table-auto w-full text-sm text-left text-gray-500">
                     <thead className="bg-first text-white uppercase text-xs">
                         <tr>
-                            <th className="px-4 py-3">Transaction ID</th>
-                            <th className="px-4 py-3">Total Price</th>
-                            <th className="px-4 py-3">Date</th>
-                            <th className="px-4 py-3">Status</th>
+                            <th className="px-4 text-center py-3">Transaction ID</th>
+                            <th className="px-4 text-center py-3">Total Price</th>
+                            <th className="px-4 text-center py-3">Date</th>
+                            <th className="px-4 text-center py-3">Status</th>
                         </tr>
                     </thead>
                     <tbody>
                         {paymentInfo.map((pay) => (
                             <tr key={pay._id} className="border-b hover:bg-gray-100">
-                                <td className="px-4 py-3 font-medium text-gray-800">{pay.transactionId}</td>
-                                <td className="px-4 text-second py-3">$ {pay.Price}</td>
-                                <td className="px-4 py-3">{pay.date}</td>
+                                <td className="px-4 py-3 font-medium text-center text-gray-800">{pay.transactionId}</td>
+                                <td className="px-4 text-second text-center py-3"> {pay.Price} tk</td>
+                                <td className="px-4 text-center py-3">{pay.date}</td>
                                 <td
-                                    className={`px-4 py-3 ${
+                                    className={`px-4 py-3  text-center ${
                                         pay.status === 'paid'
                                             ? 'text-first'
                                             : 'text-second'

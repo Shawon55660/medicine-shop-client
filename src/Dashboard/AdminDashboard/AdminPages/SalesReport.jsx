@@ -32,7 +32,6 @@ const SalesReport = () => {
     },
    
   });
-console.log(paymentInfo)
   // Filter and calculate total price
   const paidData = paymentInfo.filter((item) => item.status === "paid");
   const totalPrice = paidData.reduce((total, item) => total + item.Price, 0);

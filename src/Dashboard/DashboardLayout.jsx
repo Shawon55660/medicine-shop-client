@@ -52,7 +52,7 @@ const DashboardLayout = () => {
         }`}
       >
         {/* Sidebar Header */}
-        <div className="p-6 flex justify-evenly border-b items-center border-white">
+        <div className="p-6 flex justify-end gap-4 border-b items-center border-white">
           <h1 className="text-lg md:text-xl font-bold">Dashboard</h1>
           <button
             onClick={() => setIsSidebarOpen(false)}
@@ -78,8 +78,8 @@ const DashboardLayout = () => {
           <ul className="border-t">
             
                 
-                 <li className=' my-4 font-bold'><NavLink className='px-2 flex items-center justify-end gap-2  py-2'  to='/' end><span>Home</span> <IoHomeOutline size={30}></IoHomeOutline> </NavLink> </li>
-                 <li className=' my-4 font-bold '><NavLink className='px-2 flex items-center justify-end gap-2  py-2'  to='/updateProfile' end><span>UpdateProfile</span> <ImProfile size={27} /></NavLink></li>
+                 <li className=' my-4 font-semibold'><NavLink className='px-2 uppercase flex items-center justify-end gap-3  py-2'  to='/' end><span>Home</span> <IoHomeOutline size={25}></IoHomeOutline> </NavLink> </li>
+                 <li className=' my-4 font-semibold '><NavLink className='px-2 uppercase flex items-center justify-end gap-3  py-2'  to='/updateProfile' end><span>Update Profile</span> <ImProfile size={23} /></NavLink></li>
                
             </ul>
         </div>
@@ -94,11 +94,11 @@ const DashboardLayout = () => {
         <header className="bg-white shadow p-6 flex justify-between items-center">
           <button
             onClick={() => setIsSidebarOpen(true)}
-            className="lg:hidden text-second text-2xl"
+            className="lg:hidden text-first text-2xl"
           >
             <IoMenuSharp />
           </button>
-          <h1 className="text-lg md:text-2xl text-first capitalize font-bold">
+          <h1 className="text-lg md:text-2xl text-first mx-4 capitalize font-bold">
             Welcome back , <span className="text-first">{user?.displayName}</span>
           </h1>
 

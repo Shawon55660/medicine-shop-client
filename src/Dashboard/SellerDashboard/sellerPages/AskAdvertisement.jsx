@@ -8,6 +8,7 @@ import Swal from "sweetalert2";
 import useAxiosPublic from "../../../CustomHook/useAxiosPublic";
 import useAuth from "../../../CustomHook/useAuth";
 import { MdAdd } from "react-icons/md";
+import HelmetSet from "../../../CommonComponent/HelmetSet";
 
 const AskAdvertisement = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -71,6 +72,7 @@ const AskAdvertisement = () => {
 
   return (
     <div className="min-h-screen mx-5 my-3 bg-gray-50">
+      <HelmetSet sub1='Dashboard' sub2='Bannar Add'></HelmetSet>
      
      <div  className="flex justify-between items-center">
      <div className="mb-3">

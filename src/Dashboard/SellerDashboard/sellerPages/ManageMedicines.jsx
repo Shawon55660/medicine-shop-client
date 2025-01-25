@@ -10,6 +10,7 @@ import Swal from "sweetalert2";
 import useAxiosPublic from "../../../CustomHook/useAxiosPublic";
 import useAuth from "../../../CustomHook/useAuth";
 import { MdAdd } from "react-icons/md";
+import HelmetSet from "../../../CommonComponent/HelmetSet";
 
 const ManageMedicines = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -100,6 +101,7 @@ const ManageMedicines = () => {
     if (medicinesLoading) return <Loading />;
     return (
         <div className="min-h-screen bg-sky-50 p-4 m-2">
+            <HelmetSet sub1='Dashboard' sub2='Manage  Medicine'></HelmetSet>
             {/* Add Medicine Button */}
             <button
                 onClick={openModal}

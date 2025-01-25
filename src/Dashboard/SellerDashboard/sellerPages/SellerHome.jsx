@@ -5,6 +5,7 @@ import { FaFileMedicalAlt } from 'react-icons/fa';
 import { MdOutlinePendingActions, MdPayments } from 'react-icons/md';
 import Loading from '../../../CommonComponent/Loading';
 import useAuth from '../../../CustomHook/useAuth';
+import HelmetSet from '../../../CommonComponent/HelmetSet';
 
 const SellerHome = () => {
     const axiosPrivate =useAxiosPrivate()
@@ -24,6 +25,8 @@ const SellerHome = () => {
 if(isLoading) return <Loading></Loading>
     return (
         <div className='p-8'>
+
+            <HelmetSet sub1='Dashboard' sub2='Seller  Home'></HelmetSet>
            <div className="grid md:grid-cols-2  lg:grid-cols-3 gap-4 p-4 justify-center items-center min-h-[50vh]  shadow-xl">
   <div className="stat text-first flex items-center justify-center ">
   <div><FaFileMedicalAlt size={35} /></div>
