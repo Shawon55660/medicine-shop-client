@@ -31,7 +31,7 @@ if(isLoading) return <Loading></Loading>
   <div className="stat text-first flex items-center justify-center ">
   <div><FaFileMedicalAlt size={35} /></div>
    <div> <div className="stat-title text-second font-semibold mb-1">Total Sales Revenue</div>
-   <div className="stat-value text-first">{totalRevenus}TK</div></div>
+   <div className="stat-value text-first">{totalRevenus} TK</div></div>
    
   </div>
 
@@ -39,7 +39,7 @@ if(isLoading) return <Loading></Loading>
   <div><MdPayments size={35} /></div>
     
    <div> <div className="stat-title font-semibold mb-1 text-white">Total Payment: {totalPaid.length}</div>
-   <div className="stat-value text-center text-white">{totalRevenus}TK</div></div>
+   <div className="stat-value text-center text-white">{totalRevenus} TK</div></div>
    
   </div>
 
@@ -51,7 +51,7 @@ if(isLoading) return <Loading></Loading>
    
   <div>
   <div className="stat-title font-semibold mb-1 text-white">Total Pending: {totalPending.length}</div>
-  <div className="stat-value text-center text-white">{totalPendingRevenu}TK</div>
+  <div className="stat-value text-center text-white">{totalPendingRevenu} TK</div>
 
   </div>
  

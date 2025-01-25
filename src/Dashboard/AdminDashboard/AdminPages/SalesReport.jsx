@@ -6,6 +6,7 @@ import useAuth from "../../../CustomHook/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import { Pagination, Stack } from "@mui/material";
 import { FaSearch } from "react-icons/fa";
+import HelmetSet from "../../../CommonComponent/HelmetSet";
 
 const SalesReport = () => {
   const axiosPrivate = useAxiosPrivate();
@@ -78,6 +79,7 @@ const SalesReport = () => {
 
   return (
     <div className="p-4 bg-gray-100 min-h-screen">
+      <HelmetSet sub1='Dashboard' sub2='Admin | Sales Report'></HelmetSet>
       <div className="flex justify-center">
         <select value={dataRange} onChange={(e) => setDateRange(e.target.value)} className="px-2 py-2 rounded-l-md  text-second outline-none border-[1px] border-second w-full max-w-xs">
           <option value="" disabled>Filter By Date</option>
@@ -131,7 +133,7 @@ const SalesReport = () => {
                 <td className="px-4 py-2 border border-gray-300">{pay.GenericName}</td>
                 <td className="px-4 py-2 border border-gray-300">{pay.BuyerEmail}</td>
                 <td className="px-4 py-2 border border-gray-300">{pay.sellerEmail}</td>
-                <td className="px-4 py-2 border border-gray-300 text-right">{pay.Price}</td>
+                <td className="px-4 py-2 border border-gray-300 font-semibold text-right">{pay.Price}/=</td>
                 <td className={`px-4 py-2 border border-gray-300 ${pay.status === "paid" ? "text-first font-bold" : "text-red-600"}`}>{pay.status}</td>
               </tr>
             ))}
@@ -140,8 +142,8 @@ const SalesReport = () => {
             <tr className="bg-gray-50 font-bold">
               <td className="px-4 py-2 border border-gray-300"></td>
               <td className="px-4 py-2 border border-gray-300"></td>
-              <td className="px-4 py-2 border border-gray-300 text-right">Total Sales</td>
-              <td className="px-4 py-2 border border-gray-300 text-right">{totalPrice}</td>
+              <td className="px-4 py-2 border border-gray-300 text-left">Total Sales:</td>
+              <td className="px-4 py-2 border border-gray-300 text-right">{totalPrice}/=</td>
               <td className="px-4 py-2 border border-gray-300">TK</td>
             </tr>
           </tfoot>

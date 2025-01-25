@@ -5,6 +5,8 @@ import useAuth from '../../../CustomHook/useAuth';
 import { useQuery } from '@tanstack/react-query';
 import Swal from 'sweetalert2';
 import { Pagination, Stack } from '@mui/material';
+import HelmetSet from '../../../CommonComponent/HelmetSet';
+import { format } from 'date-fns';
 
 const PaymentManagement = () => {
   const axiosPrivate = useAxiosPrivate();
@@ -45,6 +47,7 @@ const PaymentManagement = () => {
 
   return (
     <div className="min-h-screen p-3 bg-gray-100">
+      <HelmetSet sub1='Dashboard' sub2='Admin | Payment Management'></HelmetSet>
        <div className="flex justify-center my-2">
         <Stack className="text-first" spacing={2}>
           <Pagination
@@ -64,10 +67,10 @@ const PaymentManagement = () => {
           {/* Table Head */}
           <thead className="bg-gray-200 text-gray-700">
             <tr>
-              <th className="px-4 py-2 text-left">Buyer Email</th>
-              <th className="px-4 py-2 text-left">Total Price</th>
-              <th className="px-4 py-2 text-left">Data</th>
-              <th className="px-4 py-2 text-left">Status</th>
+              <th className="px-4 py-2 text-center">Buyer Email</th>
+              <th className="px-4 py-2 text-center">Total Price</th>
+              <th className="px-4 py-2 text-center">Date</th>
+              <th className="px-4 py-2 text-center">Status</th>
               <th className="px-4 py-2 text-center">Action</th>
             </tr>
           </thead>
@@ -78,12 +81,12 @@ const PaymentManagement = () => {
                 key={payment._id}
                 className=" transition-colors border-b"
               >
-                <td className="px-4 py-3">{payment.BuyerEmail}</td>
-                <td className="px-4 py-3">{payment.Price}</td>
-                <td className="px-4 py-3">{payment.GenericName}</td>
-                <td className="px-4 py-3">
+                <td className="px-4 text-center py-3">{payment.BuyerEmail}</td>
+                <td className="px-4 text-center font-semibold py-3">{payment.Price}/=</td>
+                <td className="px-4 text-center py-3">{format(new Date(payment.date), 'PPPP')}</td>
+                <td className="px-4 text-center py-3">
                   <span
-                    className={`px-2 py-1 rounded-full text-xs font-medium ${
+                    className={`px-2 py-1 rounded-full text-center text-xs font-medium ${
                       payment.status === 'paid'
                         ? 'bg-green-100 text-first'
                         : 'bg-gray-200 text-second'
@@ -98,7 +101,7 @@ const PaymentManagement = () => {
                     disabled={payment.status === 'paid'}
                     className={`btn ${
                       payment.status === 'paid'
-                        ? 'btn'
+                        ? 'btn '
                         : 'bg-first text-white'
                     }`}
                   >

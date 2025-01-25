@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { FaFileMedicalAlt } from 'react-icons/fa';
 import { MdOutlinePendingActions, MdPayments } from 'react-icons/md';
 import Loading from '../../../CommonComponent/Loading';
+import HelmetSet from '../../../CommonComponent/HelmetSet';
 
 const AdminHome = () => {
     const axiosPrivate =useAxiosPrivate()
@@ -22,11 +23,12 @@ const AdminHome = () => {
 if(isLoading) return <Loading></Loading>
     return (
         <div className='p-8'>
+            <HelmetSet sub1='Dashboard' sub2='Admin  Home'></HelmetSet>
            <div className="grid md:grid-cols-2  lg:grid-cols-3 gap-4 p-4 justify-center items-center min-h-[50vh]  shadow-xl">
   <div className="stat text-first flex items-center justify-center ">
   <div><FaFileMedicalAlt size={35} /></div>
    <div> <div className="stat-title text-second font-semibold mb-1">Total Sales Revenue</div>
-   <div className="stat-value text-first">{totalRevenus}TK</div></div>
+   <div className="stat-value text-first">{totalRevenus} TK</div></div>
    
   </div>
 
@@ -34,7 +36,7 @@ if(isLoading) return <Loading></Loading>
   <div><MdPayments size={35} /></div>
     
    <div> <div className="stat-title font-semibold mb-1 text-white">Total Payment: {totalPaid.length}</div>
-   <div className="stat-value text-center text-white">{totalRevenus}TK</div></div>
+   <div className="stat-value text-center text-white">{totalRevenus} TK</div></div>
    
   </div>
 
@@ -46,7 +48,7 @@ if(isLoading) return <Loading></Loading>
    
   <div>
   <div className="stat-title font-semibold mb-1 text-white">Total Pending: {totalPending.length}</div>
-  <div className="stat-value text-center text-white">{totalPendingRevenu}TK</div>
+  <div className="stat-value text-center text-white">{totalPendingRevenu} TK</div>
 
   </div>
  

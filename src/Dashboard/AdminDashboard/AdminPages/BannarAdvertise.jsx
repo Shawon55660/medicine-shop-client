@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import Loading from "../../../CommonComponent/Loading";
 import Swal from "sweetalert2";
 import useAuth from "../../../CustomHook/useAuth";
+import HelmetSet from "../../../CommonComponent/HelmetSet";
 
 const BannarAdvertise = () => {
    
@@ -47,6 +48,7 @@ const BannarAdvertise = () => {
     if (advertisementsLoading) return <Loading></Loading>
     return (
         <div className="min-h-screen p-6 mt-2 bg-gray-100">
+            <HelmetSet sub1='Dashboard' sub2='Admin | Bannar'></HelmetSet>
               <h1 className="text-xl md:text-2xl font-bold text-gray-700 mb-6">Manage Bannar Advertisements</h1>
            
             <div>

@@ -4,6 +4,7 @@ import useAxiosPrivate from "../../../CustomHook/useAxiosPrivate";
 import useAuth from "../../../CustomHook/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import HelmetSet from "../../../CommonComponent/HelmetSet";
+import { format } from "date-fns";
 
 const SellerPayment = () => {
   const axiosPrivate = useAxiosPrivate();
@@ -43,8 +44,8 @@ const SellerPayment = () => {
             {paymentInfo.map((pay) => (
               <tr key={pay._id} className="hover:bg-gray-100 transition">
                 <td className="px-6 text-center py-4 text-sm text-gray-700">{pay.transactionId}</td>
-                <td className="px-6 text-center py-4 font-semibold text-sm text-gray-700">$ {pay.Price}</td>
-                <td className="px-6 text-center py-4 text-sm text-gray-700">{pay.date}</td>
+                <td className="px-6 text-center py-4 font-semibold text-sm text-gray-700"> {pay.Price}/=</td>
+                <td className="px-6 text-center py-4 text-sm text-gray-700">{format(new Date(pay.date), 'PPPP')}</td>
                 <td
                   className={`px-6 text-center py-4 text-sm font-semibold ${
                     pay.status === "paid"

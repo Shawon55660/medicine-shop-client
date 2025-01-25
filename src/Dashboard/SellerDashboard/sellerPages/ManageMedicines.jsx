@@ -131,8 +131,8 @@ const ManageMedicines = () => {
                                 <td className="px-4 py-2">{medicine.category}</td>
                                 <td className="px-4 py-2">{medicine.company}</td>
                                 <td className="px-4 py-2"><img className="w-12 h-12 object-cover rounded" src={medicine.photo} alt={medicine.GenericName} /></td>
-                                <td className="px-4 py-2">{medicine.Massunit}</td>
-                                <td className="px-4 py-2">{medicine.Price}</td>
+                                <td className="px-4 py-2">{medicine.Massunit}ml</td>
+                                <td className="px-4 py-2">{medicine.Price}/=</td>
                                 <td className="px-4 text-center py-2">{medicine.discountPercentage}%</td>
                             </tr>
                         ))}

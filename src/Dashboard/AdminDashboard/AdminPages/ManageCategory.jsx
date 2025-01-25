@@ -8,6 +8,7 @@ import { FaTrashAlt } from "react-icons/fa";
 import { GrUpdate } from "react-icons/gr";
 import Swal from "sweetalert2";
 import { Pagination, Stack } from "@mui/material";
+import HelmetSet from "../../../CommonComponent/HelmetSet";
 
 const ManageCategory = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -102,6 +103,7 @@ const ManageCategory = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 p-4">
+      <HelmetSet sub1='Dashboard' sub2='Admin | Category Manage'></HelmetSet>
        <div className="flex justify-center my-2">
         <Stack className="text-first" spacing={2}>
           <Pagination
