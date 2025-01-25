@@ -6,15 +6,16 @@ import { auth } from "../firebase/init";
 import { updateProfile } from "firebase/auth";
 import SoicalLogin from "./SoicalLogin";
 import signUp from '../../src/assets/Mobile login-amico.png'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import HelmetSet from "../CommonComponent/HelmetSet";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 
 
 const SignUp = () => {
-  const { register, handleSubmit, reset } = useForm();
+  const { register, handleSubmit, reset,formState:{errors} } = useForm();
   const axiosPublic = useAxiosPublic();
   const { createUserSignUp, setUser, user } = useAuth();
+  const navigate =useNavigate()
 
   const img_key = import.meta.env.VITE_IMG_API_KEY;
   const img_hosting_api = `https://api.imgbb.com/1/upload?key=${img_key}`;
@@ -60,6 +61,7 @@ const SignUp = () => {
                             icon: <span style={{ color: "#85A844" }}> <img src="https://img.icons8.com/?size=100&id=59850&format=png&color=85A844" alt="" srcset="" /></span>,
                             style: { backgroundColor: "#FFFFF", color: "#85A844", fontWeight: "bold" }, 
                           });
+                          navigate('/')
               }
             })
             .catch(() => {
@@ -99,6 +101,7 @@ const SignUp = () => {
      
 
 <div className="hidden md:block">
+  <ToastContainer></ToastContainer>
         <img
           className="w-11/12 mx-auto"
           src={signUp}
@@ -159,12 +162,27 @@ const SignUp = () => {
             <label className="block text-sm font-semibold mb-1">Password</label>
             <input
               type="password"
-              {...register("password", { required: true })}
+              {...register("password", {
+                required: "Password is required",
+                minLength: {
+                  value: 6,
+                  message: "Password must be at least 6 characters long",
+                },
+                pattern: {
+                  value: /^(?=.*[!@#$%^&*])/,
+                  message: "Password must include at least one special character",
+                },
+              })}
               className="w-full px-4 py-2 border rounded-sm focus:outline-none focus:ring-2 focus:ring-[#85A844]"
               placeholder="Enter your password"
-              required
+              
             />
+                      <p className="text-red-500 text-sm mt-1">
+    {errors.password && errors.password.message}
+  </p>
+
           </div>
+
          </div>
            {/* Upload Photo */}
            <div>

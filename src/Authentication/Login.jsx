@@ -5,12 +5,12 @@ import SoicalLogin from "./SoicalLogin";
 import loginimg from '../../src/assets/Sign in-bro.png'
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import HelmetSet from "../CommonComponent/HelmetSet";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 
 
 const Login = () => {
   const { loginWithEmail, setUser } = useAuth();
-  const { register, handleSubmit, reset } = useForm();
+  const { register, handleSubmit, reset, formState: { errors }} = useForm();
   const location = useLocation()
   const navigate = useNavigate()
  
@@ -39,22 +39,25 @@ const Login = () => {
       .catch((error) => {
         toast.error('something is worng Please try again', {
           position: "top-center",
-          autoClose: 5000,
+          autoClose: 2000,
           hideProgressBar: false,
           closeOnClick: false,
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
           theme: "light",
-          t
+          
         });
       });
+     
   };
 
   return (
     <div className="grid  mx-auto gap-4 md:grid-cols-2 justify-center items-center min-h-screen bg-gray-100">
       <HelmetSet sub1='MediStore' sub2='Login'></HelmetSet>
+     
       <div>
+      <ToastContainer></ToastContainer>
         <img className="w-6/12 md:w-9/12 mx-auto" src={loginimg} alt="" />
       </div>
       <div className=" w-9/12 md:w-10/12 lg:w-7/12 mx-auto  bg-white shadow-md rounded-lg p-6">
@@ -65,19 +68,22 @@ const Login = () => {
           {/* Email Field */}
           <div>
             <label
-              htmlFor="email"
+              
               className="block text-sm font-semibold text-gray-700"
             >
               Email
             </label>
             <input
               type="email"
-              {...register("email", { required: true })}
+              {...register("email", { required: 'Enter your Email' })}
               className="w-full px-4 py-2 mt-2 border rounded-sm focus:outline-none focus:ring-2 focus:ring-[#85A844] focus:border-transparent"
               placeholder="Enter your email"
-              required
+            
             />
           </div>
+          <p className="text-red-500 text-sm mt-1">
+    {errors.email && errors.email.message}
+  </p>
 
           {/* Password Field */}
           <div>
@@ -89,12 +95,19 @@ const Login = () => {
             </label>
             <input
               type="password"
-              {...register("password", { required: true })}
+              {...register("password", {
+                required: "Password is required",
+                
+              })}
               className="w-full px-4 py-2 mt-2 border rounded-sm focus:outline-none focus:ring-2 focus:ring-[#85A844] focus:border-transparent"
               placeholder="Enter your password"
-              required
+              
             />
+          
           </div>
+          <p className="text-red-500 text-sm mt-1">
+    {errors.password && errors.password.message}
+  </p>
 
           {/* Submit Button */}
           <div className="flex justify-center mt-4">

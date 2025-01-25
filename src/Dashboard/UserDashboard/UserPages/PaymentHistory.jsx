@@ -17,13 +17,7 @@ const PaymentHistory = () => {
             return res.data;
         },
     });
-    const formattedDate =(date)=>{
-        date.toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'long', 
-            day: 'numeric',
-          });
-    }
+ 
 
     if (isLoading) return <Loading />;
 
