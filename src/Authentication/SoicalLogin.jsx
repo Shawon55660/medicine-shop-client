@@ -2,42 +2,58 @@ import React from 'react';
 import useAuth from '../CustomHook/useAuth';
 import useAxiosPublic from '../CustomHook/useAxiosPublic';
 import { toast } from 'react-toastify';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const SoicalLogin = () => {
-    const {loginWithGoogle,setUser} = useAuth()
+    const {loginWithGoogle,setUser,setLoading} = useAuth()
     const axiosPublic = useAxiosPublic()
+    const location  = useLocation()
+    const navigate = useNavigate()
+    
+    const from = location.state?.from?.pathname || "/";
+
     const handleGoogle=()=>{
+      setLoading(true)
         loginWithGoogle()
         .then( async res=>{
             setUser(res.user)
+            navigate(from, { replace: true });
            if(res.user){
-             toast.success("Profile Update Successfully", {
-                            position: "top-center",
-                            autoClose: 2000,
-                            hideProgressBar: true, 
-                            closeOnClick: true,
-                            pauseOnHover: true,
-                            draggable: true,
-                            icon: <span style={{ color: "#85A844" }}> <img src="https://img.icons8.com/?size=100&id=59850&format=png&color=85A844" alt="" srcset="" /></span>,
-                            style: { backgroundColor: "#FFFFF", color: "#85A844", fontWeight: "bold" }, 
-                          });
+            
             const userInfo = {
               email:res.user.email,
               name:res.user.displayName,
               role:'user'
             }
     
-             const userData = await axiosPublic.post('/users',userInfo)
+             toast.success(" Login Successfully", {
+              position: "top-center",
+              autoClose: 2000,
+              hideProgressBar: true, 
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              icon: <span style={{ color: "#85A844" }}> <img src="https://img.icons8.com/?size=100&id=59850&format=png&color=85A844" alt="" srcset="" /></span>,
+              style: { backgroundColor: "#FFFFF", color: "#85A844", fontWeight: "bold" }, 
+            });
+              userData = await axiosPublic.post('/users',userInfo)
+             
+              
+             
+
+         
+            
+          
                
            
             }
+            
           
            
            
         })
-        .catch(error=>{
-            alert('login faild')
-        })
+       
+       
       }
     return (
         <div>

@@ -9,6 +9,7 @@ import { GrDocumentUpdate } from "react-icons/gr";
 import Swal from "sweetalert2";
 import useAxiosPublic from "../../../CustomHook/useAxiosPublic";
 import useAuth from "../../../CustomHook/useAuth";
+import { MdAdd } from "react-icons/md";
 
 const ManageMedicines = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -25,9 +26,9 @@ const ManageMedicines = () => {
     const img_hosting_api = `https://api.imgbb.com/1/upload?key=${img_key}`;
 
     const { data: categoryData = [], refetch, isLoading } = useQuery({
-        queryKey: ['categoryData', 'category'],
+        queryKey: ['categoryData', 'categoryAll'],
         queryFn: async () => {
-            const catInfo = await axiosPrivate.get('/category');
+            const catInfo = await axiosPrivate.get('/categoryAll');
             if (catInfo.data) {
                 return catInfo.data;
             }
@@ -98,23 +99,24 @@ const ManageMedicines = () => {
 
     if (medicinesLoading) return <Loading />;
     return (
-        <div className="min-h-screen bg-sky-50 p-6">
+        <div className="min-h-screen bg-sky-50 p-4 m-2">
             {/* Add Medicine Button */}
             <button
                 onClick={openModal}
-                className="px-6 py-3 bg-sky-500 text-white rounded-lg hover:bg-sky-600 transition-colors"
+                className="px-6 py-3 font-semibold mb-4 flex items-center gap-3 bg-gradient-to-b from-sky-400 to-sky-500 text-white rounded-sm hover:bg-sky-600 transition-colors"
             >
-                Add Medicines
+                <span>Add Medicines </span><MdAdd size={25} color="white" />
             </button>
 
             {/* Medicines Table */}
-            <div className="overflow-x-auto mt-6 bg-white rounded-lg shadow-md">
-                <table className="table-auto w-full text-gray-700">
-                    <thead className="bg-sky-200">
+            <div className="overflow-x-auto mt-3 bg-white rounded-lg shadow-md">
+                <table className="table-auto w-full text-second">
+                    <thead className="bg-sky-400 text-white">
                         <tr>
                             <th className="px-4 py-2 text-left">Generic Name</th>
                             <th className="px-4 py-2 text-left">Category</th>
                             <th className="px-4 py-2 text-left">Company</th>
+                            <th className="px-4 py-2 text-left">Photo</th>
                             <th className="px-4 py-2 text-left">Mass Unit</th>
                             <th className="px-4 py-2 text-left">Price</th>
                             <th className="px-4 py-2 text-left">Discount (%)</th>
@@ -122,14 +124,14 @@ const ManageMedicines = () => {
                     </thead>
                     <tbody>
                         {medicinesData.map(medicine => (
-                            <tr key={medicine._id} className="hover:bg-sky-100 transition-colors">
+                            <tr key={medicine._id} className="hover:bg-sky-100 font-semibold transition-colors">
                                 <td className="px-4 py-2">{medicine.GenericName}</td>
                                 <td className="px-4 py-2">{medicine.category}</td>
                                 <td className="px-4 py-2">{medicine.company}</td>
                                 <td className="px-4 py-2"><img className="w-12 h-12 object-cover rounded" src={medicine.photo} alt={medicine.GenericName} /></td>
                                 <td className="px-4 py-2">{medicine.Massunit}</td>
                                 <td className="px-4 py-2">{medicine.Price}</td>
-                                <td className="px-4 py-2">{medicine.discountPercentage}%</td>
+                                <td className="px-4 text-center py-2">{medicine.discountPercentage}%</td>
                             </tr>
                         ))}
                     </tbody>
@@ -141,17 +143,17 @@ const ManageMedicines = () => {
                 <div className="fixed inset-0 bg-black bg-opacity-25" aria-hidden="true" />
                 <DialogPanel className="fixed inset-0 flex items-center justify-center p-4">
                     <div className="w-full max-w-lg bg-white rounded-lg p-6 shadow-lg">
-                        <h2 className="text-xl font-bold text-sky-600">Add New Medicine</h2>
+                        <h2 className="text-xl font-bold ">Add New Medicine</h2>
                         <form onSubmit={handleSubmit(onSubmit)} className="mt-4">
                             {/* Medicine Name & Generic Name */}
                             <div className="grid grid-cols-2 gap-4">
                                 <div className="mb-4">
-                                    <label className="block text-sm font-medium text-gray-700">Item Name</label>
+                                    <label className="block text-sm font-medium  text-gray-700">Item Name</label>
                                     <input
                                         type="text"
                                         placeholder="Item Name"
                                         {...register('ItemName', { required: true })}
-                                        className="w-full px-4 py-2 border rounded focus:ring-2 focus:ring-sky-500"
+                                        className="w-full px-4 py-2 border outline-none rounded focus:ring-2 focus:ring-sky-500"
                                     />
                                 </div>
                                 <div className="mb-4">
@@ -160,7 +162,7 @@ const ManageMedicines = () => {
                                         type="text"
                                         placeholder="Item Generic Name"
                                         {...register('GenericName', { required: true })}
-                                        className="w-full px-4 py-2 border rounded focus:ring-2 focus:ring-sky-500"
+                                        className="w-full px-4 py-2 outline-none border rounded focus:ring-2 focus:ring-sky-500"
                                     />
                                 </div>
                             </div>
@@ -196,7 +198,7 @@ const ManageMedicines = () => {
                                     <input
                                         type="number"
                                         {...register('Massunit', { required: true })}
-                                        className="w-full px-4 py-2 border rounded focus:ring-2 focus:ring-sky-500"
+                                        className="w-full px-4 py-2 outline-none border rounded focus:ring-2 focus:ring-sky-500"
                                     />
                                 </div>
                                 <div className="mb-4">
@@ -204,7 +206,7 @@ const ManageMedicines = () => {
                                     <input
                                         type="number"
                                         {...register('Price', { required: true })}
-                                        className="w-full px-4 py-2 border rounded focus:ring-2 focus:ring-sky-500"
+                                        className="w-full px-4 outline-none py-2 border rounded focus:ring-2 focus:ring-sky-500"
                                     />
                                 </div>
                             </div>
@@ -224,13 +226,14 @@ const ManageMedicines = () => {
                                     <input
                                         type="number"
                                         {...register('discountPercentage', { required: true })}
-                                        className="w-full px-4 py-2 border rounded focus:ring-2 focus:ring-sky-500"
+                                        className="w-full px-4 py-2 border outline-none rounded focus:ring-2 focus:ring-sky-500"
                                     />
                                 </div>
                             </div>
 
-                            <div className="flex justify-end">
-                                <button type="submit" className="bg-sky-600 text-white py-2 px-6 rounded-lg hover:bg-sky-700">Submit</button>
+                            <div className="flex  gap-3 justify-end">
+                                <button onClick={closeModal} className="bg-thrid px-4 text-white font-semibold py-2">cancel</button>
+                                <button type="submit" className="bg-gradient-to-b from-sky-400 to-sky-500 font-semibold text-white py-2 px-6 rounded-sm hover:bg-sky-700">Submit</button>
                             </div>
                         </form>
                     </div>

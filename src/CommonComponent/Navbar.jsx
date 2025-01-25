@@ -10,6 +10,7 @@ import { LuLogOut } from 'react-icons/lu';
 import { LiaBookMedicalSolid } from 'react-icons/lia';
 import navImg from'../../src/assets/navbarimg.png'
 import Loading from './Loading';
+import Swal from 'sweetalert2';
 
 const Navbar = () => {
   const {user,logOut,loading} = useAuth()
@@ -25,11 +26,14 @@ const Navbar = () => {
        const handleLogOut= ()=>{
         logOut()
         .then(res=>{
-          alert('logout successfully')
+         return Swal.fire({
+                 title: "LogOut!",
+                 text: "Logout Successfully!",
+                 icon: "success",
+                 
+               });
         })
-        .catch(error=>{
-          alert('logOut failed')
-        })
+       
        }
       
   

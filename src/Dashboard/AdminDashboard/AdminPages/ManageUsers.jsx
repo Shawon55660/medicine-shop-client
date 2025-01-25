@@ -1,38 +1,70 @@
-import React from "react";
+import React, { useState } from "react";
 import useAxiosPrivate from "../../../CustomHook/useAxiosPrivate";
 import { useQuery } from "@tanstack/react-query";
 import Loading from "../../../CommonComponent/Loading";
 import useAuth from "../../../CustomHook/useAuth";
+import { Pagination, Stack } from "@mui/material";
+import Swal from "sweetalert2";
 
 const ManageUsers = () => {
   const axiosPrivate = useAxiosPrivate();
   const { user } = useAuth();
 
-  const { data: userData = [], refetch, isLoading } = useQuery({
-    queryKey: ["userData", "users"],
+  // Pagination 
+  const [totalPage, setTotalPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
+  const limit = 5; 
+
+  const pageChange = (event, value) => {
+    setCurrentPage(value);
+  };
+
+  // Fetch users with pagination
+  const { data: usersData=[], refetch, isLoading} = useQuery({
+    queryKey: ["userData", currentPage, limit],
     queryFn: async () => {
-      const res = await axiosPrivate.get("/users");
-      return res.data;
+      const res = await axiosPrivate.get(`/users?page=${currentPage}&limit=${limit}`);
+      setTotalPage(Math.ceil(res.data.total / limit)); 
+      return res.data.perPageData;
     },
+    
   });
 
   if (isLoading) return <Loading />;
 
+
   const handleChange = async (event, id) => {
     const newRole = event.target.value;
-    const updateRole = await axiosPrivate.patch(`/updateRole/${id}`, { role: newRole });
-    if (updateRole.data.modifiedCount) {
-      alert("Role updated successfully!");
-      refetch();
+    try {
+      const updateRole = await axiosPrivate.patch(`/updateRole/${id}`, { role: newRole });
+      if (updateRole.data.modifiedCount) {
+       
+         Swal.fire("Role updated successfully");
+        refetch();
+      }
+    } catch (err) {
+      Swal(err.message);
     }
   };
 
   return (
-    <div className="p-8 bg-gray-100 min-h-screen">
-      <h1 className="text-3xl font-bold text-center text-gray-700 mb-6">Manage Users</h1>
+    <div className="p-4 bg-gray-100 min-h-screen">
+      <div className="flex justify-center my-2">
+        <Stack className="text-first" spacing={2}>
+          <Pagination
+            className="text-first"
+            count={totalPage}
+            page={currentPage}
+            onChange={pageChange}
+            color="success"
+            variant="outlined"
+            shape="rounded"
+          />
+        </Stack>
+      </div>
+      <h1 className="text-xl md:text-2xl font-bold text-gray-700 mb-6">Manage Users</h1>
       <div className="overflow-x-auto">
         <table className="table-auto w-full bg-white shadow-md rounded-lg border-collapse border border-gray-200">
-          {/* Table Header */}
           <thead className="bg-second text-white">
             <tr>
               <th className="px-6 py-3 text-left font-semibold">Name</th>
@@ -40,43 +72,21 @@ const ManageUsers = () => {
               <th className="px-6 py-3 text-left font-semibold">Change Role</th>
             </tr>
           </thead>
-
-          {/* Table Body */}
           <tbody>
-            {userData.map((users) => (
+            {usersData?.map((users) => (
               <tr key={users._id} className="hover:bg-gray-50 transition-colors">
                 <td className="px-6 py-4 text-gray-700">{users.name}</td>
                 <td className="px-6 py-4 text-gray-700">{users.email}</td>
                 <td className="px-6 py-4">
                   <select
-                    disabled={
-                      users.email === user.email && users.role === "admin"
-                    }
+                    disabled={users.email === user.email }
                     onChange={(event) => handleChange(event, users._id)}
                     value={users.role}
-                    className="select w-full border border-gray-300 rounded-lg text-gray-700 focus:ring focus:ring-blue-300"
+                    className="select w-full border border-gray-300 rounded-lg text-gray-700 focus:ring focus:ring-second"
                   >
-                    <option
-                      disabled={users.role === "admin"}
-                      value="admin"
-                      className={users.role === "admin" ? "text-red-500" : ""}
-                    >
-                      Admin
-                    </option>
-                    <option
-                      disabled={users.role === "seller"}
-                      value="seller"
-                      className={users.role === "seller" ? "text-red-500" : ""}
-                    >
-                      Seller
-                    </option>
-                    <option
-                      disabled={users.role === "user"}
-                      value="user"
-                      className={users.role === "user" ? "text-red-500" : ""}
-                    >
-                      User
-                    </option>
+                    <option  value="admin">Admin</option>
+                    <option value="seller">Seller</option>
+                    <option value="user">User</option>
                   </select>
                 </td>
               </tr>

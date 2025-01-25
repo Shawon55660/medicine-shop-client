@@ -25,6 +25,8 @@ import SellerRouter from './SellerRouter';
 import DashboardCommon from '../Dashboard/CommonComponent/DashboardCommon';
 import UpdateProfile from '../Authentication/UpdateProfile';
 import Error from '../CommonComponent/Error';
+import AdminHome from '../Dashboard/AdminDashboard/AdminPages/AdminHome';
+import SellerHome from '../Dashboard/SellerDashboard/sellerPages/SellerHome';
 
 
 
@@ -48,17 +50,10 @@ const  router  = createBrowserRouter([
                 path:'/cart',
                 element: <CartPage></CartPage>
             },
-            {
-                path:'/signUp',
-                element: <SignUp></SignUp>
-            },
-            {
-                path:'/login',
-                element:<Login></Login>
-            },
+           
             {
                 path:'/updateProfile',
-                element:<UpdateProfile></UpdateProfile>
+                element:<PrivateRouter><UpdateProfile></UpdateProfile></PrivateRouter>
             },
             {
                 path:'/category/:category',
@@ -66,32 +61,40 @@ const  router  = createBrowserRouter([
             },
             {
                 path:'/checkOut',
-                element:<CheckOut></CheckOut>
+                element:<PrivateRouter><CheckOut></CheckOut></PrivateRouter>
             },
             {
                 path:'/invoice',
-                element:<InvoicePage></InvoicePage>
-            }
-
+                element:<PrivateRouter><InvoicePage></InvoicePage></PrivateRouter>
+            } 
         ],
         errorElement:<Error></Error>
     },
+    ,{
+        path:'/signUp',
+        element: <SignUp></SignUp>
+    },
+    {
+        path:'/login',
+        element:<Login></Login>
+    },
+
     //dashboard router
     
     {
         path:'dashboard',
-        element: <PrivateRouter><DashboardLayout></DashboardLayout></PrivateRouter>,
+        element:<PrivateRouter> <DashboardLayout></DashboardLayout></PrivateRouter>,
         children:[
 
             {
                 index: true,
-                element:<DashboardCommon></DashboardCommon> 
+                element:<PrivateRouter><DashboardCommon></DashboardCommon> </PrivateRouter>
                    
             },
             // admin router
             {
                 path:'AdminHome',
-                element:<AdminRouter> <h2>admin</h2></AdminRouter>
+                element:<AdminRouter> <AdminHome></AdminHome> </AdminRouter>
             }
             ,
          
@@ -131,11 +134,11 @@ const  router  = createBrowserRouter([
             },
             {
                 path:'sellerHome',
-                element: <SellerRouter><h2>sller</h2></SellerRouter>
+                element: <SellerRouter><SellerHome></SellerHome></SellerRouter>
             },
             {
                 path:'askForAdvertise',
-                element: <PrivateRouter> <AskAdvertisement></AskAdvertisement></PrivateRouter>
+                element: <SellerRouter> <AskAdvertisement></AskAdvertisement></SellerRouter>
             },
             // user router
             {
@@ -145,8 +148,10 @@ const  router  = createBrowserRouter([
           
            
         ],
+        
         errorElement:<Error></Error>
     },
+   
     
 
 

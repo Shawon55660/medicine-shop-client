@@ -14,18 +14,20 @@ const AuthProvider = ({children}) => {
     const provider = new GoogleAuthProvider()
 
     const createUserSignUp = (email,password)=>{
-        setLoading(false)
+        setLoading(true)
 
         return createUserWithEmailAndPassword(auth,email,password)
     }
     const loginWithEmail = (email,password)=>{
-        setLoading(false)
+        setLoading(true)
         return signInWithEmailAndPassword(auth,email,password)
     }
     const loginWithGoogle = ()=>{
+        setLoading(true)
         return signInWithPopup(auth,provider)
     }
     const logOut = ()=>{
+        setLoading(true)
         return signOut(auth)
     }
 
@@ -51,7 +53,8 @@ const AuthProvider = ({children}) => {
         return () => {
             return unsubscribe();
         }
-    },[])
+       
+    },[axiosPublic])
 
     const userInfo = {
         createUserSignUp,

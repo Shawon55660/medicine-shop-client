@@ -12,13 +12,27 @@ import { IoMdClose } from "react-icons/io";
 import useAuth from "../CustomHook/useAuth";
 import { IoHomeOutline } from "react-icons/io5";
 import { ImProfile } from "react-icons/im";
+import Swal from "sweetalert2";
 
 const DashboardLayout = () => {
   const [role, isLoading] = useRole();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const { user } = useAuth();
+  const { user,loading ,logOut} = useAuth();
+  const handleLogOut= ()=>{
+    logOut()
+    .then(res=>{
+      return Swal.fire({
+        title: "LogOut!",
+        text: "Logout Successfully!",
+        icon: "success",
+        
+      });
+    })
+   
+   }
+  
 
-  if (isLoading) return <Loading />;
+  if (isLoading || loading) return <Loading />;
 
   return (
     <div className="grid relative lg:grid-cols-12 grid-cols-1 justify-between ">
@@ -84,17 +98,17 @@ const DashboardLayout = () => {
           >
             <IoMenuSharp />
           </button>
-          <h1 className="text-lg md:text-2xl capitalize font-bold">
-            Welcome back , <span className="text-second">{user?.displayName}</span>
+          <h1 className="text-lg md:text-2xl text-first capitalize font-bold">
+            Welcome back , <span className="text-first">{user?.displayName}</span>
           </h1>
 
-          <button className="px-3 py-2 bg-second text-white rounded-white font-semibold transition-colors duration-200">
+          <button onClick={handleLogOut} className="px-3 py-2 bg-first text-white rounded-white font-semibold transition-colors duration-200">
             Logout
           </button>
         </header>
 
         {/* Main Area */}
-        <main className="p-8">
+        <main className="p-2">
           <Outlet />
         </main>
       </div>

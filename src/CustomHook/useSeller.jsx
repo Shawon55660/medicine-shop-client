@@ -5,6 +5,7 @@ import useAxiosPrivate from "./useAxiosPrivate";
 import useAuth from "./useAuth";
 
 
+
 const useSeller = () => {
     const { user, loading } =useAuth() ;
     const axiosPrivate = useAxiosPrivate();
@@ -19,6 +20,7 @@ const useSeller = () => {
         }
     })
     return [isSeller, isSellerLoading]
+   
 };
 
 export default useSeller;

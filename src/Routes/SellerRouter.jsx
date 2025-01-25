@@ -3,14 +3,19 @@ import useAuth from '../CustomHook/useAuth';
 import { Navigate, useLocation } from 'react-router-dom';
 import Loading from '../CommonComponent/Loading';
 import useSeller from '../CustomHook/useSeller';
+import useRole from '../CustomHook/useRole';
 
 const SellerRouter = ({children }) => {
-    const [isSeller, isSellerLoadin] = useSeller()
+
+    const [isSeller, isSellerLoading] = useSeller()
     const {user,loading}= useAuth()
     const location = useLocation()
-    if(loading || isSellerLoadin) return <Loading></Loading>
+ 
+    
+   
+    if(loading || isSellerLoading) return <Loading></Loading>
     if(user && isSeller) return children
-    return <Navigate to='' state={location.pathname}></Navigate>
+  return <Navigate to="/dashboard" state={{ from: location }} replace></Navigate>
 };
 
 export default SellerRouter;

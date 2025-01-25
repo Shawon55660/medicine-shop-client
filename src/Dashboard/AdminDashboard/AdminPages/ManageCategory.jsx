@@ -7,6 +7,7 @@ import Loading from "../../../CommonComponent/Loading";
 import { FaTrashAlt } from "react-icons/fa";
 import { GrUpdate } from "react-icons/gr";
 import Swal from "sweetalert2";
+import { Pagination, Stack } from "@mui/material";
 
 const ManageCategory = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -27,14 +28,21 @@ const ManageCategory = () => {
     }
     setIsOpenUpdate(true);
   };
+    // Pagination states
+    const [totalPage, setTotalPage] = useState(1);
+    const [currentPage, setCurrentPage] = useState(1);
+    const limit = 3; // Per page limit
+  
+    const pageChange = (event, value) => {
+      setCurrentPage(value);
+    };
 
   const { data: categoryData = [], refetch, isLoading } = useQuery({
-    queryKey: ["categoryData", "category"],
+    queryKey: ["categoryData", "category",currentPage, limit],
     queryFn: async () => {
-      const catInfo = await axiosPrivate.get("/category");
-      if (catInfo.data) {
-        return catInfo.data;
-      }
+      const catInfo = await axiosPrivate.get(`/category?page=${currentPage}&limit=${limit}`);
+      setTotalPage(Math.ceil(catInfo.data.total / limit));
+      return catInfo.data.perPageData;
     },
   });
 
@@ -94,8 +102,21 @@ const ManageCategory = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 p-4">
+       <div className="flex justify-center my-2">
+        <Stack className="text-first" spacing={2}>
+          <Pagination
+            className="text-first"
+            count={totalPage}
+            page={currentPage}
+            onChange={pageChange}
+            color="success"
+            variant="outlined"
+            shape="rounded"
+          />
+        </Stack>
+      </div>
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold text-gray-700">Manage Categories</h1>
+        <h1 className="text-xl md:text-2xl font-bold text-gray-700 mb-6">Manage Categories</h1>
         <button
           onClick={openModal}
           className="px-4 py-2 bg-second text-white rounded shadow hover:bg-blue-600"
@@ -108,8 +129,8 @@ const ManageCategory = () => {
         <table className="table-auto w-full">
           <thead className="bg-second text-white">
             <tr>
-              <th className="px-6 py-3 text-left font-semibold">Category Name</th>
-              <th className="px-6 py-3 text-left font-semibold">Category Photo</th>
+              <th className="px-6 py-3 text-center font-semibold">Category Name</th>
+              <th className="px-6 py-3 text-center font-semibold">Category Photo</th>
               <th className="px-6 py-3 text-center font-semibold">Update</th>
               <th className="px-6 py-3 text-center font-semibold">Delete</th>
             </tr>
@@ -118,29 +139,29 @@ const ManageCategory = () => {
             {categoryData.map((category) => (
               <tr
                 key={category._id}
-                className="hover:bg-gray-100 transition-colors"
+                className="hover:bg-gray-100 text-center transition-colors "
               >
                 <td className="px-6 py-4">{category.MedicineCategory}</td>
-                <td className="px-6 py-4">
+                <td className="px-6 text-center  py-4">
                   <img
                     src={category.categoryPhoto}
                     alt="Category"
-                    className="w-10 h-10 object-cover rounded"
+                    className="w-10 h-10 mx-auto object-cover rounded"
                   />
                 </td>
-                <td className="px-6 py-4 text-center">
+                <td className="px-6 py-4  ">
                   <button
                     onClick={() => openModalUpdate(category._id)}
-                    className="text-blue-600 hover:underline flex items-center justify-center"
+                    className="text-first hover:underline flex w-full font-semibold mx-auto items-center justify-center"
                   >
                     <GrUpdate className="mr-1" />
                     Update
                   </button>
                 </td>
-                <td className="px-6 py-4 text-center">
+                <td className="px-6 py-4 ">
                   <button
                     onClick={() => handleDelete(category._id)}
-                    className="text-red-600 hover:underline flex items-center justify-center"
+                    className="text-second hover:underline w-full mx-auto font-semibold flex items-center justify-center"
                   >
                     <FaTrashAlt className="mr-1" />
                     Delete

@@ -8,6 +8,7 @@ import SoicalLogin from "./SoicalLogin";
 import signUp from '../../src/assets/Mobile login-amico.png'
 import { Link } from "react-router-dom";
 import HelmetSet from "../CommonComponent/HelmetSet";
+import { toast } from "react-toastify";
 
 
 const SignUp = () => {
@@ -49,15 +50,44 @@ const SignUp = () => {
               const userData = await axiosPublic.post("/users", userInfo);
               if (userData.data) {
                 reset();
-                alert("Sign Up Successfully");
+               toast.success(" Login Successfully", {
+                            position: "top-center",
+                            autoClose: 2000,
+                            hideProgressBar: true, 
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            icon: <span style={{ color: "#85A844" }}> <img src="https://img.icons8.com/?size=100&id=59850&format=png&color=85A844" alt="" srcset="" /></span>,
+                            style: { backgroundColor: "#FFFFF", color: "#85A844", fontWeight: "bold" }, 
+                          });
               }
             })
             .catch(() => {
-              alert("Something went wrong during profile update");
+              toast.error('something is worng Please try again', {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                t
+                });
             });
         })
         .catch(() => {
-          alert("Sign Up Failed");
+          toast.error('something is worng Please try again', {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            t
+            });
         });
     }
   };
@@ -70,14 +100,14 @@ const SignUp = () => {
 
 <div className="hidden md:block">
         <img
-          className="w-10/12 mx-auto"
+          className="w-11/12 mx-auto"
           src={signUp}
           alt="Sign Up"
         />
       </div>
 
       {/* Right Section */}
-  <div className="w-10/12 md:w-12/12 lg:w-11/12 mx-auto bg-white shadow-md rounded-lg p-8">
+  <div className="w-10/12 md:w-12/12 lg:w-9/12 mx-auto bg-white shadow-md rounded-lg p-8">
         <h2 className="text-3xl font-bold text-center text-[#85A844] mb-6">
           Create an Account
         </h2>

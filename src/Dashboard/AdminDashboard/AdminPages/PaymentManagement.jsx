@@ -1,24 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Loading from '../../../CommonComponent/Loading';
 import useAxiosPrivate from '../../../CustomHook/useAxiosPrivate';
 import useAuth from '../../../CustomHook/useAuth';
 import { useQuery } from '@tanstack/react-query';
 import Swal from 'sweetalert2';
+import { Pagination, Stack } from '@mui/material';
 
 const PaymentManagement = () => {
   const axiosPrivate = useAxiosPrivate();
   const { user } = useAuth();
+      // Pagination states
+      const [totalPage, setTotalPage] = useState(1);
+      const [currentPage, setCurrentPage] = useState(1);
+      const limit = 5; // Per page limit
 
+      const pageChange = (event, value) => {
+        setCurrentPage(value);
+      };
   // Fetch payment data using React Query
   const {
     data: paymentInfo = [],
     refetch,
     isLoading,
   } = useQuery({
-    queryKey: ['paymentInfo', 'users'],
+    queryKey: ['paymentInfo', 'users',currentPage, limit],
     queryFn: async () => {
-      const res = await axiosPrivate.get('/payments');
-      return res.data;
+      const res = await axiosPrivate.get(`/payments?page=${currentPage}&limit=${limit}`);
+      setTotalPage(Math.ceil(res.data.total / limit));
+      return res.data.perPageData;
     },
   });
 
@@ -35,8 +44,21 @@ const PaymentManagement = () => {
   if (isLoading) return <Loading />;
 
   return (
-    <div className="min-h-screen p-6 bg-gray-100">
-      <h1 className="text-2xl font-bold text-gray-700 mb-6">Payment Management</h1>
+    <div className="min-h-screen p-3 bg-gray-100">
+       <div className="flex justify-center my-2">
+        <Stack className="text-first" spacing={2}>
+          <Pagination
+            className="text-first"
+            count={totalPage}
+            page={currentPage}
+            onChange={pageChange}
+            color="success"
+            variant="outlined"
+            shape="rounded"
+          />
+        </Stack>
+      </div>
+      <h1 className=" text-xl md:text-2xl font-bold text-gray-700 mb-6">Payment Management</h1>
       <div className="overflow-x-auto bg-white shadow-md rounded-lg p-4">
         <table className="table-auto w-full border-collapse">
           {/* Table Head */}
@@ -63,8 +85,8 @@ const PaymentManagement = () => {
                   <span
                     className={`px-2 py-1 rounded-full text-xs font-medium ${
                       payment.status === 'paid'
-                        ? 'bg-green-100 text-green-700'
-                        : 'bg-yellow-100 text-yellow-700'
+                        ? 'bg-green-100 text-first'
+                        : 'bg-gray-200 text-second'
                     }`}
                   >
                     {payment.status}

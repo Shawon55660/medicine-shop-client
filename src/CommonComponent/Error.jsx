@@ -1,5 +1,5 @@
 import React from 'react';
-import errorPage from '../../public/error-404.png'
+
 import HelmetSet from './HelmetSet';
 
 const Error = () => {
@@ -7,7 +7,7 @@ const Error = () => {
         <div className='flex w-6/12 mx-auto justify-center items-center
          min-h-screen'>
             <HelmetSet sub1='MEdiStore' sub2='Error'></HelmetSet>
-            <img className='w-full' src={errorPage} alt="" />
+            <img className='w-full' src='/error-404.png' alt="" />
 
             
         </div>

@@ -10,7 +10,7 @@ const AdminRouter = ({children }) => {
     const location = useLocation()
     if(loading || isAdminLoading) return <Loading></Loading>
     if(user && isAdmin) return children
-    return <Navigate to='' state={location.pathname}></Navigate>
+    return <Navigate to="/dashboard" state={{ from: location }} replace></Navigate>
 };
 
 export default AdminRouter;
