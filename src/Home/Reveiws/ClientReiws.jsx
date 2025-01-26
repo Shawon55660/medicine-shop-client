@@ -7,8 +7,8 @@ const ClientReviews = () => {
             {/* Header Section */}
             <Header
                 title="Feedback"
-                subTitle="What Our Clients Say"
-                details="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam maximus lobortis faucibus. Pellentesque vehicula lacinia arcu nec sodales."
+                subTitle="We Value Your Feedback"
+                details="At Medistore, your feedback is crucial to us. We are committed to providing the best products and services, and your suggestions help us do just that. Whether it’s about your shopping experience, product quality, or service, we want to hear from you"
             />
 
             {/* Form Section */}
@@ -21,7 +21,7 @@ const ClientReviews = () => {
                 ></textarea>
                 <button
                     type="submit"
-                    className="mt-4 w-[100px] px-6 py-2 text-white bg-first rounded-md hover:bg-first-dark transition"
+                    className="mt-4 w-[100px] px-6 py-2 text-white bg-first rounded-sm hover:bg-first-dark transition"
                 >
                     Submit
                 </button>

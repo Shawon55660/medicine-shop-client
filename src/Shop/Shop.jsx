@@ -9,7 +9,7 @@ import useAuth from '../CustomHook/useAuth';
 import useAxiosPublic from '../CustomHook/useAxiosPublic';
 import Loading from '../CommonComponent/Loading';
 import { Pagination, Select, Stack } from '@mui/material';
-import { FaSearchPlus } from 'react-icons/fa';
+import { FaFilter, FaSearchPlus } from 'react-icons/fa';
 import { toast, ToastContainer } from 'react-toastify';
 import HelmetSet from '../CommonComponent/HelmetSet';
 
@@ -30,7 +30,7 @@ const Shop = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [search,setSearch]= useState('')
     const navigate = useNavigate()
-    let limit = 1
+    let limit = 6
 
     const handleChange = (event, value) => {
         setCurrentPage(value);
@@ -183,23 +183,23 @@ const Shop = () => {
                            <p><strong>Category:</strong> {details.category}</p>
                            <p><strong>Company:</strong> {details.company}</p>
                            <p><strong>Mass Unit:</strong> {details.Massunit}</p>
-                           <p><strong>Volume:</strong> {details.ml} ml</p>
-                           <p><strong>Price:</strong> ${details.Price}</p>
+                           
+                           <p><strong>Price:</strong> {details.Price} tk</p>
                            <p><strong>Discount:</strong> {details.discountPercentage}%</p>
-                           <p className="mt-2"><strong>Description:</strong> {details.Description}</p>
+                           
                        </div>
            
                        {/* Action Buttons */}
                        <div className="mt-6 flex justify-end space-x-4">
                            <button
                                onClick={closeModal}
-                               className="px-6 py-3 bg-[#85A844] text-white rounded-lg hover:bg-opacity-90 transition duration-300"
+                               className="px-6 py-3 bg-gray-500 text-white rounded-sm hover:bg-opacity-90 transition duration-300"
                            >
                                Cancel
                            </button>
                            <button
                                onClick={() => handleCart(details)}
-                               className="px-6 py-3 bg-[#85A844] text-white rounded-lg hover:bg-opacity-90 transition duration-300"
+                               className="px-6 py-3 bg-[#85A844] text-white rounded-sm hover:bg-opacity-90 transition duration-300"
                            >
                                Add To Cart
                            </button>
@@ -207,15 +207,15 @@ const Shop = () => {
                    </div>
                </DialogPanel>
            </Dialog>
-
             <div className='relative'>
                 <div className='flex items-center justify-between'>
 
                     <div className='my-3 flex    text-center   items-center h-10'>
                         <input type="text"onChange={e=> setSearch(e.target.value)} placeholder='Search Products by ItemName' className='border-[1px] px-4  h-full rounded-l-md border-first outline-none' /><button className='bg-first  h-full px-6 text-white rounded-r-md'><FaSearchPlus ></FaSearchPlus></button>
                     </div>
-                    <div>
-                        <select value={order} onChange={handleSort} className=" px-2 py-2 rounded-md text-first outline-none border-[1px] border-first w-full max-w-xs">
+                    <div className='flex'>
+                        <button className='text-white bg-first px-4 rounded-l-md'><FaFilter /></button>
+                        <select value={order} onChange={handleSort} className=" px-2 py-2 rounded-r-md text-first outline-none border-[1px] border-first w-full max-w-xs">
                             <option value="" disabled>
                             Sort by Price
                             </option>
@@ -248,7 +248,8 @@ const Shop = () => {
                                         <input type="radio" name="rating-4" className="mask mask-star-2 bg-first" />
                                         <input type="radio" name="rating-4" className="mask mask-star-2 bg-first" />
                                     </div>
-                                    <h2 className='font-semibold text-second text-xl py-1'>{item.ItemName} {item.Massunit}mg</h2>
+                                    <h2 className='font-semibold text-second text-xl py-1'>{item.ItemName}</h2>
+                                    <h2 className='font-semibold text-thrid text-sm py-1'> {item.Massunit} </h2>
                                     <div className='flex gap-6 justify-center text-center items-center py-1'>
                                         <h3 className='text-thrid line-through font-mono italic'>MRP.{item.Price}tk</h3>
                                         <h3 className='font-bold text-md italic  text-first'>MRP. {Math.floor(item.Price - ((item.Price * item.discountPercentage) / 100))} tk</h3>

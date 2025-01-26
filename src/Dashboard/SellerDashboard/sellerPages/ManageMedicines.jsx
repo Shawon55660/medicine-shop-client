@@ -46,29 +46,7 @@ const ManageMedicines = () => {
         }
     });
 
-    const handleDelete = async (id) => {
-        Swal.fire({
-            title: "Are you sure?",
-            text: "You won't be able to revert this!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!"
-        }).then(async (result) => {
-            if (result.isConfirmed) {
-                const res = await axiosPrivate.delete(`/category-delete/${id}`);
-                if (res.data) {
-                    await Swal.fire({
-                        title: "Deleted!",
-                        text: "Your file has been deleted.",
-                        icon: "success"
-                    });
-                }
-            }
-            await refetch();
-        });
-    };
+
 
     const onSubmit = async (data) => {
         const imgFile = { image: data.photo[0] };
@@ -77,7 +55,6 @@ const ManageMedicines = () => {
         });
         data.photo = result.data.data.display_url;
         data.sellerEmail = user?.email;
-        data.Massunit = parseInt(data.Massunit);
         data.discountPercentage = parseInt(data.discountPercentage);
         data.Price = parseInt(data.Price);
 
@@ -87,6 +64,7 @@ const ManageMedicines = () => {
                 closeModal();
                 Swal.fire("New medicines Added Successfully!");
                 medicinesFetch();
+                reset()
                 return;
             }
         } else {
@@ -121,7 +99,7 @@ const ManageMedicines = () => {
                             <th className="px-4 py-2 text-left">Photo</th>
                             <th className="px-4 py-2 text-left">Mass Unit</th>
                             <th className="px-4 py-2 text-left">Price</th>
-                            <th className="px-4 py-2 text-left">Discount (%)</th>
+                            <th className="px-4 py-2 text-left">Discount</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -131,7 +109,7 @@ const ManageMedicines = () => {
                                 <td className="px-4 py-2">{medicine.category}</td>
                                 <td className="px-4 py-2">{medicine.company}</td>
                                 <td className="px-4 py-2"><img className="w-12 h-12 object-cover rounded" src={medicine.photo} alt={medicine.GenericName} /></td>
-                                <td className="px-4 py-2">{medicine.Massunit}ml</td>
+                                <td className="px-4 py-2">{medicine.Massunit}</td>
                                 <td className="px-4 py-2">{medicine.Price}/=</td>
                                 <td className="px-4 text-center py-2">{medicine.discountPercentage}%</td>
                             </tr>
@@ -198,7 +176,7 @@ const ManageMedicines = () => {
                                 <div className="mb-4">
                                     <label className="block text-sm font-medium text-gray-700">Mass Unit</label>
                                     <input
-                                        type="number"
+                                        type="text"
                                         {...register('Massunit', { required: true })}
                                         className="w-full px-4 py-2 outline-none border rounded focus:ring-2 focus:ring-sky-500"
                                     />

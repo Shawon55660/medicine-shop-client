@@ -24,11 +24,11 @@ const HomeCard = () => {
 
 
 
-    const { category } = useParams()
+    
     const axiosPublic = useAxiosPublic()
     const [data, setData] = useState([]);
     const { user } = useAuth()
-    const navigate = useNavigate()
+  
 
 
 
@@ -160,23 +160,23 @@ const HomeCard = () => {
                 <p><strong>Category:</strong> {details.category}</p>
                 <p><strong>Company:</strong> {details.company}</p>
                 <p><strong>Mass Unit:</strong> {details.Massunit}</p>
-                <p><strong>Volume:</strong> {details.ml} ml</p>
-                <p><strong>Price:</strong> ${details.Price}</p>
+                
+                <p><strong>Price:</strong> {details.Price} tk</p>
                 <p><strong>Discount:</strong> {details.discountPercentage}%</p>
-                <p className="mt-2"><strong>Description:</strong> {details.Description}</p>
+                
             </div>
 
             {/* Action Buttons */}
             <div className="mt-6 flex justify-end space-x-4">
                 <button
                     onClick={closeModal}
-                    className="px-6 py-3 bg-[#85A844] text-white rounded-lg hover:bg-opacity-90 transition duration-300"
+                    className="px-6 py-3 bg-gray-500 text-white rounded-sm hover:bg-opacity-90 transition duration-300"
                 >
                     Cancel
                 </button>
                 <button
                     onClick={() => handleCart(details)}
-                    className="px-6 py-3 bg-[#85A844] text-white rounded-lg hover:bg-opacity-90 transition duration-300"
+                    className="px-6 py-3 bg-[#85A844] text-white rounded-sm hover:bg-opacity-90 transition duration-300"
                 >
                     Add To Cart
                 </button>
@@ -194,7 +194,7 @@ const HomeCard = () => {
 
 
 
-            <Header title='Products' subTitle=' Our Lastest Prodcuts' details='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam maximus lobortis faucibus. Pellentesque vehicula lacinia arcu nec sodales.'></Header>
+            <Header title='Products' subTitle=' Our Lastest Prodcuts' details='"At Medistore, we provide high-quality medicines, healthcare products, and essential guidance. Committed to ensuring your well-being, we make it easy and safe for you to access your essential medicines anytime, anywhere."'></Header>
 
             <div className='grid md:grid-cols-2 w-11/12 mx-auto md:w-full lg:grid-cols-3 gap-3'>
 
@@ -217,7 +217,9 @@ const HomeCard = () => {
                                     <input type="radio" name="rating-4" className="mask mask-star-2 bg-first" />
                                     <input type="radio" name="rating-4" className="mask mask-star-2 bg-first" />
                                 </div>
-                                <h2 className='font-semibold text-second text-xl py-1'>{item.ItemName} {item.Massunit} mg</h2>
+                                <h2 className='font-semibold text-second text-xl py-1'>{item.ItemName}</h2>
+                                <h2 className='font-semibold text-thrid text-sm py-1'> {item.Massunit} </h2>
+
                                 <div className='flex gap-6 justify-center text-center items-center py-1'>
                                     <h3 className='text-thrid line-through font-mono italic'>MRP.{item.Price}tk</h3>
                                     <h3 className='font-bold text-md italic  text-first'>MRP. {Math.floor(item.Price - ((item.Price * item.discountPercentage) / 100))} tk</h3>

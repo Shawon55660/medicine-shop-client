@@ -121,7 +121,7 @@ const ManageCategory = () => {
         <h1 className="text-xl md:text-2xl font-bold text-gray-700 mb-6">Manage Categories</h1>
         <button
           onClick={openModal}
-          className="px-4 py-2 bg-second text-white rounded shadow hover:bg-blue-600"
+          className="px-4 py-2 bg-second text-white rounded-sm shadow"
         >
           Add Category
         </button>
@@ -188,7 +188,7 @@ const ManageCategory = () => {
                   {...register("MedicineCategory", { required: true })}
                   type="text"
                   placeholder="Enter category name"
-                  className="w-full px-4 py-2 border rounded focus:ring focus:ring-blue-500"
+                  className="w-full px-4 py-2 border rounded focus:ring focus:ring-gray-600"
                 />
               </div>
               <div className="mb-4">
@@ -197,20 +197,20 @@ const ManageCategory = () => {
                   {...register("categoryPhoto", { required: true })}
                   type="text"
                   placeholder="Enter photo URL"
-                  className="w-full px-4 py-2 border rounded focus:ring focus:ring-blue-500"
+                  className="w-full px-4 py-2 border rounded focus:ring focus:ring-gray-600"
                 />
               </div>
               <div className="flex justify-end space-x-4">
                 <button
                   type="button"
                   onClick={closeModal}
-                  className="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600"
+                  className="px-4 py-2 bg-gray-500 text-white rounded-sm hover:bg-gray-600"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                  className="px-4 py-2 bg-second text-white rounded-sm"
                 >
                   Add
                 </button>

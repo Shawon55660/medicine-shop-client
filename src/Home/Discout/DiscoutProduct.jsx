@@ -22,7 +22,7 @@ const DiscountProduct = () => {
     })
   return (
    <div>
-    <Header title='Discount' subTitle='What Our Clients Say' details='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam maximus lobortis faucibus. Pellentesque vehicula lacinia arcu nec sodales.'></Header>
+    <Header title='Discount' subTitle='Discounted Prices for a Healthier You' details='At Medistore, we bring exciting discounts on essential health products to make your purchases more affordable. Our discount section includes a wide range of medical supplies and health-related products.'></Header>
      <div className="max-w-xl mx-auto my-4">
        <>
       <Swiper
@@ -41,7 +41,7 @@ const DiscountProduct = () => {
             discountData.filter(discount=> discount.discountPercentage > 0)
             .map(discout=><SwiperSlide key={discout._id}>
                 <div
-              className="relative max-w-xl mx-auto rounded-lg shadow-lg overflow-hidden"
+              className="relative max-w-xl min-h-[400px] flex  items-center object-cover justify-center  flex-col mx-auto rounded-lg shadow-lg overflow-hidden"
               style={{
                 backgroundImage: `url(${discout.photo})`,
                 backgroundSize: "cover",
@@ -53,10 +53,10 @@ const DiscountProduct = () => {
         
               {/* Content */}
               <div className="relative text-white text-center p-6">
-                <h2 className="text-4xl font-bold text-first mb-2">{discout.discountPercentage }% OFF</h2>
-                <p className='font-semibold'>{discout.GenericName}</p>
-                <p className="text-xl mt-2 mb-4">Limited Time Offer</p>
-                <Link to='/shop' className="bg-first text-white font-bold py-2 my-4 px-4 rounded-lg transition duration-300">
+                <h2 className="text-2xl md:text-5xl font-bold text-white my-4">{discout.discountPercentage }% OFF</h2>
+                <p className='font-semibold text-lg md:text-xl'>{discout.ItemName}</p>
+                <p className="text-2xl md:text-4xl font-semibold mt-4 mb-8">Limited Time Offer</p>
+                <Link to='/shop' className="bg-first text-white font-bold py-2 my-4 px-4 rounded-sm transition duration-300">
                   Shop Now
                 </Link>
               </div>
