@@ -3,7 +3,7 @@ import useAxiosPublic from '../../CustomHook/useAxiosPublic';
 import { useQuery } from '@tanstack/react-query';
 import { Link, NavLink } from 'react-router-dom';
 import { AiOutlineShop } from "react-icons/ai";
-import { MdOutlineArrowForwardIos } from 'react-icons/md';
+
 
 
 const Category = () => {
@@ -18,7 +18,7 @@ const Category = () => {
         }
     
       })
-     console.log(categoryData)
+    
     return (
         <div className='mb-24 text-second'>
        <div className='relative mb-8'> <h2 className='text-lg fixed bg-white py-2  top-0 left-2 right-2 items-center font-semibold gap-2 flex  text-first'> <AiOutlineShop size={26} ></AiOutlineShop> <span>Medicines By Category </span></h2></div>

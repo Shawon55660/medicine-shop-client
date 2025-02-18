@@ -1,74 +1,76 @@
-import React from 'react';
-import Header from '../../CommonComponent/Header';
+import React from "react";
+import Header from "../../CommonComponent/Header";
+import useAxiosPublic from "../../CustomHook/useAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
+
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+import { Autoplay, Pagination } from "swiper/modules";
+import { format } from "date-fns";
 
 const ReveiwsClient = () => {
-    return (
-        <div >
-            <Header title='Reviews' subTitle=' Hear from Our Happy Customers' details='At Medistore, we believe in the power of customer feedback. Our Reviews Section is where you can hear directly from those who have experienced our products and services. We value every review, as it helps us improve and ensure that we are providing the best health solutions'></Header>
-            <ul className="md:timeline md:timeline-vertical">
-    <li>
-        <hr />
-        <div className="timeline-middle py-2">
-            <img className='w-[30px] mx-2 text-first' src="https://img.icons8.com/?size=60&id=123839&format=png&color=85A844" alt="" />
-        </div>
+  const axiosPublic = useAxiosPublic();
+  const { data: reveiwsData = [], refetch, isLoading } = useQuery({
+    queryKey: ["reveiwsData"],
+    queryFn: async () => {
+      const reeiwsInfo = await axiosPublic.get("/clientReveiws-get");
+      if (reeiwsInfo.data) {
+        return reeiwsInfo.data;
+      }
+      refetch();
+    },
+  });
 
-        <div className="timeline-start timeline-box">
-           
-            <p className="text-sm text-gray-600 mt-2">Review by: farjana mou </p>
-            <p className="text-xs text-gray-500">Date: Jan 15, 2025</p>
-            <p className="text-second mt-1">"Medistore is a reliable store for buying healthcare products. I ordered a few vitamins and a home-use thermometer, and both were delivered in excellent condition."</p>
-        </div>
-        <hr />
-    </li>
-
-    <li>
-        <hr />
-        <div className="timeline-middle py-2">
-            <img className='w-[30px] mx-2 text-first' src="https://img.icons8.com/?size=60&id=123839&format=png&color=85A844" alt="" />
-        </div>
-        <div className="timeline-end timeline-box">
-           
-            <p className="text-sm text-gray-600 mt-2">Review by: Sarah Smith</p>
-            <p className="text-xs text-gray-500">Date: Oct 20, 2024</p>
-            <p className="text-second mt-1">"Medistore has been my go-to place for health-related products. The products are of high quality, and the discounts are fantastic"</p>
-        </div>
-        <hr />
-    </li>
-
-    <li>
-        <hr />
-        <div className="timeline-middle py-2">
-            <img className='w-[30px] mx-2 text-first' src="https://img.icons8.com/?size=60&id=123839&format=png&color=85A844" alt="" />
-        </div>
-
-        <div className="timeline-start timeline-box">
-          
-            <p className="text-sm text-gray-600 mt-2">Review by: Ahmed Chowdhury</p>
-            <p className="text-xs text-gray-500">Date: Mar 5, 2023</p>
-            <p className="text-second mt-1">"I recently purchased some skincare products from Medistore, and I'm really happy with the quality. The prices are reasonable, and they offer great discounts. It was also very convenient to track my order."</p>
-        </div>
-        <hr />
-    </li>
-
-    <li>
-        <hr />
-        <div className="timeline-middle py-2">
-            <img className='w-[30px] mx-2' src="https://img.icons8.com/?size=60&id=123839&format=png&color=85A844" alt="" />
-        </div>
-
-        <div className="timeline-end timeline-box">
-           
-            <p className="text-sm text-gray-600 mt-2">Review by: Maria Rahman</p>
-            <p className="text-xs text-gray-500">Date: Dec 10, 2024</p>
-            <p className="text-second mt-1">"The best online store for health essentials! I’ve been using Medistore for a few months now, and I’m always satisfied with my purchases."</p>
-        </div>
-        <hr />
-    </li>
-</ul>
-
+  return (
+    <div>
+      <Header
+        title="Reviews"
+        subTitle=" Hear from Our Happy Customers"
+        details="At Medistore, we believe in the power of customer feedback. Our Reviews Section is where you can hear directly from those who have experienced our products and services. "
+      />
+      <Swiper
+      className="h-full"
+        slidesPerView={3}
+        spaceBetween={30}
+        centeredSlides={true}
+        loop={true}
+        autoplay={{
+          delay: 1000,
+          disableOnInteraction: false,
+        }}
+        pagination={{
+          clickable: true,
+        }}
+        modules={[Autoplay, Pagination]}
+      >
+        {reveiwsData.map((info) => (
+          <SwiperSlide
             
-        </div>
-    );
+            key={info._id}
+          >
+            <div className="flex my-8 flex-col h-48 max-w-sm bg-white shadow-xl rounded-2xl p-6 border border-gray-300 transition-transform transform hover:scale-105 duration-300">
+            <div className="flex items-center gap-4 flex-grow ">
+              <img
+                src={info.clientPhoto}
+                alt={info.clientName}
+                className="w-10 h-10 rounded-full border-2 shadow-md"
+              />
+              <div>
+                <h3 className="text-xs font-bold text-gray-900">{info.clientName}</h3>
+                <p className="text-xs text-gray-500">{format(new Date(info.reviewDate), "PPP")}</p>
+              </div>
+            </div>
+            <p className="mt-4 flex-grow text-gray-700 text-base italic p-2">
+              {info.ClientReview}
+            </p>
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </div>
+  );
 };
 
 export default ReveiwsClient;

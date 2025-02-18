@@ -29,6 +29,8 @@ const DiscountProduct = () => {
         pagination={{
           dynamicBullets: true,
         }}
+        centeredSlides={true}
+        loop={true}
         autoplay={{
             delay: 1000, 
             disableOnInteraction: false, 
@@ -41,10 +43,10 @@ const DiscountProduct = () => {
             discountData.filter(discount=> discount.discountPercentage > 0)
             .map(discout=><SwiperSlide key={discout._id}>
                 <div
-              className="relative max-w-xl min-h-[400px] flex  items-center object-cover justify-center  flex-col mx-auto rounded-lg shadow-lg overflow-hidden"
+              className="relative max-w-xl bg-no-repeat flex my-8 items-center object-cover justify-center  flex-col mx-auto rounded-lg shadow-lg overflow-hidden"
               style={{
                 backgroundImage: `url(${discout.photo})`,
-                backgroundSize: "cover",
+                
                 backgroundPosition: "center",
               }}
             >

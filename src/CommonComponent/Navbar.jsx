@@ -40,7 +40,7 @@ const Navbar = () => {
     return (
         <div className='relative container'>
             <div style={{backgroundImage:`url(${navImg})`}} className="navbar text-white text-sm  bg-contain  fixed z-50 top-0 left-0 right-0 font-sans	 bg-first">
-  <div className="flex-1 gap-2 items-center ml-12 ">
+  <div className="flex-1 gap-2 items-center  ">
     <Link to='/' className=" text-xl"><LiaBookMedicalSolid  size={40}></LiaBookMedicalSolid  > </Link>
    <Link to='/'> <p className='text-xl font-mono italic font-semibold'>MediStore</p></Link>
   </div>

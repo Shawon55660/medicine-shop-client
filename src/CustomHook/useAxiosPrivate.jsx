@@ -3,7 +3,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import useAuth from './useAuth';
 const axiosPrivate = axios.create({
-    baseURL: 'https://medi-store-server.vercel.app/'
+    baseURL: 'https://medi-store-server.vercel.app'
 })
 
 const useAxiosPrivate = () => {
