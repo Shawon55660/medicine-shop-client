@@ -6,6 +6,7 @@ import ReveiwsClient from './Reveiws/ReveiwsClient';
 import ClientReiws from './Reveiws/ClientReiws';
 import HomeCard from './HomeCard/HomeCard';
 import HelmetSet from '../CommonComponent/HelmetSet';
+import ContactTeam from './ContactOurTeam/ContactTeam';
 
 const Home = () => {
     return (
@@ -16,6 +17,7 @@ const Home = () => {
             <DiscoutProduct></DiscoutProduct>
             <ReveiwsClient></ReveiwsClient>
             <ClientReiws></ClientReiws>
+            <ContactTeam></ContactTeam>
             
         </div>
     );

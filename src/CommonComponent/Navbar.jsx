@@ -40,7 +40,7 @@ const Navbar = () => {
     return (
         <div className='relative container'>
             <div style={{backgroundImage:`url(${navImg})`}} className="navbar text-white text-sm  bg-contain  fixed z-50 top-0 left-0 right-0 font-sans	 bg-first">
-  <div className="flex-1 gap-2 items-center  ">
+  <div className="flex-1 gap-2 items-center ml-12 lg:ml-0 ">
     <Link to='/' className=" text-xl"><LiaBookMedicalSolid  size={40}></LiaBookMedicalSolid  > </Link>
    <Link to='/'> <p className='text-xl font-mono italic font-semibold'>MediStore</p></Link>
   </div>
@@ -49,16 +49,8 @@ const Navbar = () => {
     {MainLink}
     
     {user?.email ?<div className="dropdown dropdown-end">
-      <div tabIndex={0} role="button" className=" ">
-        <span className=' font-semibold p-2 uppercase'>languages</span>
-      </div>
-      <ul
-        tabIndex={0}
-        className="menu menu-sm dropdown-content bg-first rounded-box z-[1] mt-3 w-52 p-2 shadow">
-      
-        <Link>Bangla</Link>
-        <Link>English</Link>
-      </ul>
+     
+     
     </div>: <NavLink to='/login' className='mx-1 font-semibold px-3 py-2 text-sm flex gap-2 items-center uppercase'><p>login</p></NavLink>}
     </ul>
     
@@ -78,13 +70,7 @@ const Navbar = () => {
        
         <Link className=' flex flex-col font-semibold py-2  md:hidden uppercase' >
         {MainLink}
-       {user?.email &&  <details>
-          <summary>languages</summary>
-          <ul className="bg-first  items-start px-12 flex flex-col rounded-t-none py-2">
-            <Link>Bangla</Link>
-            <Link>English</Link>
-          </ul>
-        </details>}
+       
         </Link>
        
       {user?.email &&  <NavLink to='/updateProfile' className='mx-1 font-semibold text-sm px-3 py-2  flex gap-2 items-center uppercase'> <FaUserEdit  size={20}></FaUserEdit ><p> Update Profile</p></NavLink>}
