@@ -28,6 +28,7 @@ import Error from '../CommonComponent/Error';
 import AdminHome from '../Dashboard/AdminDashboard/AdminPages/AdminHome';
 import SellerHome from '../Dashboard/SellerDashboard/sellerPages/SellerHome';
 import Faq from '../CommonComponent/Faq';
+import AboutUs from '../CommonComponent/AboutUs';
 
 
 
@@ -54,6 +55,10 @@ const  router  = createBrowserRouter([
             {
                 path:'/faq',
                 element: <Faq></Faq> 
+            },
+            {
+                path:'/aboutUs',
+                element:<AboutUs></AboutUs>
             },
            
             {

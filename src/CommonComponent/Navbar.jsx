@@ -8,6 +8,7 @@ import { ImProfile } from 'react-icons/im';
 import { MdAdminPanelSettings, MdManageAccounts, MdOutlineControlPoint } from 'react-icons/md';
 import { LuLogOut } from 'react-icons/lu';
 import { LiaBookMedicalSolid } from 'react-icons/lia';
+import { FaBlogger } from "react-icons/fa6";
 import navImg from'../../src/assets/navbarimg.png'
 import Loading from './Loading';
 import Swal from 'sweetalert2';
@@ -19,6 +20,7 @@ const Navbar = () => {
         <NavLink className='mx-1 font-semibold px-3 py-2 text-sm flex gap-2 items-center uppercase' to='/'><FaHome size={20}></FaHome> <p>home</p></NavLink>
         <NavLink className='mx-1 flex gap-2 items-center  text-sm font-semibold px-3 py-2 uppercase' to='/shop'>  <FaShoppingBag size={15}></FaShoppingBag><p>shop</p></NavLink>
         <NavLink className='mx-1 flex gap-2 items-center text-sm font-semibold px-3 py-2  uppercase' to='/cart'><IoCart size={20}></IoCart> <p>cart</p></NavLink>
+        <NavLink className='mx-1 flex gap-2 items-center text-sm font-semibold px-3 py-2  uppercase' to='/aboutUs'><FaBlogger size={20}></FaBlogger> <p>About Us</p></NavLink>
        
        
        
