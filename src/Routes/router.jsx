@@ -27,6 +27,7 @@ import UpdateProfile from '../Authentication/UpdateProfile';
 import Error from '../CommonComponent/Error';
 import AdminHome from '../Dashboard/AdminDashboard/AdminPages/AdminHome';
 import SellerHome from '../Dashboard/SellerDashboard/sellerPages/SellerHome';
+import Faq from '../CommonComponent/Faq';
 
 
 
@@ -49,6 +50,10 @@ const  router  = createBrowserRouter([
             {
                 path:'/cart',
                 element: <CartPage></CartPage>
+            },
+            {
+                path:'/faq',
+                element: <Faq></Faq> 
             },
            
             {

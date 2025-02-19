@@ -2,6 +2,7 @@ import React from 'react';
 import { FaLinkedin, FaSquareGithub } from 'react-icons/fa6';
 import { LiaBookMedicalSolid } from 'react-icons/lia';
 import { FaFacebookSquare } from "react-icons/fa";
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
     return (
@@ -19,7 +20,7 @@ const Footer = () => {
     <h6 className="footer-title">Company</h6>
     <a className="link link-hover">About us</a>
     <a className="link link-hover">Contact</a>
-    <a className="link link-hover">FAQ</a>
+    <Link to='/faq' className="link link-hover">FAQ</Link>
   
   </nav>
 
