@@ -3,10 +3,13 @@ import Header from '../../CommonComponent/Header';
 import useAuth from '../../CustomHook/useAuth';
 import useAxiosPublic from '../../CustomHook/useAxiosPublic';
 import { toast } from 'react-toastify';
+import {  useNavigate } from 'react-router-dom';
 
 const ClientReviews = () => {
-    const {user} = useAuth() 
+    const {user} = useAuth()
+    const navigate = useNavigate()
     const axiosPublic = useAxiosPublic()
+   
     const handleReveiw =async (e)=>{
         e.preventDefault()
         const form = e.target;
@@ -28,6 +31,7 @@ const ClientReviews = () => {
                         style: { backgroundColor: "#FFFFF", color: "#85A844", fontWeight: "bold" },
                     });
         form.reset()
+        navigate('/shop')
        }
        
     }
@@ -48,6 +52,7 @@ const ClientReviews = () => {
                     placeholder="Your experience"
                     name='reveiw'
                     rows="4"
+                    required
                 ></textarea>
                 <button
                     type="submit"

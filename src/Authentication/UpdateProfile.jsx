@@ -26,6 +26,7 @@ const UpdateProfile = () => {
     const from = e.target;
     const userName = from.userName.value;
     const photoURL = from.photo.value;
+    console.log(photoURL)
      
         updateProfile(auth.currentUser,{displayName: userName, photoURL:photoURL})
         .then(res=>{
@@ -75,6 +76,17 @@ console.log(user)
           <input
            name='userName'
             defaultValue={user?.displayName}
+            className="w-full border border-first outline-none  px-3 py-2 rounded-md"
+          />
+         
+        </div>
+         {/* User email */}
+         <div>
+          <label className="block text-first font-semibold mb-1">User Email</label>
+          <input
+           
+            defaultValue={user?.email}
+            readOnly
             className="w-full border border-first outline-none  px-3 py-2 rounded-md"
           />
          

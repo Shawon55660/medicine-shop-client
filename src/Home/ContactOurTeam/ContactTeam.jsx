@@ -9,8 +9,8 @@ const ContactTeam = () => {
         <div>
              <Header
                 title="Contact"
-                subTitle="Contact Our Active Team"
-                details="At Medistore, your feedback is crucial to us. We are committed to providing the best products and services, and your suggestions help us do just that."
+                subTitle="Get in Touch with Our Active Team"
+                details="Get in touch with our active Medistore team for any inquiries, support, or assistance. We’re here to help you with the best service"
             />
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center mb-16   gap-4 mt-8'>
                  <div className='bg-first p-4 shadow-md rounded-sm shadow-first text-white text-center'>
