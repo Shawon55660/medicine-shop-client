@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import useAuth from "../CustomHook/useAuth";
 import { useForm } from "react-hook-form";
 import SoicalLogin from "./SoicalLogin";
@@ -13,6 +13,22 @@ const Login = () => {
   const { register, handleSubmit, reset, formState: { errors }} = useForm();
   const location = useLocation()
   const navigate = useNavigate()
+
+  const [email,setEmail] = useState('')
+  const [password,setPassword] = useState('')
+  const handleUserAutoFill = ()=>{
+   
+    setEmail('rohan@gmail.com')
+    setPassword('123456@')
+  }
+  const handleSellerAutoFill = ()=>{
+    setEmail('riad@gmail.com')
+    setPassword('123456@')
+  }
+  const handleAdminAutoFill = ()=>{
+    setEmail('shawon@gmail.com')
+    setPassword('123456@')
+  }
  
 
     const from = location.state?.from?.pathname || "/";
@@ -75,9 +91,11 @@ const Login = () => {
             </label>
             <input
               type="email"
+              
               {...register("email", { required: 'Enter your Email' })}
               className="w-full px-4 py-2 mt-2 border rounded-sm focus:outline-none focus:ring-2 focus:ring-[#85A844] focus:border-transparent"
               placeholder="Enter your email"
+              value={email}
             
             />
           </div>
@@ -95,12 +113,14 @@ const Login = () => {
             </label>
             <input
               type="password"
+              
               {...register("password", {
                 required: "Password is required",
                 
               })}
               className="w-full px-4 py-2 mt-2 border rounded-sm focus:outline-none focus:ring-2 focus:ring-[#85A844] focus:border-transparent"
               placeholder="Enter your password"
+              value={password}
               
             />
           
@@ -128,6 +148,11 @@ const Login = () => {
 
         </div>
         <Link className="underline text-first flex justify-center" to='/signUp'>Register Here</Link>
+        <div className="my-4 justify-center flex gap-2">
+          <button onClick={handleUserAutoFill} className="bg-first text-sm text-white py-1 rounded-sm px-2">User Autofill</button>
+          <button onClick={handleSellerAutoFill} className="bg-first text-sm text-white py-1 rounded-sm px-2">Seller Autofill</button>
+          <button onClick={handleAdminAutoFill} className="bg-first text-sm text-white py-1 rounded-sm px-2">Admin Autofill</button>
+        </div>
 
 
       </div>
