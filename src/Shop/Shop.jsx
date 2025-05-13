@@ -208,14 +208,14 @@ const Shop = () => {
                </DialogPanel>
            </Dialog>
             <div className='relative'>
-                <div className='flex items-center justify-between'>
+                <div className='flex flex-col md:flex-row md:items-center md:justify-between items-end   justify-end '>
 
                     <div className='my-3 flex    text-center   items-center h-10'>
                         <input type="text"onChange={e=> setSearch(e.target.value)} placeholder='Search Products by ItemName' className='border-[1px] px-4  h-full rounded-l-md border-first outline-none' /><button className='bg-first  h-full px-6 text-white rounded-r-md'><FaSearchPlus ></FaSearchPlus></button>
                     </div>
                     <div className='flex'>
                         <button className='text-white bg-first px-4 rounded-l-md'><FaFilter /></button>
-                        <select value={order} onChange={handleSort} className=" px-2 py-2 rounded-r-md text-first outline-none border-[1px] border-first w-full max-w-xs">
+                        <select value={order} onChange={handleSort} className=" px-2 py-2 rounded-r-md text-first outline-none border-[1px] border-first  max-w-xs">
                             <option value="" disabled>
                             Sort by Price
                             </option>
