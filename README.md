@@ -1,44 +1,89 @@
+ MediStore
+A full-stack pharmacy web application where users can buy medicines, sellers can manage their products, and admins can control overall platform operations.
+
+ Live Site: https://medistore-ddfa1.web.app
+
+Demo Credentials
+Admin Login
+Email: shawon@gmail.com
+
+Password: 123456@
+
+Seller Login
+Email: riad@gmail.com
+
+Password: 123456@
+
+User Login
+Email: rohan@gmail.com
+
+Password: 123456@
+
+ Features
+ Role-based Authentication: Admin, Seller, and User
 
 
+ Medicine Purchase Platform
+ Filter by Date Range
 
+ Sort by Price
 
-# Live Link
-live(https://medistore-ddfa1.web.app)
-# Website Name
-# MediStore
-# admin email &  (email: shawon@gmail.com , password: 123456@)
-# seller email &  (email: riad@gmail.com , password: 123456@)
-# user email &  (email: rohan@gmail.com , password: 123456@)
-# Some  React Fundamental Concepts which used in the project
+ Search by Item Name
 
-- role: admin ,seller, user
-- In this project i use some fundamental concepts of react such as 
-- React hooks (useState, useParams, UseLoaderdata)
-- Context API
-- State props drilling
-- React Router
-- Virtual DOM
-- UseLocation Hooks
-- UseNavigation Hooks
-- npm package like (sweetalert,Helmet,React,lottle Awesome Reveal,React Tooltip )
-- private Router
-- Firebase Authentication(userLogin,userLogOut,CreateUser,LoginWithGoogle,upDateProfile etc)
-- Axois
-- custom hooks
-- react helmet
-- react form hook
-- excel format download
-- pdf format download
-- strpe payment method
-- sort by price
-- filter date range
-- search by item Name
-- tanststackQuery
-#  I have used for handling and managing data (context API  & use firebase as a database)
-#  CRUD operation (delete,create,update,read)
-#  Deatils in server readme file 
+  Stripe Payment Integration
 
+ Download in Excel & PDF Format
 
+ CRUD Operations (Create, Read, Update, Delete)
 
+ Technologies & Concepts Used
+ React Fundamentals
+React Hooks: useState, useParams, useLoaderData, useLocation, useNavigation
 
+Context API for Global State Management
+
+State & Props Drilling
+
+React Router (v6)
+
+Virtual DOM Concept
+
+NPM Packages
+sweetalert2
+
+react-helmet
+
+lottie-react
+
+react-awesome-reveal
+
+react-tooltip
+
+react-hook-form
+
+axios
+
+@tanstack/react-query
+
+ Authentication & Authorization
+Firebase Authentication:
+
+createUser
+
+loginUser
+
+loginWithGoogle
+
+updateProfile
+
+logout
+
+Protected Routes (Private Routes)
+
+ Others
+Custom Hooks
+
+Firebase Realtime Database
+
+Secure Data Handling with Context API
 
