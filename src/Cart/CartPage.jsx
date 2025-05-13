@@ -114,7 +114,7 @@ const CartPage = () => {
 
     if (medicinesLoading) return <Loading></Loading>
     return (
-        <div>
+        <div className='w-11/12 md:w-full mx-auto '>
             <HelmetSet sub1='MediStore' sub2='Cart'></HelmetSet>
             {cartData.length == 0 &&  <div className='uppercase flex flex-col justify-center items-center min-h-screen'>
                 <p className='font-bold text-xl text-first'>No Item In Cart </p>
@@ -126,7 +126,7 @@ const CartPage = () => {
             </div>}
 
             {
-                cartData.map(cart=> <div key={cart._id} className='flex mb-4 justify-between items-center '>
+                cartData.map(cart=> <div key={cart._id} className='flex  flex-col md:flex-row mb-4 justify-between md:items-center '>
                    <div className='flex  gap-4'>
                    <div className='max-w-[70px] max-h-[70px] md:max-w-[100px] md:max-h-[100px]'><img className='w-full border-2 border-first rounded-3xl h-full object-cover' src={cart.photo} alt="" /></div>
                     <div>
