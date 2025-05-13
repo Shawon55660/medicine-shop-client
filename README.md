@@ -1,89 +1,99 @@
- MediStore
-A full-stack pharmacy web application where users can buy medicines, sellers can manage their products, and admins can control overall platform operations.
-
- Live Site: https://medistore-ddfa1.web.app
-
-Demo Credentials
-Admin Login
-Email: shawon@gmail.com
-
-Password: 123456@
-
-Seller Login
-Email: riad@gmail.com
-
-Password: 123456@
-
-User Login
-Email: rohan@gmail.com
-
-Password: 123456@
-
- Features
- Role-based Authentication: Admin, Seller, and User
 
 
- Medicine Purchase Platform
- Filter by Date Range
+#  MediStore
 
- Sort by Price
+A Modern Online Pharmacy Platform where **Admin**, **Seller**, and **User** each have their own dashboards. Buy, manage, and control medicine products with ease.
 
- Search by Item Name
+ **Live Site:** [https://medistore-ddfa1.web.app](https://medistore-ddfa1.web.app)
 
-  Stripe Payment Integration
+---
 
- Download in Excel & PDF Format
+##  Demo Credentials
 
- CRUD Operations (Create, Read, Update, Delete)
+| Role   | Email              | Password  |
 
- Technologies & Concepts Used
- React Fundamentals
-React Hooks: useState, useParams, useLoaderData, useLocation, useNavigation
+| Admin  | shawon@gmail.com   | 123456@   |
+| Seller | riad@gmail.com     | 123456@   |
+| User   | rohan@gmail.com    | 123456@   |
 
-Context API for Global State Management
+---
 
-State & Props Drilling
+##  Features
 
-React Router (v6)
+- ✅ Role-based dashboard (Admin | Seller | User)
+- ✅ Firebase Authentication (Email, Password, Google)
+- ✅ Stripe Payment Integration
+- ✅ PDF & Excel File Download
+- ✅ Search Medicines by Name
+- ✅ Filter by Date Range
+- ✅ Sort by Price
+- ✅ Private and Protected Routes
+- ✅ Real-time database (Firebase)
+- ✅ Full CRUD Operations
+- ✅ Responsive and Clean UI
 
-Virtual DOM Concept
+---
 
-NPM Packages
-sweetalert2
+## Technologies & Concepts Used
 
-react-helmet
+### React Core Concepts
+- `useState`
+- `useParams`
+- `useLoaderData`
+- `useLocation`
+- `useNavigation`
+- Context API
+- State & Props Drilling
+- Virtual DOM
+- React Router DOM
 
-lottie-react
+### Tools & Libraries
+- `axios`
+- `sweetalert2`
+- `react-hook-form`
+- `react-tooltip`
+- `react-helmet`
+- `lottie-react`
+- `react-awesome-reveal`
+- `@tanstack/react-query`
 
-react-awesome-reveal
+### Firebase Auth
+- Create User
+- User Login
+- Google Login
+- Update Profile
+- Logout
 
-react-tooltip
+### Payments & Export
+- Stripe Payment Method
+- Export Table Data as PDF
+- Export Table Data as Excel
 
-react-hook-form
+---
 
-axios
 
-@tanstack/react-query
 
- Authentication & Authorization
-Firebase Authentication:
 
-createUser
 
-loginUser
 
-loginWithGoogle
+---
 
-updateProfile
+##  Developer Info
 
-logout
+**Shawon Ahmed Shadhin**  
+ Frontend Developer | React.js Enthusiast  
+ Kushtia, Khulna, Bangladesh  
+ Email: shawonahmed55660@gmail.com  
 
-Protected Routes (Private Routes)
 
- Others
-Custom Hooks
+---
 
-Firebase Realtime Database
+##  License
 
-Secure Data Handling with Context API
+This project is licensed for learning, practice, and portfolio purposes only.
 
+---
+
+##  Special Note
+
+Thank you for visiting this project. If you liked it, feel free to  the repository and connect with me!
