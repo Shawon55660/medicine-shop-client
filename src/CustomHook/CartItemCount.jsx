@@ -6,7 +6,7 @@ import useAxiosPrivate from './useAxiosPrivate';
 
 const CartItemCount = () => {
    const { user } = useAuth()
-    const axiosPrivate = useAxiosPrivate()
+    const axiosPrivate = useAxiosPublic()
 
     const { data: cartData = [], isLoading: medicinesLoading, refetch } = useQuery({
         queryKey: ['cartData', user?.email],
