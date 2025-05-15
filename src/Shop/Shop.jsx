@@ -12,6 +12,7 @@ import { Pagination, Select, Stack } from '@mui/material';
 import { FaFilter, FaSearchPlus } from 'react-icons/fa';
 import { toast, ToastContainer } from 'react-toastify';
 import HelmetSet from '../CommonComponent/HelmetSet';
+import CartItemCount from '../CustomHook/CartItemCount';
 
 
 const Shop = () => {
@@ -20,6 +21,7 @@ const Shop = () => {
     const closeModal = () => setIsOpen(false);
     const [details, setDetails] = useState([])
     const { user,Loading } = useAuth()
+     const [cartData,refetch] = CartItemCount()
 
 
 
@@ -109,6 +111,8 @@ const Shop = () => {
         const res = await axiosPublic.post(`/cart`, medicineInfo)
 
         if (res.data.insertedId) {
+            refetch()
+         
             toast.success("Profile Update Successfully", {
                            position: "top-center",
                            autoClose: 2000,

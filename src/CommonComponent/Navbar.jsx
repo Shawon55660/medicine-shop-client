@@ -15,22 +15,12 @@ import Swal from 'sweetalert2';
 import useAxiosPrivate from '../CustomHook/useAxiosPrivate';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosPublic from '../CustomHook/useAxiosPublic';
+import CartItemCount from '../CustomHook/CartItemCount';
 
 const Navbar = () => {
   const {user,logOut,loading} = useAuth()
    
-      const axiosPublic = useAxiosPublic()
-  
-      const { data: cartData = [], isLoading: medicinesLoading, refetch } = useQuery({
-          queryKey: ['cartData', user?.email],
-          queryFn: async () => {
-              const catInfo = await axiosPublic.get(`/cartsOwner?userEmail=${user?.email}`)
-              if (catInfo.data) {
-                  return catInfo.data
-              }
-          }
-  
-      })
+    const [cartData,refetch]= CartItemCount()
     const MainLink = 
        <>
         <NavLink className='mx-1 font-semibold px-3 py-2 text-sm flex gap-2 items-center uppercase' to='/'><FaHome size={20}></FaHome> <p>home</p></NavLink>

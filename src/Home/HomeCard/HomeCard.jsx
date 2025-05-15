@@ -12,6 +12,7 @@ import useAxiosPublic from '../../CustomHook/useAxiosPublic';
 import Header from '../../CommonComponent/Header';
 import useAuth from '../../CustomHook/useAuth';
 import { toast, ToastContainer } from 'react-toastify';
+import CartItemCount from '../../CustomHook/CartItemCount';
 
 
 
@@ -20,6 +21,7 @@ const HomeCard = () => {
     const openModal = () => setIsOpen(true);
     const closeModal = () => setIsOpen(false);
     const [details, setDetails] = useState([])
+    const [cartData,refetch] = CartItemCount()
 
 
 
@@ -32,6 +34,8 @@ const HomeCard = () => {
 
 
 
+  
+   
 
     const fetchData = async () => {
         const catInfo = await axiosPublic.get(`/medicinesAll`)
@@ -102,6 +106,8 @@ const HomeCard = () => {
         const res = await axiosPublic.post(`/cart`, medicineInfo)
 
         if (res.data.insertedId) {
+            refetch()
+             
             toast.success("Profile Update Successfully", {
                 position: "top-center",
                 autoClose: 2000,
@@ -112,6 +118,8 @@ const HomeCard = () => {
                 icon: <span style={{ color: "#85A844" }}> <img src="https://img.icons8.com/?size=100&id=59850&format=png&color=85A844" alt="" srcset="" /></span>,
                 style: { backgroundColor: "#FFFFF", color: "#85A844", fontWeight: "bold" },
             });
+            
+          
         }
         else {
             toast.error(`${res.data.error}`, {
