@@ -45,7 +45,7 @@ const DashboardLayout = () => {
           role === "admin"
             ? "bg-gradient-to-b from-second to-second"
             : role === "seller"
-            ? "bg-gradient-to-b from-sky-400 to-sky-500"
+            ? "bg-gradient-to-b from-[#85A844] to-[#85A844]"
             : role === "user"
             ? "bg-gradient-to-b from-[#85A844] to-[#85A844]"
             : ""

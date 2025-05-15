@@ -95,7 +95,7 @@ const Login = () => {
               {...register("email", { required: 'Enter your Email' })}
               className="w-full px-4 py-2 mt-2 border rounded-sm focus:outline-none focus:ring-2 focus:ring-[#85A844] focus:border-transparent"
               placeholder="Enter your email"
-              value={email}
+              value={email || null}
             
             />
           </div>
@@ -120,7 +120,7 @@ const Login = () => {
               })}
               className="w-full px-4 py-2 mt-2 border rounded-sm focus:outline-none focus:ring-2 focus:ring-[#85A844] focus:border-transparent"
               placeholder="Enter your password"
-              value={password}
+              value={password || null}
               
             />
           
