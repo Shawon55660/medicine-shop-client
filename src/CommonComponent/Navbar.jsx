@@ -14,16 +14,17 @@ import Loading from './Loading';
 import Swal from 'sweetalert2';
 import useAxiosPrivate from '../CustomHook/useAxiosPrivate';
 import { useQuery } from '@tanstack/react-query';
+import useAxiosPublic from '../CustomHook/useAxiosPublic';
 
 const Navbar = () => {
   const {user,logOut,loading} = useAuth()
    
-      const axiosPrivate = useAxiosPrivate()
+      const axiosPublic = useAxiosPublic()
   
       const { data: cartData = [], isLoading: medicinesLoading, refetch } = useQuery({
           queryKey: ['cartData', user?.email],
           queryFn: async () => {
-              const catInfo = await axiosPrivate.get(`/cartsOwner?userEmail=${user?.email}`)
+              const catInfo = await axiosPublic.get(`/cartsOwner?userEmail=${user?.email}`)
               if (catInfo.data) {
                   return catInfo.data
               }
