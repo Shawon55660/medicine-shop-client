@@ -2,10 +2,10 @@ import React from "react";
 
 const AboutUs = () => {
   return (
-    <div className="bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="bg-gray-100 dark:bg-gray-800 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-5xl mx-auto text-center">
-        <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl">About Medistore</h2>
-        <p className="mt-4 italic  text-gray-600">
+        <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 sm:text-4xl">About Medistore</h2>
+        <p className="mt-4 italic dark:text-gray-300  text-gray-600">
           Medistore is your trusted online pharmacy, offering high-quality medicines and healthcare products
           at affordable prices. Our mission is to provide convenient and reliable healthcare solutions to
           our customers.
@@ -30,8 +30,8 @@ const AboutUs = () => {
       </div>
 
       <div className="mt-10 text-center">
-        <h3 className="text-2xl font-bold text-gray-900">Why Choose Medistore?</h3>
-        <p className="text-gray-600 mt-4 italic max-w-3xl mx-auto">
+        <h3 className="text-2xl font-bold dark:text-gray-100 text-gray-900">Why Choose Medistore?</h3>
+        <p className="text-gray-600 mt-4 dark:text-gray-300 italic max-w-3xl mx-auto">
           At Medistore, we prioritize your health and convenience. With a user-friendly platform, verified medicines,
           and top-notch customer service, we ensure a seamless experience for all your healthcare needs.
         </p>

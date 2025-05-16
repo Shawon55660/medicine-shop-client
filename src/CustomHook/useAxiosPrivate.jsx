@@ -23,7 +23,7 @@ axiosPrivate.interceptors.response.use((response)=>{
     const status = error.response.status
     if(status == 401 ||  status == 403){
         await logOut()
-        navigate('/login')
+       await navigate('/login')
 
     }
     return Promise.reject(error)

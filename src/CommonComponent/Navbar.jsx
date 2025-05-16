@@ -25,7 +25,7 @@ const Navbar = () => {
        <>
         <NavLink className='mx-1 font-semibold px-3 py-2 text-sm flex gap-2 items-center uppercase' to='/'><FaHome size={20}></FaHome> <p>home</p></NavLink>
         <NavLink className='mx-1 flex gap-2 items-center  text-sm font-semibold px-3 py-2 uppercase' to='/shop'>  <FaShoppingBag size={15}></FaShoppingBag><p>shop</p></NavLink>
-        <NavLink className='mx-1 relative  flex gap-2 items-center text-sm font-semibold px-3 py-2  uppercase' to='/cart'><span className='absolute top-1 text-xs left-1 bg-first px-1 text-white rounded-full '>{user?.email && cartData.length}</span> <IoCart size={20}></IoCart> <p>cart</p></NavLink>
+        <NavLink className='mx-1 relative  flex gap-2 items-center text-sm font-semibold px-3 py-2  uppercase' to='/cart'><span className='absolute top-1 text-xs left-1 bg-first px-1 text-white rounded-full '>{cartData.length}</span> <IoCart size={20}></IoCart> <p>cart</p></NavLink>
         <NavLink className='mx-1 flex gap-2 items-center text-sm font-semibold px-3 py-2  uppercase' to='/aboutUs'><FaBlogger size={20}></FaBlogger> <p>About Us</p></NavLink>
        
        
@@ -44,7 +44,7 @@ const Navbar = () => {
        
        }
       
-
+//  if (medicinesLoading) return <Loading></Loading>
     return (
         <div className='relative container'>
      

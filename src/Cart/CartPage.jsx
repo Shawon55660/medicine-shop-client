@@ -145,7 +145,7 @@ const CartPage = () => {
                     <div>
                     <div className='text-xl flex gap-8 '>
                                <div className='flex gap-3'>
-                               <button className='btn btn-xs md:btn-sm text-sm md:text-xl dark:bg-white text-second ' disabled={cart.quentity==1} onClick={() => cartDecrease(cart._id)}>-</button>
+                               <button className='btn btn-xs md:btn-sm text-sm md:text-xl text-second dark:text-white' disabled={cart.quentity==1} onClick={() => cartDecrease(cart._id)}>-</button>
                                 <button className='text-sm md:text-xl text-second dark:text-white'>{cart.quentity}</button>
                                 <button className='btn  btn-xs md:btn-sm  text-sm md:text-xl text-second' disabled={cart.quentity == cart.Massunit} onClick={() => cartIncrease(cart._id)}>+</button>
                                </div>

@@ -21,7 +21,7 @@ const Shop = () => {
     const closeModal = () => setIsOpen(false);
     const [details, setDetails] = useState([])
     const { user,Loading } = useAuth()
-     const [cartData,refetch] = CartItemCount()
+     const [cartData,medicinesLoading,refetch] = CartItemCount()
 
 
 

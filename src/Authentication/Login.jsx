@@ -69,7 +69,7 @@ const Login = () => {
   };
 
   return (
-    <div className="grid  mx-auto gap-4 md:grid-cols-2 justify-center items-center min-h-screen bg-gray-100">
+    <div className="grid  mx-auto gap-4 md:grid-cols-2 justify-center items-center min-h-screen dark:bg-gray-800  bg-gray-100">
       <HelmetSet sub1='MediStore' sub2='Login'></HelmetSet>
      
       <div>

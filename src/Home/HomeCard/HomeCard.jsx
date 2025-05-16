@@ -21,7 +21,7 @@ const HomeCard = () => {
     const openModal = () => setIsOpen(true);
     const closeModal = () => setIsOpen(false);
     const [details, setDetails] = useState([])
-    const [cartData,refetch] = CartItemCount()
+    const [cartData,medicinesLoading,refetch] = CartItemCount()
 
 
 

@@ -10,6 +10,7 @@ const CartItemCount = () => {
 
     const { data: cartData = [], isLoading: medicinesLoading, refetch } = useQuery({
         queryKey: ['cartData', user?.email],
+        
         queryFn: async () => {
             const catInfo = await axiosPrivate.get(`/cartsOwner?userEmail=${user?.email}`)
             if (catInfo.data) {
