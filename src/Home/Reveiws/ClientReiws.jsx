@@ -36,7 +36,7 @@ const ClientReviews = () => {
        
     }
     return (
-        <div className="bg-third p-6">
+        <div className="bg-third  p-6">
             {/* Header Section */}
             <Header
                 title="Feedback"
@@ -45,10 +45,10 @@ const ClientReviews = () => {
             />
 
             {/* Form Section */}
-          <div className='md:w-7/12 mx-auto'>
-          <form onSubmit={handleReveiw} className="mt-6 flex flex-col">
+          <div className='md:w-7/12 mx-auto '>
+          <form onSubmit={handleReveiw} className="mt-6  flex flex-col">
                 <textarea
-                    className=" w-full mx-auto p-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-first"
+                    className=" w-full dark:bg-second  dark:text-white mx-auto p-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-first"
                     placeholder="Your experience"
                     name='reveiw'
                     rows="4"

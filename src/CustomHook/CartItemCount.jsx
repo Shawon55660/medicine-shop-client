@@ -1,8 +1,8 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import useAuth from './useAuth';
-import useAxiosPublic from './useAxiosPublic';
 import useAxiosPrivate from './useAxiosPrivate';
+import useAxiosPublic from './useAxiosPublic';
 
 const CartItemCount = () => {
    const { user } = useAuth()
@@ -18,7 +18,7 @@ const CartItemCount = () => {
         }
 
     })
-    return [cartData,refetch]
+    return [cartData,medicinesLoading,refetch]
 };
 
 export default CartItemCount;

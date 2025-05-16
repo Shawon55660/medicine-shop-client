@@ -52,7 +52,7 @@ const ReveiwsClient = () => {
             
             key={info._id}
           >
-            <div className="flex my-8 flex-col  bg-white shadow-xl rounded-2xl p-6 border border-gray-300 transition-transform transform hover:scale-105 duration-300">
+            <div className="flex my-8 flex-col  bg-white dark:bg-second  shadow-xl rounded-2xl p-6 border border-gray-300 transition-transform transform hover:scale-105 duration-300">
             <div className="md:flex items-center gap-4 flex-grow ">
               <img
                 src={info.clientPhoto}
@@ -60,11 +60,11 @@ const ReveiwsClient = () => {
                 className="w-10 h-10 rounded-full border-2 object-cover  shadow-md"
               />
               <div>
-                <h3 className="text-xs font-bold text-gray-900">{info.clientName}</h3>
-                <p className="text-xs text-gray-500">{format(new Date(info.reviewDate), "PPP")}</p>
+                <h3 className="text-xs font-bold dark:text-white text-gray-900">{info.clientName}</h3>
+                <p className="text-xs text-gray-500 dark:text-gray-200">{format(new Date(info.reviewDate), "PPP")}</p>
               </div>
             </div>
-            <p className="mt-4 flex-grow text-gray-700 w-full  text-base italic md:p-2">
+            <p className="mt-4 flex-grow text-gray-700 dark:text-white w-full  text-base italic md:p-2">
               {info.ClientReview}
             </p>
             </div>

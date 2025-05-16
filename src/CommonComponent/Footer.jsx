@@ -7,10 +7,10 @@ import { Link } from 'react-router-dom';
 const Footer = () => {
     return (
        <div className=''>
-         <div className='bg-gray-200'>
-            <footer className="footer   text-base-content p-10">
+         <div className='bg-gray-200 dark:bg-gray-600 '>
+            <footer className="footer dark:text-white  text-base-content p-10">
   <nav>
-    <h6 className="footer-title">Services</h6>
+    <h6 className="footer-title   ">Services</h6>
    
     <a className="link link-hover">Fast Delivery</a>
     <a className="link link-hover">Marketing</a>
@@ -25,7 +25,7 @@ const Footer = () => {
   </nav>
 
 </footer>
-<footer className="footer bg-base-200 text-base-content border-base-300 border-t px-10 py-4">
+<footer className="footer bg-base-200 text-base-content border-base-300 dark:text-white dark:bg-gray-800 border-t px-10 py-4">
   <aside className="grid-flow-col items-center">
     <LiaBookMedicalSolid  color='#85A844' size={40}></LiaBookMedicalSolid  >
     <p className='font-semibold'>

@@ -171,7 +171,7 @@ const Shop = () => {
                    className={`fixed inset-0 flex items-center justify-center p-6 overflow-y-auto transition-all duration-500 
                    ${isOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}
                >
-                   <div className="w-full max-w-3xl bg-white p-6 shadow-lg rounded-xl flex flex-col max-h-[80vh]">
+                   <div className="w-full max-w-3xl bg-white dark:bg-gray-800  p-6 shadow-lg rounded-xl flex flex-col max-h-[80vh]">
                        
                        {/* Product Image */}
                        <div className="flex justify-center mb-4">
@@ -179,9 +179,9 @@ const Shop = () => {
                        </div>
            
                        {/* Product Information */}
-                       <div className="flex flex-col space-y-3 text-gray-600 overflow-y-auto flex-1 max-h-[60vh]">
+                       <div className="flex flex-col space-y-3 text-gray-600 dark:text-white overflow-y-auto flex-1 max-h-[60vh]">
                            <p className="text-2xl font-bold text-first text-center">{details.ItemName}</p>
-                           <p className="text-lg text-second text-center">{details.GenericName}</p>
+                           <p className="text-lg text-second dark:text-white text-center">{details.GenericName}</p>
            
                            {/* Additional Details */}
                            <p><strong>Category:</strong> {details.category}</p>
@@ -215,11 +215,11 @@ const Shop = () => {
                 <div className='flex flex-col md:flex-row md:items-center md:justify-between items-end   justify-end '>
 
                     <div className='my-3 flex    text-center   items-center h-10'>
-                        <input type="text"onChange={e=> setSearch(e.target.value)} placeholder='Search Products by ItemName' className='border-[1px] px-4  h-full rounded-l-md border-first outline-none' /><button className='bg-first  h-full px-6 text-white rounded-r-md'><FaSearchPlus ></FaSearchPlus></button>
+                        <input type="text"onChange={e=> setSearch(e.target.value)} placeholder='Search Products by ItemName' className='border-[1px] px-4 dark:bg-gray-800 dark:text-white  h-full rounded-l-md border-first outline-none' /><button className='bg-first   h-full px-6 text-white rounded-r-md'><FaSearchPlus ></FaSearchPlus></button>
                     </div>
                     <div className='flex'>
-                        <button className='text-white bg-first px-4 rounded-l-md'><FaFilter /></button>
-                        <select value={order} onChange={handleSort} className=" px-2 py-2 rounded-r-md text-first outline-none border-[1px] border-first  max-w-xs">
+                        <button className='text-white  bg-first px-4 rounded-l-md'><FaFilter /></button>
+                        <select value={order} onChange={handleSort} className=" dark:bg-gray-800 px-2 py-2 rounded-r-md text-first outline-none border-[1px] border-first  max-w-xs">
                             <option value="" disabled>
                             Sort by Price
                             </option>
@@ -237,7 +237,7 @@ const Shop = () => {
                     {/* card satart  */}
                   
                     {
-                        data.map(item => <div className='flex relative  flex-col h-full rounded-sm border-[1px] p-4' key={item._id}>
+                        data.map(item => <div className='flex relative  flex-col h-full dark:border-gray-500 rounded-sm border-[1px] p-4' key={item._id}>
                             
                             {item.discountPercentage > 0 && <p className='w-8 text-sm font-semibold absolute top-1 right-1 h-8 flex items-center justify-center p-6 bg-first opacity-90 text-white rounded-full z-20 '>-{item.discountPercentage}%</p>}
 
@@ -252,19 +252,20 @@ const Shop = () => {
                                         <input type="radio" name="rating-4" className="mask mask-star-2 bg-first" />
                                         <input type="radio" name="rating-4" className="mask mask-star-2 bg-first" />
                                     </div>
-                                    <h2 className='font-semibold text-second text-xl py-1'>{item.ItemName}</h2>
-                                    <h2 className='font-semibold text-thrid text-sm py-1'> {item.Massunit} </h2>
-                                    <div className='flex gap-6 justify-center text-center items-center py-1'>
-                                        <h3 className='text-thrid line-through font-mono italic'>MRP.{item.Price}tk</h3>
-                                        <h3 className='font-bold text-md italic  text-first'>MRP. {Math.floor(item.Price - ((item.Price * item.discountPercentage) / 100))} tk</h3>
+                                   <h2 className='font-semibold text-second dark:text-white text-xl py-1'>{item.ItemName}</h2>
+                                <h2 className='font-semibold text-thrid dark:text-gray-300 text-sm py-1'> {item.Massunit} </h2>
 
-                                    </div>
+                                <div className='flex gap-6 justify-center text-center items-center py-1'>
+                                    <h3 className='text-thrid dark:text-gray-300 line-through font-mono italic'>MRP.{item.Price}tk</h3>
+                                    <h3 className='font-bold text-md italic  text-first'>MRP. {Math.floor(item.Price - ((item.Price * item.discountPercentage) / 100))} tk</h3>
+
+                                </div>
                                 </div>
                             </div>
                             <div className='flex flex-col justify-center gap-3 mt-1 items-center' >
                                 <button onClick={() => handleCart(item)} className='uppercase flex items-center text-sm gap-2 font-semibold bg-first text-white px-4 py-[7px]'> <CgAddR size={18}></CgAddR> <span>add to cart</span></button>
 
-                                <button className='flex font-semibold text-thrid items-center gap-2 uppercase  text-xs ' onClick={() => handleDetails(item._id)} > <FaEye size={14}></FaEye><span>quick veiw</span></button>
+                                <button className='flex font-semibold text-thrid dark:text-white items-center gap-2 uppercase  text-xs ' onClick={() => handleDetails(item._id)} > <FaEye size={14}></FaEye><span>quick veiw</span></button>
                             </div>
                         </div>)
                     }
@@ -274,13 +275,22 @@ const Shop = () => {
 
             </div>
             <div className='flex justify-center my-4 '>
-                <Stack className='text-first' spacing={2}>
+                <Stack className='text-first dark:text-white' spacing={2}>
 
-                    <Pagination className='text-first'
+                    <Pagination className='text-first '
                         count={totalPages}
                         page={currentPage}
                         onChange={handleChange}
-                        color='success'
+                         sx={{
+    '& .MuiPaginationItem-root': {
+      color: '#85A844',
+      borderColor: '#85A844',
+    },
+    '& .Mui-selected': {
+      backgroundColor: '#85A844',
+      color: 'white',
+    }
+  }}
 
                         variant="outlined" shape="rounded" />
                 </Stack>

@@ -3,6 +3,7 @@ import { auth } from '../firebase/init';
 import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from 'firebase/auth';
 import useAxiosPublic from '../CustomHook/useAxiosPublic';
 import useRole from '../CustomHook/useRole';
+import CartItemCount from '../CustomHook/CartItemCount';
 export const authContext = createContext()
 
 const AuthProvider = ({children}) => {
@@ -10,6 +11,22 @@ const AuthProvider = ({children}) => {
     const [user,setUser] = useState([])
     const [paymentInfo,setPaymentInfo] = useState({})
     const [loading,setLoading] = useState(true)
+
+    //dark mode light mode system build
+ const [darkMode, setDarkMode] = useState(() => {
+    return localStorage.getItem('theme') === 'dark';
+  });
+
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+    }
+  }, [darkMode]);
+    
    
     const provider = new GoogleAuthProvider()
 
@@ -20,9 +37,11 @@ const AuthProvider = ({children}) => {
     }
     const loginWithEmail = (email,password)=>{
         setLoading(true)
+       
         return signInWithEmailAndPassword(auth,email,password)
     }
     const loginWithGoogle = ()=>{
+      
         setLoading(true)
         return signInWithPopup(auth,provider)
     }
@@ -66,6 +85,7 @@ const AuthProvider = ({children}) => {
         setUser,
         user,paymentInfo,
         setPaymentInfo,
+        darkMode, setDarkMode
        
 
     }

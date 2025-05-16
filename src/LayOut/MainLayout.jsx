@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Navbar from "../CommonComponent/Navbar";
 import { Outlet } from "react-router-dom";
 import { IoMenu } from "react-icons/io5";
@@ -7,6 +7,7 @@ import Category from "../Home/Category/Category";
 import Footer from "../CommonComponent/Footer";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import "react-perfect-scrollbar/dist/css/styles.css";
+import { authContext } from "../Provider/AuthProvider";
 
 const MainLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -14,9 +15,20 @@ const MainLayout = () => {
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
+  const {setDarkMode,darkMode} = useContext(authContext)
 
   return (
-    <div className="container relative mx-auto">
+   <div className="dark:bg-gray-800">
+     <div className="container  relative mx-auto">
+       {/* Dark Mode Toggle Button */}
+      <div className="fixed bottom-8 right-4 z-[100]">
+        <button
+          onClick={() => setDarkMode(!darkMode)}
+          className="px-3 font-semibold py-2 bg-gray-800 dark:bg-first dark:text-white  text-white rounded"
+        >
+          {darkMode ? '☀ Light' : '🌙 Dark'}
+        </button>
+      </div>
       <Navbar />
 
       <div className="lg:grid lg:grid-cols-12 gap-2 min-h-screen mt-16">
@@ -44,14 +56,15 @@ const MainLayout = () => {
         </div>
 
         {/* Main Content */}
-        <div className="col-span-9 w-full md:w-[96%]">
-          <div className="min-h-[80vh]">
+        <div className="col-span-9 w-full  md:w-[96%]">
+          <div className="min-h-[80vh] ">
             <Outlet />
           </div>
           <Footer />
         </div>
       </div>
     </div>
+   </div>
   );
 };
 

@@ -121,8 +121,8 @@ const CartPage = () => {
                 <Link className='bg-first font-semibold py-2 px-4 text-white rounded-sm my-2' to='/shop'>add now</Link>
                  </div> }
            {cartData.length > 0 &&   <div className='border-b mt-8 mb-4 flex justify-between pb-2 items-center'>
-                <p className='text-lg font-semibold text-second uppercase'>Delete All Item</p>
-               <div className='text-right text-thrid'>  <button onClick={deleteCart} className=' flex items-center  gap-2'><MdDeleteOutline size={20} ></MdDeleteOutline > <span>Delete All</span></button></div> 
+                <p className='text-lg font-semibold text-second dark:text-white uppercase'>Delete All Item</p>
+               <div className='text-right text-thrid dark:text-gray-200'>  <button onClick={deleteCart} className=' flex items-center  gap-2'><MdDeleteOutline size={20} ></MdDeleteOutline > <span>Delete All</span></button></div> 
             </div>}
 
             {
@@ -132,21 +132,21 @@ const CartPage = () => {
                     <div>
                         <h2 className='text-sm md:text-xl font-semibold'>{cart.ItemName}</h2>
                         <p className='text-xs md:text-[17px] md:py-1 font-semibold text-first'>{cart.category}</p>
-                        <p className='text-second text-xs  py-1 md:text-[16px]'>{cart.GenericName}</p>
+                        <p className='text-second dark:text-white text-xs  py-1 md:text-[16px]'>{cart.GenericName}</p>
                         <p className='text-first  text-xs font-bold  py-1 md:text-[16px]'>{cart.DisPrice} % OFF</p>
                     </div>
                    </div>
                     <div className='flex items-center gap-6'>
                     <div className='leading-10'>
                     <h3 className='font-bold text-sm md:text-md italic   text-first'>MRP. {Math.floor(cart.Price - ((cart.Price * cart.DisPrice) / 100))} tk</h3>
-                    <h3 className='text-thrid line-through text-xs md:text-sm font-mono italic'>MRP.{cart.Price}tk</h3>
+                    <h3 className='text-thrid dark:text-gray-200 line-through text-xs md:text-sm font-mono italic'>MRP.{cart.Price}tk</h3>
 
                     </div>
                     <div>
                     <div className='text-xl flex gap-8 '>
                                <div className='flex gap-3'>
-                               <button className='btn btn-xs md:btn-sm text-sm md:text-xl text-second' disabled={cart.quentity==1} onClick={() => cartDecrease(cart._id)}>-</button>
-                                <button className='text-sm md:text-xl text-second'>{cart.quentity}</button>
+                               <button className='btn btn-xs md:btn-sm text-sm md:text-xl dark:bg-white text-second ' disabled={cart.quentity==1} onClick={() => cartDecrease(cart._id)}>-</button>
+                                <button className='text-sm md:text-xl text-second dark:text-white'>{cart.quentity}</button>
                                 <button className='btn  btn-xs md:btn-sm  text-sm md:text-xl text-second' disabled={cart.quentity == cart.Massunit} onClick={() => cartIncrease(cart._id)}>+</button>
                                </div>
                                 <button className='text-first' onClick={() => handleDelete(cart._id)}><LuDelete /></button>
