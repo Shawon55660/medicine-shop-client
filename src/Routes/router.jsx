@@ -29,6 +29,7 @@ import AdminHome from '../Dashboard/AdminDashboard/AdminPages/AdminHome';
 import SellerHome from '../Dashboard/SellerDashboard/sellerPages/SellerHome';
 import Faq from '../CommonComponent/Faq';
 import AboutUs from '../CommonComponent/AboutUs';
+import Contact from '../CommonComponent/Contact';
 
 
 
@@ -56,6 +57,13 @@ const  router  = createBrowserRouter([
                 path:'/faq',
                 element: <Faq></Faq> 
             },
+          
+            { 
+                 path:'/contact',
+                element: <Contact>Z</Contact>
+
+            }
+              ,
             {
                 path:'/aboutUs',
                 element:<AboutUs></AboutUs>

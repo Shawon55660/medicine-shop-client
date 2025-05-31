@@ -40,15 +40,15 @@ const MainLayout = () => {
           {isSidebarOpen ? <IoMdClose /> : <IoMenu />}
         </button>
 
-        <div className="col-span-3 relative z-40  w-72 ">
+        <div className="col-span-3 relative z-40  w-72">
           <div
             className={`shadow-xl rounded-sm text-black h-screen  fixed top-18 lg:top-16 left-0 transform ${
               isSidebarOpen ? "translate-x-0" : "-translate-x-full"
-            } lg:translate-x-0 lg:fixed bg-white z-40 transition-transform duration-300`}
+            } lg:translate-x-0 lg:fixed bg-white dark:bg-gray-800  z-40 transition-transform duration-300`}
           >
             
             <PerfectScrollbar>
-              <div className="p-3">
+              <div className=" px-3">
                 <Category />
               </div>
             </PerfectScrollbar>

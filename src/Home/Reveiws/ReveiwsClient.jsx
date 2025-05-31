@@ -9,6 +9,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Autoplay, Pagination } from "swiper/modules";
 import { format } from "date-fns";
+import Loading from "../../CommonComponent/Loading";
 
 const ReveiwsClient = () => {
   const axiosPublic = useAxiosPublic();
@@ -23,6 +24,7 @@ const ReveiwsClient = () => {
     },
   });
 
+     if (isLoading) return <Loading></Loading>
   return (
     <div>
       <Header

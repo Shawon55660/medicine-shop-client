@@ -11,6 +11,7 @@ import { Autoplay, Pagination } from 'swiper/modules';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosPrivate from '../CustomHook/useAxiosPrivate';
 import { Link } from 'react-router-dom';
+import Loading from '../CommonComponent/Loading';
 
 const Bannar = () => {
     const axiosPrivate = useAxiosPrivate();
@@ -23,7 +24,7 @@ const Bannar = () => {
             }
         }
     });
-
+   if (advertisementsLoading) return <Loading></Loading>
     return (
         <div className="max-w-[1348px] mx-auto">
             <Swiper

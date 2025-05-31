@@ -13,6 +13,7 @@ import Header from '../../CommonComponent/Header';
 import useAuth from '../../CustomHook/useAuth';
 import { toast, ToastContainer } from 'react-toastify';
 import CartItemCount from '../../CustomHook/CartItemCount';
+import Loading from '../../CommonComponent/Loading';
 
 
 
@@ -137,7 +138,7 @@ const HomeCard = () => {
         }
     }
 
-    // if(!data.length) return <Loading></Loading>
+    if(medicinesLoading) return <Loading></Loading>
     return (
         <div className='h-full'>
             <ToastContainer></ToastContainer>

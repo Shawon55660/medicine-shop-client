@@ -7,6 +7,7 @@ import useAxiosPublic from '../../CustomHook/useAxiosPublic';
 import { useQuery } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 import Header from '../../CommonComponent/Header';
+import Loading from '../../CommonComponent/Loading';
 
 const DiscountProduct = () => {
     const axiosPublic  = useAxiosPublic()
@@ -20,6 +21,7 @@ const DiscountProduct = () => {
         }
 
     })
+       if (discountLoding) return <Loading></Loading>
   return (
    <div>
     <Header title='Discount' subTitle='Discounted Prices for a Healthier You' details='At Medistore, we bring exciting discounts on essential health products to make your purchases more affordable. Our discount section includes a wide range of medical supplies and health-related products.'></Header>

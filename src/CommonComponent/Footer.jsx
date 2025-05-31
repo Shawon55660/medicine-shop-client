@@ -8,34 +8,22 @@ const Footer = () => {
     return (
        <div className=''>
          <div className='bg-gray-200 dark:bg-gray-600 '>
-            <footer className="footer dark:text-white  text-base-content p-10">
-  <nav>
-    <h6 className="footer-title   ">Services</h6>
-   
-    <a className="link link-hover">Fast Delivery</a>
-    <a className="link link-hover">Marketing</a>
-    <a className="link link-hover">Advertisement</a>
-  </nav>
-  <nav>
-    <h6 className="footer-title">Company</h6>
-    <Link to='/aboutUs' className="link link-hover">About us</Link>
-    <a className="link link-hover">Contact</a>
-    <Link to='/faq' className="link link-hover">FAQ</Link>
-  
-  </nav>
-
-</footer>
-<footer className="footer bg-base-200 text-base-content border-base-300 dark:text-white dark:bg-gray-800 border-t px-10 py-4">
-  <aside className="grid-flow-col items-center">
-    <LiaBookMedicalSolid  color='#85A844' size={40}></LiaBookMedicalSolid  >
-    <p className='font-semibold'>
+            <footer className="footer dark:text-white  flex flex-col md:flex-row justify-evenly  md:items-center text-base-content p-10">
+ 
+ 
+  <div className=' flex flex-col  gap-6'>
+    <aside className="flex gap-2   items-center">
+    <LiaBookMedicalSolid  color='#85A844' size={40}></LiaBookMedicalSolid>
+    <div className='flex flex-col  dark:text-gray-300 font-semibold gap-1'>
+      <p className=''>
      shawonahmed55660@gmail.com
-      <br />
-      Providing reliable  since 2025
-    </p>
+       </p>
+      <p>Providing reliable  since 2025</p>
+    </div>
+   
   </aside>
-  <nav className="md:place-self-center md:justify-self-end">
-    <div className="grid grid-flow-col text-2xl gap-4">
+  <nav className="px-2">
+    <div className="flex text-2xl gap-4 items-center justify-center">
       <a target='_blank' href="https://www.linkedin.com/in/shawon-ahmed-shadhin-4b091b1a4/"><FaLinkedin /></a>
       <a target='_blank' href="https://github.com/Shawon55660"><FaSquareGithub /></a>
       <a target='_blank' href='https://www.facebook.com/shawon56660'>
@@ -43,7 +31,17 @@ const Footer = () => {
       </a>
     </div>
   </nav>
+  </div>
+   <nav className=''>
+    <h6 className="footer-title">Company</h6>
+    <Link to='/aboutUs' className="link link-hover">About us</Link>
+    <Link to='/contact'  className="link link-hover">Contact</Link>
+    <Link to='/faq' className="link link-hover">FAQ</Link>
+  
+  </nav>
+
 </footer>
+
             
         </div>
        </div>
