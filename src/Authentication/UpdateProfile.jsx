@@ -8,6 +8,7 @@ import useAxiosPublic from "../CustomHook/useAxiosPublic";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import HelmetSet from "../CommonComponent/HelmetSet";
+import Loading from "../CommonComponent/Loading";
 
 
 const UpdateProfile = () => {
@@ -41,17 +42,15 @@ const UpdateProfile = () => {
                 icon: <span style={{ color: "#85A844" }}> <img src="https://img.icons8.com/?size=100&id=59850&format=png&color=85A844" alt="" srcset="" /></span>,
                 style: { backgroundColor: "#FFFFF", color: "#85A844", fontWeight: "bold" }, 
               });
-            console.log(user)
+            
             // navigate('/shop')
             setUser({...auth.currentUser,displayName: userName, photoURL: photoURL})
           
 
          
         })
-        .catch(err=>{
-            alert('error')
-        })
-        console.log(user)
+      
+     
 
     
 
@@ -59,16 +58,18 @@ const UpdateProfile = () => {
  
    
   };
-
-console.log(user)
+if(loading) return <Loading></Loading>
   return (
     <div className="container mx-auto ">
        <HelmetSet sub1='MediStore' sub2='UpdateProfile'></HelmetSet>
 
       
-      <div className="grid lg:grid-cols-2 gap-2  items-center">
-    <div className="w-9/12 mx-auto p-4 bg-white shadow-md rounded-lg"> 
-        <div className="mx-auto flex flex-col gap-2 justify-center items-center"><img className=" border-4 w-40 object-cover h-40 rounded-full border-first " src={user?.photoURL} alt="" /><p className="font-semibold text-first">{user?.displayName}</p> <h2 className="text-first  uppercase  text-2xl font-semibold">Update Profile</h2></div>
+      <div className="grid lg:grid-cols-2 gap-2  items-center"><div>
+            <img className="w-10/12 mx-auto" src={updateImg} alt="" />
+
+        </div>
+    <div className="w-9/12 mx-auto p-4 bg-white dark:bg-gray-800 dark:border-2 dark:border-gray-500 my-8 shadow-md rounded-lg"> 
+        <div className="mx-auto flex flex-col gap-2  justify-center items-center"><img className=" border-4 w-40 object-cover h-40 rounded-full border-first " src={user?.photoURL} alt="" /><p className="font-semibold text-first">{user?.displayName}</p> <h2 className="text-first  uppercase  text-2xl font-semibold">Update Profile</h2></div>
       <form onSubmit={onSubmit} className="space-y-4">
         {/* User Name */}
         <div>
@@ -119,10 +120,7 @@ console.log(user)
       </div>
       </form>
        </div>
-        <div>
-            <img className="w-10/12 mx-auto" src={updateImg} alt="" />
-
-        </div>
+        
       </div>
 
     </div>

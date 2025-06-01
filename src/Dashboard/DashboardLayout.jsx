@@ -89,9 +89,9 @@ const DashboardLayout = () => {
     </div>
 
       {/* Main Content */}
-      <div className="lg:col-span-10 ml-4 bg-gray-50">
+      <div className="lg:col-span-10 ml-4 relative   bg-gray-50">
         {/* Header */}
-        <header className="bg-white shadow p-6 flex justify-between items-center">
+        <header className="bg-white sticky top-0 z-40 shadow p-6 flex justify-between items-center">
           <button
             onClick={() => setIsSidebarOpen(true)}
             className="lg:hidden text-first text-2xl"
@@ -102,13 +102,13 @@ const DashboardLayout = () => {
             Welcome back , <span className="text-first">{user?.displayName}</span>
           </h1>
 
-          <button onClick={handleLogOut} className="px-3 py-2 bg-first text-white rounded-white font-semibold transition-colors duration-200">
+          <button onClick={handleLogOut} className="px-3 py-2 bg-first text-white  rounded-white font-semibold transition-colors duration-200">
             Logout
           </button>
         </header>
 
         {/* Main Area */}
-        <main className="p-2">
+        <main className="p-2 dark:bg-gray-800">
           <Outlet />
         </main>
       </div>

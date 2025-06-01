@@ -49,7 +49,7 @@ const ManageUsers = () => {
   };
 
   return (
-    <div className="p-4 bg-gray-100 min-h-screen">
+    <div className="p-4 bg-gray-100 dark:bg-gray-800 min-h-screen">
       <HelmetSet sub1='Dashboard' sub2='Admin | Manage Users'></HelmetSet>
       <div className="flex justify-center my-2">
         <Stack className="text-first" spacing={2}>
@@ -58,15 +58,22 @@ const ManageUsers = () => {
             count={totalPage}
             page={currentPage}
             onChange={pageChange}
-            color="success"
-            variant="outlined"
-            shape="rounded"
-          />
+            sx={{
+    '& .MuiPaginationItem-root': {
+      color: '#85A844',
+      borderColor: '#85A844',
+    },
+    '& .Mui-selected': {
+      backgroundColor: '#85A844',
+      color: 'white',
+    }
+  }}
+        variant="outlined" shape="rounded"   />
         </Stack>
       </div>
-      <h1 className="text-xl md:text-2xl font-bold text-gray-700 mb-6">Manage Users</h1>
+      <h1 className="text-xl md:text-2xl font-bold dark:text-gray-50 text-gray-700 mb-6">Manage Users</h1>
       <div className="overflow-x-auto">
-        <table className="table-auto w-full bg-white shadow-md rounded-lg border-collapse border border-gray-200">
+        <table className="table-auto w-full bg-white shadow-md rounded-lg border-collapse border border-white dark:border-second">
           <thead className="bg-second text-white">
             <tr>
               <th className="px-6 py-3 text-left font-semibold">Name</th>
@@ -76,9 +83,9 @@ const ManageUsers = () => {
           </thead>
           <tbody>
             {usersData?.map((users) => (
-              <tr key={users._id} className="hover:bg-gray-50 transition-colors">
-                <td className="px-6 py-4 text-gray-700">{users.name}</td>
-                <td className="px-6 py-4 text-gray-700">{users.email}</td>
+              <tr key={users._id} className="hover:bg-gray-50 text-gray-800 dark:border-2 dark:border-second dark:bg-gray-800 dark:text-gray-200 transition-colors">
+                <td className="px-6 py-4 ">{users.name}</td>
+                <td className="px-6 py-4 ">{users.email}</td>
                 <td className="px-6 py-4">
                   <select
                     disabled={users.email === user.email }
