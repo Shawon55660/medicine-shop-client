@@ -12,8 +12,8 @@ import useAxiosPublic from '../../CustomHook/useAxiosPublic';
 import Header from '../../CommonComponent/Header';
 import useAuth from '../../CustomHook/useAuth';
 import { toast, ToastContainer } from 'react-toastify';
-import CartItemCount from '../../CustomHook/CartItemCount';
 import Loading from '../../CommonComponent/Loading';
+import useCartItem from '../../CustomHook/useCartItem';
 
 
 
@@ -22,7 +22,8 @@ const HomeCard = () => {
     const openModal = () => setIsOpen(true);
     const closeModal = () => setIsOpen(false);
     const [details, setDetails] = useState([])
-    const [cartData,medicinesLoading,refetch] = CartItemCount()
+    const [cartData,medicinesLoading,refetch] = useCartItem()
+
 
 
 
@@ -107,9 +108,8 @@ const HomeCard = () => {
         const res = await axiosPublic.post(`/cart`, medicineInfo)
 
         if (res.data.insertedId) {
-            refetch()
-             
-            toast.success("Profile Update Successfully", {
+            
+            toast.success("Item Add  Successfully", {
                 position: "top-center",
                 autoClose: 2000,
                 hideProgressBar: true,
@@ -119,6 +119,8 @@ const HomeCard = () => {
                 icon: <span style={{ color: "#85A844" }}> <img src="https://img.icons8.com/?size=100&id=59850&format=png&color=85A844" alt="" srcset="" /></span>,
                 style: { backgroundColor: "#FFFFF", color: "#85A844", fontWeight: "bold" },
             });
+            refetch()
+                     
             
           
         }
@@ -138,7 +140,7 @@ const HomeCard = () => {
         }
     }
 
-    if(medicinesLoading) return <Loading></Loading>
+    if(data.length==0) return <Loading></Loading>
     return (
         <div className='h-full'>
             <ToastContainer></ToastContainer>

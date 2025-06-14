@@ -32,7 +32,7 @@ const ManageCategory = () => {
     // Pagination states
     const [totalPage, setTotalPage] = useState(1);
     const [currentPage, setCurrentPage] = useState(1);
-    const limit = 3; // Per page limit
+    const limit = 5; // Per page limit
   
     const pageChange = (event, value) => {
       setCurrentPage(value);
@@ -102,23 +102,30 @@ const ManageCategory = () => {
   if (isLoading) return <Loading />;
 
   return (
-    <div className="min-h-screen bg-gray-100 p-4">
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-800 p-4">
       <HelmetSet sub1='Dashboard' sub2='Admin | Category Manage'></HelmetSet>
        <div className="flex justify-center my-2">
         <Stack className="text-first" spacing={2}>
-          <Pagination
-            className="text-first"
-            count={totalPage}
-            page={currentPage}
-            onChange={pageChange}
-            color="success"
-            variant="outlined"
-            shape="rounded"
-          />
-        </Stack>
+         <Pagination
+                     className="text-first"
+                     count={totalPage}
+                     page={currentPage}
+                     onChange={pageChange}
+                     sx={{
+             '& .MuiPaginationItem-root': {
+               color: '#85A844',
+               borderColor: '#85A844',
+             },
+             '& .Mui-selected': {
+               backgroundColor: '#85A844',
+               color: 'white',
+             }
+           }}
+                 variant="outlined" shape="rounded"   />
+                 </Stack>
       </div>
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-xl md:text-2xl font-bold text-gray-700 mb-6">Manage Categories</h1>
+        <h1 className="text-xl md:text-2xl font-bold text-gray-700 dark:text-gray-100 mb-6">Manage Categories</h1>
         <button
           onClick={openModal}
           className="px-4 py-2 bg-second text-white rounded-sm shadow"
@@ -141,9 +148,9 @@ const ManageCategory = () => {
             {categoryData.map((category) => (
               <tr
                 key={category._id}
-                className="hover:bg-gray-100 text-center transition-colors "
+                className="hover:bg-gray-100 dark:border-[1px] dark:border-gray-400 dark:bg-gray-800 text-center transition-colors "
               >
-                <td className="px-6 py-4">{category.MedicineCategory}</td>
+                <td className="px-6 dark:text-gray-100 py-4">{category.MedicineCategory}</td>
                 <td className="px-6 text-center  py-4">
                   <img
                     src={category.categoryPhoto}
@@ -163,7 +170,7 @@ const ManageCategory = () => {
                 <td className="px-6 py-4 ">
                   <button
                     onClick={() => handleDelete(category._id)}
-                    className="text-second hover:underline w-full mx-auto font-semibold flex items-center justify-center"
+                    className="text-second dark:text-gray-300  hover:underline w-full mx-auto font-semibold flex items-center justify-center"
                   >
                     <FaTrashAlt className="mr-1" />
                     Delete

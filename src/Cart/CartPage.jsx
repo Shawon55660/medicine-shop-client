@@ -11,21 +11,13 @@ import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom';
 import { FaArrowRight, FaCartPlus } from 'react-icons/fa6';
 import HelmetSet from '../CommonComponent/HelmetSet';
+import useCartItem from '../CustomHook/useCartItem';
 
 const CartPage = () => {
     const { user } = useAuth()
     const axiosPrivate = useAxiosPrivate()
 
-    const { data: cartData = [], isLoading: medicinesLoading, refetch } = useQuery({
-        queryKey: ['cartData', user?.email],
-        queryFn: async () => {
-            const catInfo = await axiosPrivate.get(`/cartsOwner?userEmail=${user?.email}`)
-            if (catInfo.data) {
-                return catInfo.data
-            }
-        }
-
-    })
+   const [cartData,medicinesLoading,refetch] = useCartItem()
     const handleDelete = async (id) => {
 
         Swal.fire({

@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-
-import { useQuery } from '@tanstack/react-query';
 import { FaEye } from 'react-icons/fa6';
 import { CgAddR } from 'react-icons/cg';
 import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
 import useAuth from '../CustomHook/useAuth';
 import useAxiosPublic from '../CustomHook/useAxiosPublic';
-import Loading from '../CommonComponent/Loading';
 import { Pagination, Select, Stack } from '@mui/material';
 import { FaFilter, FaSearchPlus } from 'react-icons/fa';
 import { toast, ToastContainer } from 'react-toastify';
 import HelmetSet from '../CommonComponent/HelmetSet';
-import CartItemCount from '../CustomHook/CartItemCount';
+import useCartItem from '../CustomHook/useCartItem';
+import Loading from '../CommonComponent/Loading';
+
+
 
 
 const Shop = () => {
@@ -20,8 +20,10 @@ const Shop = () => {
     const openModal = () => setIsOpen(true);
     const closeModal = () => setIsOpen(false);
     const [details, setDetails] = useState([])
-    const { user,Loading } = useAuth()
-     const [cartData,medicinesLoading,refetch] = CartItemCount()
+    const { user } = useAuth()
+    const [cartData,medicinesLoading,refetch] = useCartItem()
+
+ 
 
 
 
@@ -111,9 +113,9 @@ const Shop = () => {
         const res = await axiosPublic.post(`/cart`, medicineInfo)
 
         if (res.data.insertedId) {
-            refetch()
+           
          
-            toast.success("Profile Update Successfully", {
+            toast.success("Item Add Successfully", {
                            position: "top-center",
                            autoClose: 2000,
                            hideProgressBar: true, 
@@ -123,6 +125,7 @@ const Shop = () => {
                            icon: <span style={{ color: "#85A844" }}> <img src="https://img.icons8.com/?size=100&id=59850&format=png&color=85A844" alt="" srcset="" /></span>,
                            style: { backgroundColor: "#FFFFF", color: "#85A844", fontWeight: "bold" }, 
                          });
+                          refetch()
         }
         else {
            toast.error(`${res.data.error}`, {
@@ -156,7 +159,7 @@ const Shop = () => {
 
    
 
- 
+if(data.length==0) return <Loading></Loading>
     return (
         <div className=''>
             <ToastContainer></ToastContainer>
@@ -230,7 +233,7 @@ const Shop = () => {
                         </select>
                     </div>
                 </div>
-                {!dataMatch.length && <p className='flex capitalize text-2xl font-semibold text-first  justify-center w-full text-center items-center min-h-screen'>no data match</p> }
+             
               
                 <div className='grid md:grid-cols-2 my-8 lg:grid-cols-3 gap-3'>
                 

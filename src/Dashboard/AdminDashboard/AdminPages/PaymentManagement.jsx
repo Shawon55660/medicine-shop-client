@@ -46,22 +46,29 @@ const PaymentManagement = () => {
   if (isLoading) return <Loading />;
 
   return (
-    <div className="min-h-screen p-3 bg-gray-100">
+    <div className="min-h-screen p-3 bg-gray-100 dark:bg-gray-800">
       <HelmetSet sub1='Dashboard' sub2='Admin | Payment Management'></HelmetSet>
        <div className="flex justify-center my-2">
         <Stack className="text-first" spacing={2}>
-          <Pagination
-            className="text-first"
-            count={totalPage}
-            page={currentPage}
-            onChange={pageChange}
-            color="success"
-            variant="outlined"
-            shape="rounded"
-          />
-        </Stack>
+            <Pagination
+                      className="text-first"
+                      count={totalPage}
+                      page={currentPage}
+                      onChange={pageChange}
+                      sx={{
+              '& .MuiPaginationItem-root': {
+                color: '#85A844',
+                borderColor: '#85A844',
+              },
+              '& .Mui-selected': {
+                backgroundColor: '#85A844',
+                color: 'white',
+              }
+            }}
+                  variant="outlined" shape="rounded"   />
+                  </Stack>
       </div>
-      <h1 className=" text-xl md:text-2xl font-bold text-gray-700 mb-6">Payment Management</h1>
+      <h1 className=" text-xl md:text-2xl font-bold dark:text-gray-50 text-gray-700 mb-6">Payment Management</h1>
       <div className="overflow-x-auto bg-white shadow-md rounded-lg p-4">
         <table className="table-auto w-full border-collapse">
           {/* Table Head */}
@@ -79,7 +86,7 @@ const PaymentManagement = () => {
             {paymentInfo.map((payment) => (
               <tr
                 key={payment._id}
-                className=" transition-colors border-b"
+                className=" transition-colors border-b dark:border-2 dark:border-second dark:bg-gray-800 dark:text-gray-200"
               >
                 <td className="px-4 text-center py-3">{payment.BuyerEmail}</td>
                 <td className="px-4 text-center font-semibold py-3">{payment.Price}/=</td>
@@ -99,13 +106,14 @@ const PaymentManagement = () => {
                   <button
                     onClick={() => handlePayment(payment._id)}
                     disabled={payment.status === 'paid'}
-                    className={`btn ${
+                    className={`btn-sm ${
                       payment.status === 'paid'
-                        ? 'btn '
-                        : 'bg-first text-white'
+                        ? 'btn-sm rounded-sm dark:bg-gray-400 dark:text-gray-50'
+                        : 'bg-first rounded-sm text-white'
                     }`}
                   >
-                    Accept Payment
+                    {payment.status === 'paid'? 'Accepted':'Accept Payment'}
+                   
                   </button>
                 </td>
               </tr>

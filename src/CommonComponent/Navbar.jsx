@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import '../../src/CommonComponent/navbar.css'
 import useAuth from '../CustomHook/useAuth';
@@ -12,20 +12,22 @@ import { FaBlogger } from "react-icons/fa6";
 import navImg from'../../src/assets/navbarimg.png'
 import Loading from './Loading';
 import Swal from 'sweetalert2';
-import useAxiosPrivate from '../CustomHook/useAxiosPrivate';
-import { useQuery } from '@tanstack/react-query';
-import useAxiosPublic from '../CustomHook/useAxiosPublic';
-import CartItemCount from '../CustomHook/CartItemCount';
+import useCartItem from '../CustomHook/useCartItem';
+
+
 
 const Navbar = () => {
   const {user,logOut,loading} = useAuth()
+  const [cartData,medicinesLoading,refetch] = useCartItem()
    
-    const [cartData,medicinesLoading, refetch]= CartItemCount()
+
+
+   
     const MainLink = 
        <>
         <NavLink className='mx-1 font-semibold px-3 py-2 text-sm flex gap-2 items-center uppercase' to='/'><FaHome size={20}></FaHome> <p>home</p></NavLink>
         <NavLink className='mx-1 flex gap-2 items-center  text-sm font-semibold px-3 py-2 uppercase' to='/shop'>  <FaShoppingBag size={15}></FaShoppingBag><p>shop</p></NavLink>
-        <NavLink className='mx-1 relative  flex gap-2 items-center text-sm font-semibold px-3 py-2  uppercase' to='/cart'><span className='absolute top-1 text-xs left-1 bg-first px-1 text-white rounded-full '>{cartData.length}</span> <IoCart size={20}></IoCart> <p>cart</p></NavLink>
+        <NavLink className='mx-1 relative  flex gap-2 items-center text-sm font-semibold px-3 py-2  uppercase' to='/cart'><span className='absolute top-1 text-xs left-1 bg-first px-1 text-white rounded-full '>{cartData.length}</span> <IoCart size={20}></IoCart>cart</NavLink>
         <NavLink className='mx-1 flex gap-2 items-center text-sm font-semibold px-3 py-2  uppercase' to='/aboutUs'><FaBlogger size={20}></FaBlogger> <p>About Us</p></NavLink>
        
        
@@ -44,7 +46,7 @@ const Navbar = () => {
        
        }
       
-//  if (medicinesLoading) return <Loading></Loading>
+//  if (refetch) return <Loading></Loading>
     return (
         <div className='relative container'>
      

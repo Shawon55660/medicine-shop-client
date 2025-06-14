@@ -3,7 +3,6 @@ import { auth } from '../firebase/init';
 import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from 'firebase/auth';
 import useAxiosPublic from '../CustomHook/useAxiosPublic';
 import useRole from '../CustomHook/useRole';
-import CartItemCount from '../CustomHook/CartItemCount';
 export const authContext = createContext()
 
 const AuthProvider = ({children}) => {

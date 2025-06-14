@@ -1,0 +1,6 @@
+.active{
+    background-color:#FFF;
+    color: #85A844;
+    border-radius: 2px;
+    transition: all ease-in-out .3s;
+}
