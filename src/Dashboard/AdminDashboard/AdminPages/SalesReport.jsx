@@ -78,7 +78,7 @@ const SalesReport = () => {
   if (isLoading) return <Loading />;
 
   return (
-    <div className="p-4 bg-gray-100 min-h-screen">
+    <div className="p-4 bg-gray-100 dark:bg-gray-800 min-h-screen">
       <HelmetSet sub1='Dashboard' sub2='Admin | Sales Report'></HelmetSet>
       <div className="flex justify-center">
         <select value={dataRange} onChange={(e) => setDateRange(e.target.value)} className="px-2 py-2 rounded-l-md  text-second outline-none border-[1px] border-second w-full max-w-xs">
@@ -93,20 +93,27 @@ const SalesReport = () => {
 
       <div className="flex justify-center my-2">
         <Stack className="text-first" spacing={2}>
-          <Pagination
-            className="text-first"
-            count={totalPage}
-            page={currentPage}
-            onChange={pageChange}
-            color="success"
-            variant="outlined"
-            shape="rounded"
-          />
-        </Stack>
+         <Pagination
+                               className="text-first"
+                               count={totalPage}
+                               page={currentPage}
+                               onChange={pageChange}
+                               sx={{
+                       '& .MuiPaginationItem-root': {
+                         color: '#85A844',
+                         borderColor: '#85A844',
+                       },
+                       '& .Mui-selected': {
+                         backgroundColor: '#85A844',
+                         color: 'white',
+                       }
+                     }}
+                           variant="outlined" shape="rounded"   />
+                           </Stack>
       </div>
 
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold text-gray-700">Sales Report</h1>
+        <h1 className="text-2xl font-bold dark:text-gray-50 text-gray-700">Sales Report</h1>
         <DownloadTableExcel
           filename="sales_report"
           sheet="Sales Data"
@@ -116,35 +123,35 @@ const SalesReport = () => {
         </DownloadTableExcel>
       </div>
 
-      <div className="overflow-x-auto bg-white shadow-md rounded-lg p-4">
-        <table ref={tableRef} className="table-auto w-full border-collapse border border-gray-200">
-          <thead>
-            <tr className="bg-gray-50">
-              <th className="px-4 py-2 border border-gray-300 text-left font-semibold">Generic Name</th>
-              <th className="px-4 py-2 border border-gray-300 text-left font-semibold">Buyer Email</th>
-              <th className="px-4 py-2 border border-gray-300 text-left font-semibold">Seller Email</th>
-              <th className="px-4 py-2 border border-gray-300 text-right font-semibold">Price</th>
-              <th className="px-4 py-2 border border-gray-300 text-left font-semibold">Status</th>
+      <div className="overflow-x-auto ">
+        <table ref={tableRef} className="table-auto w-full dark:border-[1px]  dark:border-gray-400">
+          <thead className="bg-second text-white dark:border-[1px]  dark:border-gray-400">
+            <tr>
+              <th className="px-4 py-2   text-left font-semibold">Generic Name</th>
+              <th className="px-4 py-2   text-left font-semibold">Buyer Email</th>
+              <th className="px-4 py-2   text-left font-semibold">Seller Email</th>
+              <th className="px-4 py-2   text-right font-semibold">Price</th>
+              <th className="px-4 py-2   text-left font-semibold">Status</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody> 
             {paidData.map((pay, index) => (
-              <tr key={pay._id} className={`${index % 2 === 0 ? "bg-gray-50" : "bg-white"} hover:bg-gray-100 transition-colors`}>
-                <td className="px-4 py-2 border border-gray-300">{pay.GenericName}</td>
-                <td className="px-4 py-2 border border-gray-300">{pay.BuyerEmail}</td>
-                <td className="px-4 py-2 border border-gray-300">{pay.sellerEmail}</td>
-                <td className="px-4 py-2 border border-gray-300 font-semibold text-right">{pay.Price}/=</td>
-                <td className={`px-4 py-2 border border-gray-300 ${pay.status === "paid" ? "text-first font-bold" : "text-red-600"}`}>{pay.status}</td>
+              <tr key={pay._id} className={`${index % 2 === 0 ? "bg-gray-50" : "bg-white"}  dark:bg-gray-800 dark:text-gray-200 transition-colors dark:border-[1px]  dark:border-gray-400`}>
+                <td className="px-4 py-2  ">{pay.GenericName}</td>
+                <td className="px-4 py-2  ">{pay.BuyerEmail}</td>
+                <td className="px-4 py-2  ">{pay.sellerEmail}</td>
+                <td className="px-4 py-2   font-semibold text-right">{pay.Price}/=</td>
+                <td className={`px-4 py-2   ${pay.status === "paid" ? "text-first font-bold" : "text-red-600"}`}>{pay.status}</td>
               </tr>
             ))}
           </tbody>
           <tfoot>
             <tr className="bg-gray-50 font-bold">
-              <td className="px-4 py-2 border border-gray-300"></td>
-              <td className="px-4 py-2 border border-gray-300"></td>
-              <td className="px-4 py-2 border border-gray-300 text-left">Total Sales:</td>
-              <td className="px-4 py-2 border border-gray-300 text-right">{totalPrice}/=</td>
-              <td className="px-4 py-2 border border-gray-300">TK</td>
+              <td className="px-4 py-2 "></td>
+              <td className="px-4 py-2 "></td>
+              <td className="px-4 py-2  text-left">Total Sales:</td>
+              <td className="px-4 py-2  text-right">{totalPrice}/=</td>
+              <td className="px-4 py-2  ">TK</td>
             </tr>
           </tfoot>
         </table>

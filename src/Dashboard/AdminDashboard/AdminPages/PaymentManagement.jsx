@@ -69,10 +69,10 @@ const PaymentManagement = () => {
                   </Stack>
       </div>
       <h1 className=" text-xl md:text-2xl font-bold dark:text-gray-50 text-gray-700 mb-6">Payment Management</h1>
-      <div className="overflow-x-auto bg-white shadow-md rounded-lg p-4">
-        <table className="table-auto w-full border-collapse">
+      <div className="overflow-x-auto ">
+        <table className="table-auto w-full dark:border-[1px]  dark:border-gray-400">
           {/* Table Head */}
-          <thead className="bg-gray-200 text-gray-700">
+          <thead className="bg-second text-white">
             <tr>
               <th className="px-4 py-2 text-center">Buyer Email</th>
               <th className="px-4 py-2 text-center">Total Price</th>
@@ -86,7 +86,7 @@ const PaymentManagement = () => {
             {paymentInfo.map((payment) => (
               <tr
                 key={payment._id}
-                className=" transition-colors border-b dark:border-2 dark:border-second dark:bg-gray-800 dark:text-gray-200"
+                className=" transition-colors hover:bg-gray-50 dark:border-[1px]  dark:border-gray-400 dark:bg-gray-800 dark:text-gray-200"
               >
                 <td className="px-4 text-center py-3">{payment.BuyerEmail}</td>
                 <td className="px-4 text-center font-semibold py-3">{payment.Price}/=</td>

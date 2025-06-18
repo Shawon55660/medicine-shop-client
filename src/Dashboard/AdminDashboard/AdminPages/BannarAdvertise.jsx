@@ -32,7 +32,7 @@ const BannarAdvertise = () => {
            
         }
         else{
-            status = 'pending'
+            status = 'pending' 
         }
         console.log(status)
        
@@ -47,18 +47,18 @@ const BannarAdvertise = () => {
 
     if (advertisementsLoading) return <Loading></Loading>
     return (
-        <div className="min-h-screen p-6 mt-2 bg-gray-100">
+        <div className="min-h-screen p-6 mt-2 bg-gray-100 dark:bg-gray-800">
             <HelmetSet sub1='Dashboard' sub2='Admin | Bannar'></HelmetSet>
-              <h1 className="text-xl md:text-2xl font-bold text-gray-700 mb-6">Manage Bannar Advertisements</h1>
+              <h1 className="text-xl md:text-2xl font-bold dark:text-gray-50 text-gray-700 mb-6">Manage Bannar Advertisements</h1>
            
             <div>
                 <div className="overflow-x-auto">
-                    <table className="table">
+                    <table className="table dark:border-[1px]  dark:border-gray-400">
                         {/* head */}
-                        <thead>
-                            <tr className="text-sm text-second font-semibold">
+                        <thead className="bg-second text-white">
+                            <tr className="text-sm  font-semibold">
 
-                                <th>Medicine Name </th>
+                                <th>BannarTitle</th>
                                 <th>Seller Email </th>
                                 <th>Bannar Image </th>
                                 <th>Description</th>
@@ -70,13 +70,13 @@ const BannarAdvertise = () => {
                         </thead>
                         <tbody>
 
-                            {advertisementsData.map(advertisment => <tr key={advertisment._id}>
+                            {advertisementsData.map(advertisment => <tr className="transition-colors hover:bg-gray-50 dark:bg-gray-800 dark:text-gray-200 dark:border-[1px]  dark:border-gray-400" key={advertisment._id}>
                                 
-                                <td>{advertisment.medicineName}</td>
+                                <td>{advertisment.BannarTitle}</td>
                                 <td>{advertisment.sellerEmail}</td>
                                 <td><img className="w-10 h-10 object-cover" src={advertisment.photo} alt="" /></td>
                                 <td>{advertisment.Description.split(" ").slice(0, 5)}...</td>
-                                <td><input type="checkbox" className="toggle" onChange={()=>handleBannar(advertisment._id,advertisment.status)}  defaultChecked={advertisment.status=='aceecpt'}/></td>
+                                <td><input type="checkbox" className={`${advertisment.status=='aceecpt'? 'dark:text-first ':'dark:text-gray-800'} toggle `} onChange={()=>handleBannar(advertisment._id,advertisment.status)}  defaultChecked={advertisment.status=='aceecpt'}/></td>
                                
 
                             </tr>)}
