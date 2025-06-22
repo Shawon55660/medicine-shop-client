@@ -19,11 +19,12 @@ const Bannar = () => {
         queryKey: ['advertisementsData', 'advertisements'],
         queryFn: async () => {
             const catInfo = await axiosPrivate.get('/advertisements-all');
-            if (catInfo.data) {
-                return catInfo.data;
-            }
+            
+                return catInfo.data.result;
+        
         }
     });
+   
    if (advertisementsLoading) return <Loading></Loading>
     return (
         <div className="max-w-[1348px] mx-auto">

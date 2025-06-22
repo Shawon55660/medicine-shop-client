@@ -5,22 +5,31 @@ import Loading from "../../../CommonComponent/Loading";
 import Swal from "sweetalert2";
 import useAuth from "../../../CustomHook/useAuth";
 import HelmetSet from "../../../CommonComponent/HelmetSet";
+import { Pagination, Stack } from "@mui/material";
 
 const BannarAdvertise = () => {
    
     const {user} = useAuth()
     const axiosPrivate = useAxiosPrivate()
     
+       // Pagination states
+                const [totalPage, setTotalPage] = useState(1);
+                const [currentPage, setCurrentPage] = useState(1);
+                const limit = 5; // Per page limit
+              
+                const pageChange = (event, value) => {
+                  setCurrentPage(value);
+                };
+    
    
 
   
     const { data: advertisementsData = [], refetch:advertisementsFetch, isLoading:advertisementsLoading } = useQuery({
-        queryKey: ['advertisementsData', 'advertisements'],
+        queryKey: ['advertisementsData', 'advertisements',currentPage, limit],
         queryFn: async () => {
-            const catInfo = await axiosPrivate.get('/advertisements-all')
-            if (catInfo.data) {
-                return catInfo.data
-            }
+            const catInfo = await axiosPrivate.get(`/advertisements-all?page=${currentPage}&limit=${limit}`)
+            setTotalPage(Math.ceil(catInfo.data.total / limit));
+      return catInfo.data.perPageData;
         }
 
     })
@@ -49,6 +58,27 @@ const BannarAdvertise = () => {
     return (
         <div className="min-h-screen p-6 mt-2 bg-gray-100 dark:bg-gray-800">
             <HelmetSet sub1='Dashboard' sub2='Admin | Bannar'></HelmetSet>
+            {/* /pagination  */}
+            <div className="flex justify-center my-6">
+                    <Stack className="text-first" spacing={2}>
+                     <Pagination
+                                 className="text-first"
+                                 count={totalPage}
+                                 page={currentPage}
+                                 onChange={pageChange}
+                                 sx={{
+                         '& .MuiPaginationItem-root': {
+                           color: '#85A844',
+                           borderColor: '#85A844',
+                         },
+                         '& .Mui-selected': {
+                           backgroundColor: '#85A844',
+                           color: 'white',
+                         }
+                       }}
+                             variant="outlined" shape="rounded"   />
+                             </Stack>
+                  </div>
               <h1 className="text-xl md:text-2xl font-bold dark:text-gray-50 text-gray-700 mb-6">Manage Bannar Advertisements</h1>
            
             <div>
