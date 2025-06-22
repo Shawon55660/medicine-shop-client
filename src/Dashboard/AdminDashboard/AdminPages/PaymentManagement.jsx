@@ -68,17 +68,17 @@ const PaymentManagement = () => {
                   variant="outlined" shape="rounded"   />
                   </Stack>
       </div>
-      <h1 className=" text-xl md:text-2xl font-bold dark:text-gray-50 text-gray-700 mb-6">Payment Management</h1>
+      <h1 className=" text-xl md:text-2xl font-bold dark:text-gray-50 text-gray-700 my-6">Payment Management</h1>
       <div className="overflow-x-auto ">
         <table className="table-auto w-full dark:border-[1px]  dark:border-gray-400">
           {/* Table Head */}
           <thead className="bg-second text-white">
-            <tr>
-              <th className="px-4 py-2 text-center">Buyer Email</th>
-              <th className="px-4 py-2 text-center">Total Price</th>
-              <th className="px-4 py-2 text-center">Date</th>
-              <th className="px-4 py-2 text-center">Status</th>
-              <th className="px-4 py-2 text-center">Action</th>
+            <tr className='text-xs md:text-sm lg:text-lg text-center'>
+              <th className="px-4 py-2 ">Buyer Email</th>
+              <th className="px-4 py-2 ">Total Price</th>
+              <th className="px-4 py-2 ">Date</th>
+              <th className="px-4 py-2 ">Status</th>
+              <th className="px-4 py-2 ">Action</th>
             </tr>
           </thead>
           {/* Table Body */}
@@ -86,12 +86,12 @@ const PaymentManagement = () => {
             {paymentInfo.map((payment) => (
               <tr
                 key={payment._id}
-                className=" transition-colors hover:bg-gray-50 dark:border-[1px]  dark:border-gray-400 dark:bg-gray-800 dark:text-gray-200"
+                className=" transition-colors text-xs md:text-sm lg:text-lg text-center hover:bg-gray-50 dark:border-[1px]  dark:border-gray-400 dark:bg-gray-800 dark:text-gray-200"
               >
-                <td className="px-4 text-center py-3">{payment.BuyerEmail}</td>
-                <td className="px-4 text-center font-semibold py-3">{payment.Price}/=</td>
-                <td className="px-4 text-center py-3">{format(new Date(payment.date), 'PPPP')}</td>
-                <td className="px-4 text-center py-3">
+                <td className="px-4  py-3">{payment.BuyerEmail}</td>
+                <td className="px-4  font-semibold py-3">{payment.Price}/=</td>
+                <td className="px-4  py-3">{format(new Date(payment.date), 'PPPP')}</td>
+                <td className="px-4  py-3">
                   <span
                     className={`px-2 py-1 rounded-full text-center text-xs font-medium ${
                       payment.status === 'paid'

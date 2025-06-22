@@ -11,12 +11,21 @@ import useAxiosPublic from "../../../CustomHook/useAxiosPublic";
 import useAuth from "../../../CustomHook/useAuth";
 import { MdAdd } from "react-icons/md";
 import HelmetSet from "../../../CommonComponent/HelmetSet";
+import { Pagination, Stack } from "@mui/material";
 
 const ManageMedicines = () => {
     const [isOpen, setIsOpen] = useState(false);
     const { register, handleSubmit, reset } = useForm();
     const axiosPrivate = useAxiosPrivate();
     const { user } = useAuth();
+     // Pagination states
+        const [totalPage, setTotalPage] = useState(1);
+        const [currentPage, setCurrentPage] = useState(1);
+        const limit = 5; // Per page limit
+      
+        const pageChange = (event, value) => {
+          setCurrentPage(value);
+        };
 
     // Modal open/close korar function
     const openModal = () => setIsOpen(true);
@@ -30,23 +39,22 @@ const ManageMedicines = () => {
         queryKey: ['categoryData', 'categoryAll'],
         queryFn: async () => {
             const catInfo = await axiosPrivate.get('/categoryAll');
-            if (catInfo.data) {
-                return catInfo.data;
+            if(catInfo){
+                return catInfo.data
             }
         }
     });
 
     const { data: medicinesData = [], refetch: medicinesFetch, isLoading: medicinesLoading } = useQuery({
-        queryKey: ['medicinesData', 'medicines'],
+        queryKey: ['medicinesData', 'medicines',currentPage, limit],
         queryFn: async () => {
-            const catInfo = await axiosPrivate.get(`/medicines?sellerEmail=${user?.email}`);
-            if (catInfo.data) {
-                return catInfo.data;
-            }
+            const catInfo = await axiosPrivate.get(`/medicines?sellerEmail=${user?.email}&page=${currentPage}&limit=${limit}`);
+           setTotalPage(Math.ceil(catInfo.data.total / limit));
+            return catInfo.data.perPageData;
         }
     });
 
-
+console.log(medicinesData)
 
     const onSubmit = async (data) => {
         const imgFile = { image: data.photo[0] };
@@ -78,8 +86,29 @@ const ManageMedicines = () => {
 
     if (medicinesLoading) return <Loading />;
     return (
-        <div className="min-h-screen bg-gray-100 dark:bg-gray-800 p-4 m-2">
+        <div className="min-h-screen bg-gray-100 dark:bg-gray-800 p-4 ">
             <HelmetSet sub1='Dashboard' sub2='Manage  Medicine'></HelmetSet>
+            {/* /pagination  */}
+            <div className="flex justify-center my-2">
+                    <Stack className="text-first" spacing={2}>
+                     <Pagination
+                                 className="text-first"
+                                 count={totalPage}
+                                 page={currentPage}
+                                 onChange={pageChange}
+                                 sx={{
+                         '& .MuiPaginationItem-root': {
+                           color: '#85A844',
+                           borderColor: '#85A844',
+                         },
+                         '& .Mui-selected': {
+                           backgroundColor: '#85A844',
+                           color: 'white',
+                         }
+                       }}
+                             variant="outlined" shape="rounded"   />
+                             </Stack>
+                  </div>
             {/* Add Medicine Button */}
             <button
                 onClick={openModal}
@@ -89,7 +118,7 @@ const ManageMedicines = () => {
             </button>
 
             {/* Medicines Table */}
-            <div className="overflow-x-auto mt-3 bg-white rounded-lg shadow-md">
+            <div className="overflow-x-auto  bg-white rounded-lg shadow-md">
                 <table className="table-auto w-full text-second dark:border-[1px]  dark:border-gray-400">
                     <thead className="bg-sky-400 text-white">
                         <tr>
@@ -104,7 +133,7 @@ const ManageMedicines = () => {
                     </thead>
                     <tbody>
                         {medicinesData.map(medicine => (
-                            <tr key={medicine._id} className="hover:bg-sky-100 font-semibold transition-colors  dark:bg-gray-800 dark:text-gray-200 dark:border-[1px]  dark:border-gray-400">
+                            <tr key={medicine._id} className="hover:bg-sky-100 font-semibold transition-colors   dark:bg-gray-800 dark:text-gray-200 dark:border-[1px]  dark:border-gray-400">
                                 <td className="px-4 py-2">{medicine.GenericName}</td>
                                 <td className="px-4 py-2">{medicine.category}</td>
                                 <td className="px-4 py-2">{medicine.company}</td>

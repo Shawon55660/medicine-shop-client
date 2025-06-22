@@ -9,12 +9,21 @@ import useAxiosPublic from "../../../CustomHook/useAxiosPublic";
 import useAuth from "../../../CustomHook/useAuth";
 import { MdAdd } from "react-icons/md";
 import HelmetSet from "../../../CommonComponent/HelmetSet";
+import { Pagination, Stack } from "@mui/material";
 
 const AskAdvertisement = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { register, handleSubmit, reset } = useForm();
   const { user } = useAuth();
   const axiosPrivate = useAxiosPrivate();
+   // Pagination states
+          const [totalPage, setTotalPage] = useState(1);
+          const [currentPage, setCurrentPage] = useState(1);
+          const limit = 5; // Per page limit
+        
+          const pageChange = (event, value) => {
+            setCurrentPage(value);
+          };
 
   const openModal = () => setIsOpen(true);
   const closeModal = () => setIsOpen(false);
@@ -28,12 +37,12 @@ const AskAdvertisement = () => {
     refetch: advertisementsFetch,
     isLoading: advertisementsLoading,
   } = useQuery({
-    queryKey: ["advertisementsData", "advertisements"],
+    queryKey: ["advertisementsData", "advertisements",currentPage, limit],
     queryFn: async () => {
-      const catInfo = await axiosPrivate.get(`/advertisements?sellerEmail=${user.email}`);
-      if (catInfo.data) {
-        return catInfo.data;
-      }
+      const catInfo = await axiosPrivate.get(`/advertisements?sellerEmail=${user.email}&page=${currentPage}&limit=${limit}`);
+      setTotalPage(Math.ceil(catInfo.data.total / limit));
+            return catInfo.data.perPageData;
+        
     },
   });
 
@@ -71,12 +80,33 @@ const AskAdvertisement = () => {
   if (advertisementsLoading) return <Loading />;
 
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-800 p-4 m-2">
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-800 p-4 ">
       <HelmetSet sub1='Dashboard' sub2='Bannar Add'></HelmetSet>
+      {/* /pagination  */}
+            <div className="flex justify-center my-2">
+                    <Stack className="text-first" spacing={2}>
+                     <Pagination
+                                 className="text-first"
+                                 count={totalPage}
+                                 page={currentPage}
+                                 onChange={pageChange}
+                                 sx={{
+                         '& .MuiPaginationItem-root': {
+                           color: '#85A844',
+                           borderColor: '#85A844',
+                         },
+                         '& .Mui-selected': {
+                           backgroundColor: '#85A844',
+                           color: 'white',
+                         }
+                       }}
+                             variant="outlined" shape="rounded"   />
+                             </Stack>
+                  </div>
      
-     <div  className="flex justify-between items-center">
-     <div className="mb-3">
-        <h1 className="text-2xl font-bold text-second dark:text-gray-50 ">Manage Advertisements</h1>
+     <div  className="flex-col flex md:flex-row  justify-between my-4 items-center">
+     <div className="mb-3 text-center md:text-left">
+        <h1 className="text-2xl lg:text-3xl font-bold text-second dark:text-gray-50 ">Manage Advertisements</h1>
         <p className="text-sm text-thrid dark:text-gray-50  py-2 md:text-lg">Submit and track your advertisement requests.</p>
       </div>
 
@@ -91,7 +121,7 @@ const AskAdvertisement = () => {
      </div>
 
 
-      <div className="mt-3">
+      <div className="">
         <div className="overflow-x-auto bg-white rounded-lg shadow">
           <table className="table dark:border-[1px]  dark:border-gray-400">
             <thead className="bg-gradient-to-b from-sky-400 to-sky-500 text-white">
@@ -104,17 +134,17 @@ const AskAdvertisement = () => {
             <tbody className="divide-y divide-gray-200">
               {advertisementsData.map((advertisement) => (
                 <tr className="hover:bg-gray-100 transition dark:bg-gray-800 dark:text-gray-200 dark:border-[1px]  dark:border-gray-400" key={advertisement._id}>
-                  <td className="px-6 py-4">
+                  <td className="px-6 ">
                     <img
-                      className="w-16 h-16 rounded object-cover border"
+                      className="w-12 h-12 rounded object-cover border"
                       src={advertisement.photo}
                       alt="Banner"
                     />
                   </td>
-                  <td className="px-6 py-4 text-sm ">
+                  <td className="px-6  text-sm ">
                     {advertisement.Description.split(" ").slice(0, 10).join(" ")}...
                   </td>
-                  <td className="px-6 py-4 text-sm font-semibold capitalize text-first">
+                  <td className="px-6  text-sm font-semibold capitalize text-first">
                     {advertisement.status}
                   </td>
                 </tr>

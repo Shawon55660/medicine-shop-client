@@ -56,7 +56,7 @@ const BannarAdvertise = () => {
                     <table className="table dark:border-[1px]  dark:border-gray-400">
                         {/* head */}
                         <thead className="bg-second text-white">
-                            <tr className="text-sm  font-semibold">
+                            <tr className="text-xs md:text-sm lg:text-lg font-semibold">
 
                                 <th>BannarTitle</th>
                                 <th>Seller Email </th>
@@ -70,7 +70,7 @@ const BannarAdvertise = () => {
                         </thead>
                         <tbody>
 
-                            {advertisementsData.map(advertisment => <tr className="transition-colors hover:bg-gray-50 dark:bg-gray-800 dark:text-gray-200 dark:border-[1px]  dark:border-gray-400" key={advertisment._id}>
+                            {advertisementsData.map(advertisment => <tr className="transition-colors hover:bg-gray-50 dark:bg-gray-800 dark:text-gray-200 dark:border-[1px] text-xs md:text-sm lg:text-lg dark:border-gray-400" key={advertisment._id}>
                                 
                                 <td>{advertisment.BannarTitle}</td>
                                 <td>{advertisment.sellerEmail}</td>

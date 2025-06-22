@@ -39,7 +39,7 @@ const DashboardLayout = () => {
       {/* Sidebar */}
     <div className="lg:col-span-2">
     <div
-        className={`text-white shadow-lg z-50   fixed top-0 left-0 h-screen  w-64 transform ${
+        className={`text-white shadow-lg z-50   fixed top-0 left-0 h-screen   transform ${
           isSidebarOpen ? "translate-x-0" : "-translate-x-full"
         } lg:translate-x-0 transition-transform duration-300 ${
           role === "admin"
@@ -89,7 +89,7 @@ const DashboardLayout = () => {
     </div>
 
       {/* Main Content */}
-      <div className="lg:col-span-10 ml-4 relative   bg-gray-50">
+      <div className="lg:col-span-10 lg:ml-4 relative   bg-gray-50">
         {/* Header */}
         <header className="bg-white sticky top-0 z-40 shadow p-6 flex justify-between items-center">
           <button

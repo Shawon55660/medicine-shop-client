@@ -80,18 +80,7 @@ const SalesReport = () => {
   return (
     <div className="p-4 bg-gray-100 dark:bg-gray-800 min-h-screen">
       <HelmetSet sub1='Dashboard' sub2='Admin | Sales Report'></HelmetSet>
-      <div className="flex justify-center">
-        <select value={dataRange} onChange={(e) => setDateRange(e.target.value)} className="px-2 py-2 rounded-l-md  text-second outline-none border-[1px] border-second w-full max-w-xs">
-          <option value="" disabled>Filter By Date</option>
-          <option value="yesterday">Yesterday</option>
-          <option value="lastWeek">Last Week</option>
-          <option value="lastMonth">Last Month</option>
-          <option value="lastYear">Last Year</option>
-        </select>
-        <button className=" bg-second px-4 py-2 text-white rounded-r-md " onClick={handleRange}><FaSearch /></button>
-      </div>
-
-      <div className="flex justify-center my-2">
+       <div className="flex justify-center my-2">
         <Stack className="text-first" spacing={2}>
          <Pagination
                                className="text-first"
@@ -111,8 +100,20 @@ const SalesReport = () => {
                            variant="outlined" shape="rounded"   />
                            </Stack>
       </div>
+      <div className="flex justify-center my-6">
+        <select value={dataRange} onChange={(e) => setDateRange(e.target.value)} className="px-2 py-2 rounded-l-md  text-second outline-none border-[1px] border-second w-full max-w-xs">
+          <option value="" disabled>Filter By Date</option>
+          <option value="yesterday">Yesterday</option>
+          <option value="lastWeek">Last Week</option>
+          <option value="lastMonth">Last Month</option>
+          <option value="lastYear">Last Year</option>
+        </select>
+        <button className=" bg-second px-4 py-2 text-white rounded-r-md " onClick={handleRange}><FaSearch /></button>
+      </div>
 
-      <div className="flex justify-between items-center mb-6">
+     
+
+      <div className="flex justify-between items-center mb-4">
         <h1 className="text-2xl font-bold dark:text-gray-50 text-gray-700">Sales Report</h1>
         <DownloadTableExcel
           filename="sales_report"
@@ -126,31 +127,31 @@ const SalesReport = () => {
       <div className="overflow-x-auto ">
         <table ref={tableRef} className="table-auto w-full dark:border-[1px]  dark:border-gray-400">
           <thead className="bg-second text-white dark:border-[1px]  dark:border-gray-400">
-            <tr>
-              <th className="px-4 py-2   text-left font-semibold">Generic Name</th>
-              <th className="px-4 py-2   text-left font-semibold">Buyer Email</th>
-              <th className="px-4 py-2   text-left font-semibold">Seller Email</th>
-              <th className="px-4 py-2   text-right font-semibold">Price</th>
-              <th className="px-4 py-2   text-left font-semibold">Status</th>
+            <tr className="text-xs md:text-sm lg:text-lg text-center" >
+              <th className="px-4 py-2    font-semibold">Generic Name</th>
+              <th className="px-4 py-2    font-semibold">Buyer Email</th>
+              <th className="px-4 py-2    font-semibold">Seller Email</th>
+              <th className="px-4 py-2   font-semibold">Price</th>
+              <th className="px-4 py-2    font-semibold">Status</th>
             </tr>
           </thead>
           <tbody> 
             {paidData.map((pay, index) => (
-              <tr key={pay._id} className={`${index % 2 === 0 ? "bg-gray-50" : "bg-white"}  dark:bg-gray-800 dark:text-gray-200 transition-colors dark:border-[1px]  dark:border-gray-400`}>
-                <td className="px-4 py-2  ">{pay.GenericName}</td>
-                <td className="px-4 py-2  ">{pay.BuyerEmail}</td>
-                <td className="px-4 py-2  ">{pay.sellerEmail}</td>
-                <td className="px-4 py-2   font-semibold text-right">{pay.Price}/=</td>
-                <td className={`px-4 py-2   ${pay.status === "paid" ? "text-first font-bold" : "text-red-600"}`}>{pay.status}</td>
+              <tr key={pay._id} className={`${index % 2 === 0 ? "bg-gray-50" : "bg-white"}  dark:bg-gray-800 dark:text-gray-200 transition-colors dark:border-[1px] text-center py-2 text-xs md:text-sm lg:text-lg dark:border-gray-400`}>
+                <td className="px-4 py-4  ">{pay.GenericName}</td>
+                <td className="px-4 py-4  ">{pay.BuyerEmail}</td>
+                <td className="px-4 py-4  ">{pay.sellerEmail}</td>
+                <td className="px-4 py-4   font-semibold ">{pay.Price}/=</td>
+                <td className={`px-4 py-4   ${pay.status === "paid" ? "text-first font-bold" : "text-red-600"}`}>{pay.status}</td>
               </tr>
             ))}
           </tbody>
           <tfoot>
-            <tr className="bg-gray-50 font-bold">
+            <tr className="bg-gray-50 font-bold text-center">
               <td className="px-4 py-2 "></td>
               <td className="px-4 py-2 "></td>
-              <td className="px-4 py-2  text-left">Total Sales:</td>
-              <td className="px-4 py-2  text-right">{totalPrice}/=</td>
+              <td className="px-4 py-2  ">Total Sales:</td>
+              <td className="px-4 py-2  ">{totalPrice}/=</td>
               <td className="px-4 py-2  ">TK</td>
             </tr>
           </tfoot>

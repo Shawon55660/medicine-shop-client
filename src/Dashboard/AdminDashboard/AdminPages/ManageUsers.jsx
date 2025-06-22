@@ -71,19 +71,19 @@ const ManageUsers = () => {
         variant="outlined" shape="rounded"   />
         </Stack>
       </div>
-      <h1 className="text-xl md:text-2xl font-bold dark:text-gray-50 text-gray-700 mb-6">Manage Users</h1>
+      <h1 className="text-xl md:text-2xl  font-bold dark:text-gray-50 text-gray-700 my-6">Manage Users</h1>
       <div className="overflow-x-auto">
         <table className="table-auto w-full dark:border-[1px]  dark:border-gray-400 shadow-md ">
           <thead className="bg-second dark:border-[1px]  dark:border-gray-400 text-white">
-            <tr>
-              <th className="px-6 py-3 text-left font-semibold">Name</th>
-              <th className="px-6 py-3 text-left font-semibold">Email</th>
-              <th className="px-6 py-3 text-left font-semibold">Change Role</th>
+            <tr className="text-xs md:text-sm lg:text-lg text-center ">
+              <th className="px-6 py-3 font-semibold">Name</th>
+              <th className="px-6 py-3 font-semibold">Email</th>
+              <th className="px-6 py-3 font-semibold">Change Role</th>
             </tr>
           </thead>
           <tbody>
             {usersData?.map((users) => (
-              <tr key={users._id} className="hover:bg-gray-50 text-gray-800  dark:bg-gray-800 dark:text-gray-200 transition-colors dark:border-[1px]  dark:border-gray-400">
+              <tr key={users._id} className="hover:bg-gray-50 text-gray-800 text-xs md:text-sm lg:text-lg  dark:bg-gray-800 dark:text-gray-200 transition-colors dark:border-[1px] text-center  dark:border-gray-400">
                 <td className="px-6 py-4 ">{users.name}</td>
                 <td className="px-6 py-4 ">{users.email}</td>
                 <td className="px-6 py-4">
@@ -91,7 +91,7 @@ const ManageUsers = () => {
                     disabled={users.email === user.email }
                     onChange={(event) => handleChange(event, users._id)}
                     value={users.role}
-                    className="select w-full border border-gray-300 rounded-lg text-gray-700 focus:ring focus:ring-second"
+                    className="select w-full dark:bg-second dark:text-white text-center  md:w-11/12 border border-gray-300 rounded-lg text-gray-700 focus:ring focus:ring-second"
                   >
                     <option  value="admin">Admin</option>
                     <option value="seller">Seller</option>
