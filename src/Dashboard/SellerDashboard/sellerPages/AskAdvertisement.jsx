@@ -83,7 +83,7 @@ const AskAdvertisement = () => {
     <div className="min-h-screen bg-gray-100 dark:bg-gray-800 p-4 ">
       <HelmetSet sub1='Dashboard' sub2='Bannar Add'></HelmetSet>
       {/* /pagination  */}
-            <div className="flex justify-center my-2">
+            <div className="flex justify-center my-4">
                     <Stack className="text-first" spacing={2}>
                      <Pagination
                                  className="text-first"
@@ -104,16 +104,16 @@ const AskAdvertisement = () => {
                              </Stack>
                   </div>
      
-     <div  className="flex-col flex md:flex-row  justify-between my-4 items-center">
-     <div className="mb-3 text-center md:text-left">
+     <div  className="flex-col flex md:flex-row  justify-between my-4 md:items-center">
+     <div className=" ">
         <h1 className="text-2xl lg:text-3xl font-bold text-second dark:text-gray-50 ">Manage Advertisements</h1>
-        <p className="text-sm text-thrid dark:text-gray-50  py-2 md:text-lg">Submit and track your advertisement requests.</p>
+        <p className="text-xs text-thrid dark:text-gray-50  py-2 md:text-sm">Submit and track your advertisement requests.</p>
       </div>
 
      <div>
      <button
         onClick={openModal}
-        className="px-6 py-2 flex items-center font-semibold gap-3 justify-center text-white bg-gradient-to-b from-sky-400 to-sky-500 rounded-sm shadow hover:bg-sky-700 transition"
+        className="md:px-6 md:py-3  px-4 py-2 flex items-center font-semibold gap-3 justify-center text-white bg-gradient-to-b from-sky-400 to-sky-500 rounded-sm shadow hover:bg-sky-700 transition"
       >
         <span>Request New Banner</span> <MdAdd size={25} color="white" />
       </button>
@@ -125,7 +125,7 @@ const AskAdvertisement = () => {
         <div className="overflow-x-auto bg-white rounded-lg shadow">
           <table className="table dark:border-[1px]  dark:border-gray-400">
             <thead className="bg-gradient-to-b from-sky-400 to-sky-500 text-white">
-              <tr>
+              <tr className="text-xs md:text-sm ">
                 <th className="px-6 py-3 text-left text-sm font-medium uppercase">Image</th>
                 <th className="px-6 py-3 text-left text-sm font-medium uppercase">Description</th>
                 <th className="px-6 py-3 text-left text-sm font-medium uppercase">Status</th>
@@ -133,7 +133,7 @@ const AskAdvertisement = () => {
             </thead>
             <tbody className="divide-y divide-gray-200">
               {advertisementsData.map((advertisement) => (
-                <tr className="hover:bg-gray-100 transition dark:bg-gray-800 dark:text-gray-200 dark:border-[1px]  dark:border-gray-400" key={advertisement._id}>
+                <tr className="hover:bg-gray-100 transition dark:bg-gray-800 dark:text-gray-200 dark:border-[1px] text-xs md:text-sm  dark:border-gray-400" key={advertisement._id}>
                   <td className="px-6 ">
                     <img
                       className="w-12 h-12 rounded object-cover border"

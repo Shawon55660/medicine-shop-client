@@ -137,7 +137,7 @@ const ManageCategory = () => {
       <div className="overflow-x-auto ">
         <table className="table-auto w-full dark:border-[1px] dark:border-gray-400  ">
           <thead className="bg-second text-white dark:border-[1px]  dark:border-gray-400">
-            <tr className="text-xs md:text-sm lg:text-lg">
+            <tr className="text-xs md:text-sm ">
               <th className="px-6 py-3 text-center font-semibold">Category Name</th>
               <th className="px-6 py-3 text-center font-semibold">Category Photo</th>
               <th className="px-6 py-3 text-center font-semibold">Update</th>
@@ -148,7 +148,7 @@ const ManageCategory = () => {
             {categoryData.map((category) => (
               <tr
                 key={category._id}
-                className="hover:bg-gray-50  dark:bg-gray-800 text-center transition-colors dark:border-[1px]  text-xs md:text-sm lg:text-lg dark:border-gray-400"
+                className="hover:bg-gray-50  dark:bg-gray-800 text-center transition-colors dark:border-[1px]  text-xs md:text-sm  dark:border-gray-400"
               >
                 <td className="px-6 dark:text-gray-100 py-4">{category.MedicineCategory}</td>
                 <td className="px-6 text-center  py-4">

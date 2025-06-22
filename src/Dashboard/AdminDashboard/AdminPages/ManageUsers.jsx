@@ -75,7 +75,7 @@ const ManageUsers = () => {
       <div className="overflow-x-auto">
         <table className="table-auto w-full dark:border-[1px]  dark:border-gray-400 shadow-md ">
           <thead className="bg-second dark:border-[1px]  dark:border-gray-400 text-white">
-            <tr className="text-xs md:text-sm lg:text-lg text-center ">
+            <tr className="text-xs md:text-sm  text-center ">
               <th className="px-6 py-3 font-semibold">Name</th>
               <th className="px-6 py-3 font-semibold">Email</th>
               <th className="px-6 py-3 font-semibold">Change Role</th>
@@ -83,7 +83,7 @@ const ManageUsers = () => {
           </thead>
           <tbody>
             {usersData?.map((users) => (
-              <tr key={users._id} className="hover:bg-gray-50 text-gray-800 text-xs md:text-sm lg:text-lg  dark:bg-gray-800 dark:text-gray-200 transition-colors dark:border-[1px] text-center  dark:border-gray-400">
+              <tr key={users._id} className="hover:bg-gray-50 text-gray-800 text-xs md:text-sm   dark:bg-gray-800 dark:text-gray-200 transition-colors dark:border-[1px] text-center  dark:border-gray-400">
                 <td className="px-6 py-4 ">{users.name}</td>
                 <td className="px-6 py-4 ">{users.email}</td>
                 <td className="px-6 py-4">

@@ -108,7 +108,7 @@ const DashboardLayout = () => {
         </header>
 
         {/* Main Area */}
-        <main className="p-2 dark:bg-gray-800">
+        <main className=" dark:bg-gray-800">
           <Outlet />
         </main>
       </div>

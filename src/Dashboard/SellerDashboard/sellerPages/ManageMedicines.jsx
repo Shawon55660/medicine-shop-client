@@ -89,7 +89,7 @@ console.log(medicinesData)
         <div className="min-h-screen bg-gray-100 dark:bg-gray-800 p-4 ">
             <HelmetSet sub1='Dashboard' sub2='Manage  Medicine'></HelmetSet>
             {/* /pagination  */}
-            <div className="flex justify-center my-2">
+            <div className="flex justify-center my-4">
                     <Stack className="text-first" spacing={2}>
                      <Pagination
                                  className="text-first"
@@ -112,7 +112,7 @@ console.log(medicinesData)
             {/* Add Medicine Button */}
             <button
                 onClick={openModal}
-                className="px-6 py-3 font-semibold mb-4 flex items-center gap-3 bg-gradient-to-b from-sky-400 to-sky-500 text-white rounded-sm hover:bg-sky-600 transition-colors"
+                className="px-4 py-2 md:px-6 md:py-3 font-semibold mb-4 flex items-center gap-3 bg-gradient-to-b from-sky-400 to-sky-500 text-white rounded-sm hover:bg-sky-600 transition-colors text-sm"
             >
                 <span>Add Medicines </span><MdAdd size={25} color="white" />
             </button>
@@ -121,7 +121,7 @@ console.log(medicinesData)
             <div className="overflow-x-auto  bg-white rounded-lg shadow-md">
                 <table className="table-auto w-full text-second dark:border-[1px]  dark:border-gray-400">
                     <thead className="bg-sky-400 text-white">
-                        <tr>
+                        <tr className="text-xs md:text-sm ">
                             <th className="px-4 py-2 text-left">Generic Name</th>
                             <th className="px-4 py-2 text-left">Category</th>
                             <th className="px-4 py-2 text-left">Company</th>
@@ -133,7 +133,7 @@ console.log(medicinesData)
                     </thead>
                     <tbody>
                         {medicinesData.map(medicine => (
-                            <tr key={medicine._id} className="hover:bg-sky-100 font-semibold transition-colors   dark:bg-gray-800 dark:text-gray-200 dark:border-[1px]  dark:border-gray-400">
+                            <tr key={medicine._id} className="hover:bg-sky-100 font-semibold transition-colors  text-xs md:text-sm dark:bg-gray-800 dark:text-gray-200 dark:border-[1px]  dark:border-gray-400">
                                 <td className="px-4 py-2">{medicine.GenericName}</td>
                                 <td className="px-4 py-2">{medicine.category}</td>
                                 <td className="px-4 py-2">{medicine.company}</td>

@@ -127,7 +127,7 @@ const SalesReport = () => {
       <div className="overflow-x-auto ">
         <table ref={tableRef} className="table-auto w-full dark:border-[1px]  dark:border-gray-400">
           <thead className="bg-second text-white dark:border-[1px]  dark:border-gray-400">
-            <tr className="text-xs md:text-sm lg:text-lg text-center" >
+            <tr className="text-xs md:text-sm  text-center" >
               <th className="px-4 py-2    font-semibold">Generic Name</th>
               <th className="px-4 py-2    font-semibold">Buyer Email</th>
               <th className="px-4 py-2    font-semibold">Seller Email</th>
@@ -137,7 +137,7 @@ const SalesReport = () => {
           </thead>
           <tbody> 
             {paidData.map((pay, index) => (
-              <tr key={pay._id} className={`${index % 2 === 0 ? "bg-gray-50" : "bg-white"}  dark:bg-gray-800 dark:text-gray-200 transition-colors dark:border-[1px] text-center py-2 text-xs md:text-sm lg:text-lg dark:border-gray-400`}>
+              <tr key={pay._id} className={`${index % 2 === 0 ? "bg-gray-50" : "bg-white"}  dark:bg-gray-800 dark:text-gray-200 transition-colors dark:border-[1px] text-center py-2 text-xs md:text-sm  dark:border-gray-400`}>
                 <td className="px-4 py-4  ">{pay.GenericName}</td>
                 <td className="px-4 py-4  ">{pay.BuyerEmail}</td>
                 <td className="px-4 py-4  ">{pay.sellerEmail}</td>
