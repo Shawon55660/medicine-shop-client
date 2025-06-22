@@ -27,10 +27,10 @@ if(isLoading) return <Loading></Loading>
         <div className='p-8'>
 
             <HelmetSet sub1='Dashboard' sub2='Seller  Home'></HelmetSet>
-           <div className="grid md:grid-cols-2  lg:grid-cols-3 gap-4 p-4 justify-center items-center min-h-[50vh]  shadow-xl">
-  <div className="stat text-first flex items-center justify-center ">
+           <div className="grid md:grid-cols-2  lg:grid-cols-3 gap-4 p-4 justify-center items-center min-h-[80vh]  shadow-xl">
+  <div className="stat text-first dark:bg-white flex items-center justify-center ">
   <div><FaFileMedicalAlt size={35} /></div>
-   <div> <div className="stat-title text-second font-semibold mb-1">Total Sales Revenue</div>
+   <div> <div className="stat-title   text-second font-semibold mb-1">Total Sales Revenue</div>
    <div className="stat-value text-first">{totalRevenus} TK</div></div>
    
   </div>

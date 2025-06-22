@@ -21,17 +21,17 @@ const SellerPayment = () => {
   if (isLoading) return <Loading />;
 
   return (
-    <div className="p-4 mx-5 my-2 min-h-screen bg-gray-50">
+    <div className="  min-h-screen bg-gray-100 dark:bg-gray-800 p-4 m-2">
       <HelmetSet sub1='Dashboard' sub2='Payment  History'></HelmetSet>
       {/* Header Section */}
       <div className="mb-3">
-        <h1 className="text-2xl font-bold text-second">Payment Information</h1>
-        <p className="text-sm text-thrid py-1 md:text-lg">Track your sales transactions and payment status.</p>
+        <h1 className="text-2xl font-bold text-second dark:text-gray-50  ">Payment Information</h1>
+        <p className="text-sm text-thrid dark:text-gray-50  py-2 md:text-lg">Track your sales transactions and payment status.</p>
       </div>
 
       {/* Table Section */}
       <div className="overflow-x-auto bg-white rounded-lg shadow">
-        <table className="min-w-full divide-y divide-gray-200">
+        <table className="table dark:border-[1px]  dark:border-gray-400">
           <thead className="bg-gradient-to-b from-sky-400 to-sky-500 text-white">
             <tr>
               <th className="px-6 py-3 text-center text-sm font-medium uppercase">Transaction ID</th>
@@ -42,10 +42,10 @@ const SellerPayment = () => {
           </thead>
           <tbody className="divide-y divide-gray-200 bg-white">
             {paymentInfo.map((pay) => (
-              <tr key={pay._id} className="hover:bg-gray-100 transition">
-                <td className="px-6 text-center py-4 text-sm text-gray-700">{pay.transactionId}</td>
-                <td className="px-6 text-center py-4 font-semibold text-sm text-gray-700"> {pay.Price}/=</td>
-                <td className="px-6 text-center py-4 text-sm text-gray-700">{format(new Date(pay.date), 'PPPP')}</td>
+              <tr key={pay._id} className="hover:bg-gray-100 transition dark:bg-gray-800 dark:text-gray-200 dark:border-[1px]  dark:border-gray-400">
+                <td className="px-6 text-center py-4 text-sm ">{pay.transactionId}</td>
+                <td className="px-6 text-center py-4 font-semibold text-sm "> {pay.Price}/=</td>
+                <td className="px-6 text-center py-4 text-sm ">{format(new Date(pay.date), 'PPPP')}</td>
                 <td
                   className={`px-6 text-center py-4 text-sm font-semibold ${
                     pay.status === "paid"

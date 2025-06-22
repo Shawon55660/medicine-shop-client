@@ -71,13 +71,13 @@ const AskAdvertisement = () => {
   if (advertisementsLoading) return <Loading />;
 
   return (
-    <div className="min-h-screen mx-5 my-3 bg-gray-50">
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-800 p-4 m-2">
       <HelmetSet sub1='Dashboard' sub2='Bannar Add'></HelmetSet>
      
      <div  className="flex justify-between items-center">
      <div className="mb-3">
-        <h1 className="text-2xl font-bold text-second">Manage Advertisements</h1>
-        <p className="text-sm text-thrid pt-1 md:text-lg">Submit and track your advertisement requests.</p>
+        <h1 className="text-2xl font-bold text-second dark:text-gray-50 ">Manage Advertisements</h1>
+        <p className="text-sm text-thrid dark:text-gray-50  py-2 md:text-lg">Submit and track your advertisement requests.</p>
       </div>
 
      <div>
@@ -93,7 +93,7 @@ const AskAdvertisement = () => {
 
       <div className="mt-3">
         <div className="overflow-x-auto bg-white rounded-lg shadow">
-          <table className="min-w-full divide-y divide-gray-200">
+          <table className="table dark:border-[1px]  dark:border-gray-400">
             <thead className="bg-gradient-to-b from-sky-400 to-sky-500 text-white">
               <tr>
                 <th className="px-6 py-3 text-left text-sm font-medium uppercase">Image</th>
@@ -103,7 +103,7 @@ const AskAdvertisement = () => {
             </thead>
             <tbody className="divide-y divide-gray-200">
               {advertisementsData.map((advertisement) => (
-                <tr key={advertisement._id}>
+                <tr className="hover:bg-gray-100 transition dark:bg-gray-800 dark:text-gray-200 dark:border-[1px]  dark:border-gray-400" key={advertisement._id}>
                   <td className="px-6 py-4">
                     <img
                       className="w-16 h-16 rounded object-cover border"
@@ -111,7 +111,7 @@ const AskAdvertisement = () => {
                       alt="Banner"
                     />
                   </td>
-                  <td className="px-6 py-4 text-sm text-gray-600">
+                  <td className="px-6 py-4 text-sm ">
                     {advertisement.Description.split(" ").slice(0, 10).join(" ")}...
                   </td>
                   <td className="px-6 py-4 text-sm font-semibold capitalize text-first">
@@ -164,7 +164,7 @@ const AskAdvertisement = () => {
                 <button
                   type="button"
                   onClick={closeModal}
-                  className="px-4 py-2 text-gray-600 bg-gray-200 rounded-sm hover:bg-gray-300"
+                  className="px-4 py-2  bg-gray-200 rounded-sm hover:bg-gray-300"
                 >
                   Cancel
                 </button>

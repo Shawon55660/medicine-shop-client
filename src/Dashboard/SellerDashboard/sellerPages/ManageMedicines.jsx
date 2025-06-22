@@ -78,7 +78,7 @@ const ManageMedicines = () => {
 
     if (medicinesLoading) return <Loading />;
     return (
-        <div className="min-h-screen bg-sky-50 p-4 m-2">
+        <div className="min-h-screen bg-gray-100 dark:bg-gray-800 p-4 m-2">
             <HelmetSet sub1='Dashboard' sub2='Manage  Medicine'></HelmetSet>
             {/* Add Medicine Button */}
             <button
@@ -90,7 +90,7 @@ const ManageMedicines = () => {
 
             {/* Medicines Table */}
             <div className="overflow-x-auto mt-3 bg-white rounded-lg shadow-md">
-                <table className="table-auto w-full text-second">
+                <table className="table-auto w-full text-second dark:border-[1px]  dark:border-gray-400">
                     <thead className="bg-sky-400 text-white">
                         <tr>
                             <th className="px-4 py-2 text-left">Generic Name</th>
@@ -104,7 +104,7 @@ const ManageMedicines = () => {
                     </thead>
                     <tbody>
                         {medicinesData.map(medicine => (
-                            <tr key={medicine._id} className="hover:bg-sky-100 font-semibold transition-colors">
+                            <tr key={medicine._id} className="hover:bg-sky-100 font-semibold transition-colors  dark:bg-gray-800 dark:text-gray-200 dark:border-[1px]  dark:border-gray-400">
                                 <td className="px-4 py-2">{medicine.GenericName}</td>
                                 <td className="px-4 py-2">{medicine.category}</td>
                                 <td className="px-4 py-2">{medicine.company}</td>
