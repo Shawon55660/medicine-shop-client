@@ -13,10 +13,12 @@ const SellerHome = () => {
      const { data: paymentInfo =[], refetch, isLoading } = useQuery({
             queryKey: ['paymentInfo', 'users'],
             queryFn: async () => {
-                const res = await axiosPrivate.get(`/sellerSelling?sellerEmail=${user.email}`)
-                return res.data
+                const catInfo = await axiosPrivate.get(`/sellerSelling?sellerEmail=${user.email}`)
+                 return catInfo.data.result
             }
         })
+
+        console.log(paymentInfo)
    
    const  totalPending = paymentInfo.filter(sale=> sale.status == 'pending')
    const totalPendingRevenu = totalPending.reduce((total, item) => total + (Math.floor(item.Price - ((item.Price * item.DisPrice) / 100))), 0);

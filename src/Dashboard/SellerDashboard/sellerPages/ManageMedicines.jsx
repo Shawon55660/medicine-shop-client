@@ -121,23 +121,23 @@ console.log(medicinesData)
             <div className="overflow-x-auto  bg-white rounded-lg shadow-md">
                 <table className="table-auto w-full text-second dark:border-[1px]  dark:border-gray-400">
                     <thead className="bg-sky-400 text-white">
-                        <tr className="text-xs md:text-sm ">
-                            <th className="px-4 py-2 text-left">Generic Name</th>
-                            <th className="px-4 py-2 text-left">Category</th>
-                            <th className="px-4 py-2 text-left">Company</th>
-                            <th className="px-4 py-2 text-left">Photo</th>
-                            <th className="px-4 py-2 text-left">Mass Unit</th>
-                            <th className="px-4 py-2 text-left">Price</th>
-                            <th className="px-4 py-2 text-left">Discount</th>
+                        <tr className="text-xs md:text-sm text-center ">
+                            <th className="px-4 py-2 ">Generic Name</th>
+                            <th className="px-4 py-2 ">Category</th>
+                            <th className="px-4 py-2 ">Company</th>
+                            <th className="px-4 py-2 ">Photo</th>
+                            <th className="px-4 py-2 ">Mass Unit</th>
+                            <th className="px-4 py-2 ">Price</th>
+                            <th className="px-4 py-2 ">Discount</th>
                         </tr>
                     </thead>
                     <tbody>
                         {medicinesData.map(medicine => (
-                            <tr key={medicine._id} className="hover:bg-sky-100 font-semibold transition-colors  text-xs md:text-sm dark:bg-gray-800 dark:text-gray-200 dark:border-[1px]  dark:border-gray-400">
+                            <tr key={medicine._id} className="hover:bg-sky-100 font-semibold transition-colors  text-xs md:text-sm dark:bg-gray-800 dark:text-gray-200 dark:border-[1px] text-center dark:border-gray-400">
                                 <td className="px-4 py-2">{medicine.GenericName}</td>
                                 <td className="px-4 py-2">{medicine.category}</td>
                                 <td className="px-4 py-2">{medicine.company}</td>
-                                <td className="px-4 py-2"><img className="w-12 h-12 object-cover rounded" src={medicine.photo} alt={medicine.GenericName} /></td>
+                                <td className="px-4 py-2 flex  justify-center  items-center"><img className="w-12 h-12 object-cover rounded" src={medicine.photo} alt={medicine.GenericName} /></td>
                                 <td className="px-4 py-2">{medicine.Massunit}</td>
                                 <td className="px-4 py-2">{medicine.Price}/=</td>
                                 <td className="px-4 text-center py-2">{medicine.discountPercentage}%</td>

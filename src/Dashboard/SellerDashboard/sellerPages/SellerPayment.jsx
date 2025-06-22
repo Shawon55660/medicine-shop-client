@@ -21,10 +21,11 @@ const SellerPayment = () => {
             };
 
   const { data: paymentInfo = [], refetch, isLoading } = useQuery({
-    queryKey: ["paymentInfo", "users"],
+    queryKey: ["paymentInfo", "users",limit,currentPage],
     queryFn: async () => {
-      const res = await axiosPrivate.get(`/sellerSelling?sellerEmail=${user.email}`);
-      return res.data;
+      const catInfo = await axiosPrivate.get(`/sellerSelling?sellerEmail=${user.email}&page=${currentPage}&limit=${limit}`);
+      setTotalPage(Math.ceil(catInfo.data.total / limit));
+            return catInfo.data.perPageData;
     },
   });
 
@@ -56,7 +57,7 @@ const SellerPayment = () => {
                         </div>
       {/* Header Section */}
       <div className="mb-3">
-        <h1 className="text-2xl font-bold text-second dark:text-gray-50  ">Payment Information</h1>
+        <h1 className="text-xl md:text-3xl font-bold text-second dark:text-gray-50  ">Payment Information</h1>
         <p className="text-sm text-thrid dark:text-gray-50  py-2 md:text-lg">Track your sales transactions and payment status.</p>
       </div>
 

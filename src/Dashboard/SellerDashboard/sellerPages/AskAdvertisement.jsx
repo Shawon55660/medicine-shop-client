@@ -125,20 +125,18 @@ const AskAdvertisement = () => {
         <div className="overflow-x-auto bg-white rounded-lg shadow">
           <table className="table dark:border-[1px]  dark:border-gray-400">
             <thead className="bg-gradient-to-b from-sky-400 to-sky-500 text-white">
-              <tr className="text-xs md:text-sm ">
-                <th className="px-6 py-3 text-left text-sm font-medium uppercase">Image</th>
-                <th className="px-6 py-3 text-left text-sm font-medium uppercase">Description</th>
-                <th className="px-6 py-3 text-left text-sm font-medium uppercase">Status</th>
+              <tr className="text-xs md:text-sm text-center">
+                <th className="px-6 py-3  text-sm font-medium uppercase">Image</th>
+                <th className="px-6 py-3  text-sm font-medium uppercase">Description</th>
+                <th className="px-6 py-3  text-sm font-medium uppercase">Status</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-200">
+            <tbody >
               {advertisementsData.map((advertisement) => (
-                <tr className="hover:bg-gray-100 transition dark:bg-gray-800 dark:text-gray-200 dark:border-[1px] text-xs md:text-sm  dark:border-gray-400" key={advertisement._id}>
-                  <td className="px-6 ">
-                    <img
-                      className="w-12 h-12 rounded object-cover border"
+                <tr className="hover:bg-gray-100 transition dark:bg-gray-800 dark:text-gray-200 dark:border-[1px] text-xs md:text-sm  dark:border-gray-400 text-center" key={advertisement._id}>
+                  <td  className="px-4 py-2 flex justify-center items-center"><img className="w-12 h-12 object-cover rounded"
                       src={advertisement.photo}
-                      alt="Banner"
+                      
                     />
                   </td>
                   <td className="px-6  text-sm ">
